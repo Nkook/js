@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+
+ <script>
+   // array.reduce(function(total, currentValue, currentIndex, arr) {
+   //  ....
+   // }, initValue)
+
+   // total 必需，初始值initValue、或上一次计算结束后的返回值
+   // currentValue 必需，当前元素
+   // currentIndex 可选，当前元素的索引。若提供init初始值，起始索引为0，否则起始索引为1
+   // arr 可选，当前元素所属的数组对象
+
+   // reduce()是数组的归并方法，与forEach()、map()、filter()等迭代方法一样都会对数组每一项进行遍历，
+   // 但是reduce()可同时将前面数组项便利产生的结果与当前遍历项进行计算，这一点是其他的迭代方法无法企及的。
+   // 参考文章：https://blog.csdn.net/qq_38970408/article/details/121018660
+
+
+   // 1、求和：没有初始值
+   const arr = [1, 2, 3, 4, 5]
+   const sum = arr.reduce(function(prev, curVal, curIndex, arr) {
+     console.log(prev, curVal, curIndex)
+     return prev + curVal
+   })
+   console.log('sum', sum) // 15
+   /* 打印结果
+     1 2 1 reduce.html:23
+     3 3 2 reduce.html:23 
+     6 4 3 reduce.html:23 
+     10 5 4 reduce.html:23 
+     sum 15 reduce.html:26 
+   */
+
+   // 2、求和：有初始值
+   const arr1 = [1, 2, 3, 4, 5]
+   // const sum1 = arr1.reduce(function(prev, curVal, curIndex, arr) {
+   //  return prev + curVal
+   // }, 5)
+   const sum1 = arr1.reduce((prev, curVal, curIndex, arr) => {
+    return prev + curVal
+   }, 5)
+   console.log('sum1', sum1) // 20
+   
+   // 3、数组求和
+   let arr2 = [1, 2, 3, 4, 5]
+   console.log(arr2.reduce((a, b) => a + b)) // 15
+   console.log(arr2.reduce((a, b) => a * b)) // 120
+
+   // 4、计算数组中每个元素出现的次数
+   // 如果当前值，不再上一次的结果对象中，则把当前值作为该对象的新属性并给属性值1；若存在则给该属性值+1
+   var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice', 'Bob', 'Bob'];
+   var countedNames = names.reduce(function (allNames, name) {
+     console.log(allNames, name, name in allNames);
+     if (name in allNames) {
+       allNames[name]++;
+     } else {
+       allNames[name] = 1;
+     }
+     return allNames;
+   }, {});
+   console.log(countedNames);
+
+   // {} 'Alice' false                   reduce.html:54
+   // {Alice: 1} 'Bob' false             reduce.html:54 
+   // {Alice: 1, Bob: 1} 'Tiff' false    reduce.html:54 
+   // {Alice: 1, Bob: 1, Tiff: 1} 'Bruce' false
+   // {Alice: 1, Bob: 1, Tiff: 1, Bruce: 1} 'Alice' true
+   // {Alice: 2, Bob: 1, Tiff: 1, Bruce: 1} 'Bob' true
+   // {Alice: 2, Bob: 2, Tiff: 1, Bruce: 1} 'Bob' true
+   // {Alice: 2, Bob: 3, Tiff: 1, Bruce: 1}        reduce.html:62 
+
+   // 5、去除数组中重复的元素
+   // 如果上一次结果的数组中不存在该值的索引，则将该值放入数组中
+   // 判断当前元素是否已经添加到数组中，如果不存在就从尾部添加。
+   let myArray = ['a', 'b', 'a', 'b', 'c', 'e', 'e', 'c', 'd', 'd', 'd', 'd'];
+   let duplicateRemovalArr = myArray.reduce(function (preArr, curVal) {
+     if (preArr.indexOf(curVal) == -1) {
+      preArr.push(curVal)
+     }
+     return preArr
+   }, [])
+   console.log('duplicateRemovalArr', duplicateRemovalArr) // ['a', 'b', 'c', 'e', 'd']
+
+   // 6、去除数组中重复的元素
+   // 首先对数字进行从小到大排序，若初始数组长度为0 或 初始数组最后一项不等于 当前值，将当前值放入初始数组中。
+   // 从小到大往初始数组中push，通过最后一项和当前值做比较，即可以过滤掉重复的数字
+   let arr3 = [1,2,1,2,3,5,4,5,3,4,4,4,4];
+   let result = arr3.sort().reduce(function (preArr, curVal) {
+     if (preArr.length == 0 || preArr[preArr.length-1] !== curVal) {
+      preArr.push(curVal)
+     }
+     return preArr
+   }, [])
+   console.log(result) // [1, 2, 3, 4, 5]
+
+   // 7、按属性值给object分类
+   var person = [
+     {
+         name: 'xiaoming',
+         age: 18
+     },{
+         name: 'xiaohong',
+         age: 17
+     },{
+         name: 'xiaogang',
+         age: 17
+     }
+   ];
+   function groupBy(objectArray, property) {
+     return objectArray.reduce(function (acc, obj) {
+       var key = obj[property];
+       if (!acc[key]) { // !undefined === true
+         acc[key] = [];
+       }
+       acc[key].push(obj);
+       return acc;
+     }, {});
+   }
+   var groupedPerson = groupBy(person, 'age');
+   console.log(groupedPerson); 
+   // {17: [{name: 'xiaohong', age: 17}, {name: 'xiaogang', age: 17}], 
+   //  18: [{name: 'xiaoming', age: 18}]}
+
+   // 8、对object的属性求和
+   let people = [
+     { name: 'Alice', age: 21 },
+     { name: 'Max', age: 20 },
+     { name: 'Jane', age: 20 }
+   ];
+   let result1 = people.reduce(function(init, curVal, curIndex) {
+     // return init += curVal['age']
+     init = init + curVal.age
+     return init
+   }, 0)
+   console.log('result1', result1) // 61
+
+   
+
+
+
+ </script>
+</body>
+</html>

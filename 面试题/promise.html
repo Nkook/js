@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <script>
+  // 1、promise有三种状态：pending、resolved、rejected
+  // 2、promise状态不可变
+  // 3、如何解决地狱回调：如果请求之间有依赖关系就需要不停的嵌套；下一次请求的参数需要用到上一次请求返回的结果时
+  // then里可以return一个Promise，继续被后面捕获。来防止地狱回调
+  // 4、promise的方法：all/race 
+  // 5、顺序执行 （async/await）
+  const promise1 = new Promise(resolve => {
+    setTimeout(() => {
+      resolve(1)
+    }, 3000)
+  }) 
+  const promise2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(2)
+      // reject(2)
+    }, 2000)
+  })
+  const promise3 = new Promise(resolve => {
+    setTimeout(() => {
+      resolve(3)
+    }, 1000)
+  })
+  // 执行顺序按照数组传入的顺序；数组中所有的resolve执行完毕，执行then；数组中有一个reject，就会进入catch
+  // Promise.all([promise1, promise2, promise3]).then(v => {
+  //   console.log('then---v', v) // [1,2,3]
+  // }).catch(v => {
+  //   console.log('catch---v', v) // 2
+  // })
+  // 谁先返回谁快就用谁，不管是resolve还是reject
+  // Promise.race([promise1, promise2, promise3]).then(v => {
+  //   console.log('then---v', v) // 3
+  // }).catch(v => {
+  //   console.log('catch---v', v) // 3
+  // })
+  // async function execute() {
+  //   await promise1.then(res => console.log(res))
+  //   await promise2.then(res => console.log(res))
+  //   await promise3.then(res => console.log(res))
+  // }
+  // execute() // 1 2 3
+   
+
+
+  // 执行顺序
+  // 1.在 Promise 中，resolve或者reject不会阻止Promise内的其余代码的执行
+  // 2.并且后面的then和catch，会链式调用；
+  const p = new Promise((resolve,reject) => {
+    console.log(0)
+    // 当promise执行reject的时候就会进入catch方法
+    reject()
+    console.log(1)
+    // 当promise执行resolve的时候就会进入then方法
+    resolve()
+    console.log(2)
+  })
+  p.then(res => {
+    console.log(3)
+  }).then(res => {
+    console.log(4)
+  }).catch(res => {
+    console.log(5)
+  }).then(res => {
+    console.log(6)
+  }).catch(res => {
+    console.log(7)
+  }).then(res => {
+    console.log(8)
+  }).then(res => {
+    console.log(9)
+  })
+  // 0125689
+ </script>
+</body>
+</html>

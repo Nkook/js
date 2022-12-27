@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <script>
+   // es2015支持类的概念
+   // constructor就是构造函数
+   class Dog {
+     constructor(name, age) {
+       this.name = name
+       this.age = age
+     }
+     sayName() {
+       console.log(`我是${this.name}`)
+     }
+   }
+
+   let dog = new Dog('旺财', 2)
+   dog.sayName() // 我是旺财
+
+ </script>
+</body>
+</html>

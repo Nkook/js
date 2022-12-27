@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+  <script>
+    // 扩展Date对象实现如下功能，实现dateFormate方法，返回值是"XXX年XX月XX日"
+    Date.prototype.dateFormate = function() {
+      // var d = new Date()
+      var year = this.getFullYear()
+      var month = this.getMonth() + 1
+      var day = this.getDate()
+      return `${year}年${month}月${day}日`
+    }
+    var getDate = new Date('1996-1-19')
+    let result = getDate.dateFormate()
+    console.log('result', result) // 1996年1月19日
+  </script>
+</body>
+</html>

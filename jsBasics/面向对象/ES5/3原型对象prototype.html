@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+  <script>
+    // es5没有类的概念，用构造函数来模拟类
+    // 构造函数的函数名，首字母大写
+    // 通过构造函数来创建对象
+    // function Dog(name, age) {
+    //   this.name = name // this指向的是被创建的实例dog，给dog实例增加name和age属性并赋值
+    //   this.age = age
+    // }
+    // var dog = new Dog('旺财', 2) // 通过new关键字+构造函数 = 创建了一个对象，狗类的实例,也就是一个实例。通过构造函数传入值
+    // console.log(dog.name) //旺财
+
+    // prototype是构造函数的一个属性（称为原型对象）。可以在该属性上增加方法和属性，通过该构造函数创建的对象，均可以使用这些方法。
+    // 通过原型对象，为构造函数生成的对象赋予新的方法。
+    function Dog(name, age) {
+      this.name = name
+      this.age = age
+    }
+    Dog.prototype.sayName = function() {
+     console.log(`我的名字是${this.name}`)
+    }
+    var dog = new Dog('旺财', 2)
+    var bigDog = new Dog('来福', 3)
+    dog.sayName() // 我的名字是旺财
+    bigDog.sayName() // 我的名字是来福
+
+    // 通过prototype可以去扩展方法，可以扩展我们自己写的构造函数，也可以扩展系统自带的构造函数（Array）
+    // prototype是构造函数的属性，不能当成对象的属性去扩展
+    // var arr = new Array(1, 2, 3)
+    var arr = [1, 2, 3]
+    Array.prototype.sayHello = function() {
+      console.log(`我是一个数组，我的长度是${this.length}`)
+    }
+    arr.sayHello() // 我是一个数组，我的长度是3
+
+  </script>
+</body>
+</html>

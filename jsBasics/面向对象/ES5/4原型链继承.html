@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+  <script>
+    // 通过原型链 实现继承：子类可以调用父类及其原型上的所有方法
+    // function Animal(name) {
+    //   this.name = name
+    // }
+    // Animal.prototype.sayName = function () {
+    //   console.log(`你好，我是${this.name}`)
+    // }
+    // var an = new Animal("花花")
+    // an.sayName() //你好，我是花花
+
+    function Animal(name) {
+      this.name = name
+    }
+    Animal.prototype.sayName = function () {
+      console.log(`你好，我是${this.name}`)
+    }
+    var an = new Animal("花花")
+    an.sayName() //你好，我是花花
+
+    // 如果想扩展这个父类，就直接在Animal的prototype上加方法就可以。其子类也可以调用
+    Animal.prototype.sayHello = function() {
+      console.log('sayHello!!!!!!!')
+    }
+
+    // 想让Dog调用父级Animal的方法
+    function Dog(name) {
+      this.name = name
+    }
+    // Dog的原型对象 赋值为 Animal的一个实例。此时通过Dog生成的实例都可以调用Animal原型上的方法
+    Dog.prototype = new Animal()
+    var dog = new Dog("旺财")
+    dog.sayName() // 你好，我是旺财
+    dog.sayHello() // sayHello!!!!!!!
+
+
+    
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+  <script>
+   // 通过extends关键字继承父类
+   class Animal{
+     constructor(name) {
+       this.name = name
+     }
+     sayName() {
+       console.log(`我是${this.name}`)
+     }
+   }
+   // 如果想传入年龄，也可以给Dog类自己定义一个构造函数
+   // name是继承父级的一个属性，使用super关键字 把父级的属性给加进来
+   // 子级的话再用 自己定义的
+   class Dog extends Animal {
+     constructor(name, age) {
+       super(name)
+       this.age = age
+     }
+   }
+   let dog = new Dog("旺财")
+   dog.sayName() // 我是旺财
+
+   let bigDog = new Dog('来福', 2)
+   console.log(bigDog.name, bigDog.age)
+
+   // 在前端中，大部分情况不需要去通过定义类完成开，很多时候会使用别人定义的类（例如第三方库或框架）
+
+  </script>
+</body>
+</html>

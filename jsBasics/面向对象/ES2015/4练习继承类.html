@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定义一个Person类，让Student类和Teacher类继承Person，
+    // 为Person类添加getInformation方法，使Student类和Teacher类都可以通过此方法获取个人信息。
+    class Person {
+      constructor(name, age) {
+        this.name = name
+        this.age = age
+      }
+      getInformation() {
+        console.log(`我是${this.name}, 我${this.age}岁了。`)
+      }
+    }
+    class Teacher extends Person {
+      
+    }
+    class Student extends Person {
+      constructor(name, age, score) {
+        super(name, age)
+        this.score = score
+      }
+      sayInfo() {
+        console.log(`我的名字叫${this.name}我今年${this.age}我考了${this.score}`)
+      }
+
+    }
+    var Teacher1 = new Teacher('王武', 29)
+    Teacher1.getInformation() // 我是王武, 我29岁了。
+    var Student1 = new Student('章三', 15, 100)
+    Student1.sayInfo() // 我的名字叫章三我今年15我考了100
+  </script>
+</body>
+</html>

@@ -9,6 +9,10 @@
 <body>
  <script>
 
+  // 箭头函数简化了函数的写法
+  // 箭头函数中的this：箭头函数在哪里定义，this就指向谁
+  // 箭头函数可以作为参数传给另一个函数
+
   // 函数表达式
   // const fun = function(x) {
   //  return x * x
@@ -20,12 +24,13 @@
   // }
   // 箭头函数基本语法 当只有一个参数且只有返回结果时可以这么写
   // const fun = x => x * x
-  // console.log('fun', fun(2))
+  // console.log('fun', fun(2)) // 4
 
   // 箭头函数中的this
   // const cat = {
   //   name: '喵喵',
   //   sayName() {
+  //     console.log(this.name) // 喵喵
   //     setInterval(function() {
   //      console.log(this) // 输出window，setInterval其实是window的方法，此时this指向window
   //      console.log(this.name) // 什么也没输出，只执行了定时器；去掉定时器可以输出喵喵
@@ -57,7 +62,7 @@
 
   // 箭头函数和普通函数的this指向不同
   // 普通函数指向的是调用该函数的对象（如上面的setInterval是被window调用，所以this指向window）
-  // 箭头函数在哪里定义，this就指向谁（箭头函数在sayName中定义，this指向cat作用域）
+  // 箭头函数在哪里定义，this就指向谁（箭头函数在sayName中定义，this指向定义sayName的这个cat作用域）
  </script>
 </body>
 </html>

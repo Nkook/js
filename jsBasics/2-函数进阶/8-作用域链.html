@@ -10,18 +10,18 @@
  <script>
   // 作用域链
   // 每个函数都会创建一个新的作用域
-  // 函数外部无法访问函数内部的值
-  // 函数内部的值可以访问函数外部的值
+  // 外部函数无法访问内部函数的值
+  // 内部函数可以访问外部函数的值
   let str = "hello"
   function fun1() {
-   let str = "world"
-   let num = 10
-   console.log('fun1--', str) // world
-   function fun2() {
-    console.log('fun2', str) // world
-    console.log('fun2', num) // 10
-   }
-   fun2()
+    let str = "world"
+    let num = 10
+    console.log('fun1--', str) // world
+    function fun2() {
+      console.log('fun2', str) // world
+      console.log('fun2', num) // 10
+    }
+    fun2()
   }
   fun1()
   // 整体的script标签是全局环境，每一层函数都有一个新的作用域，里面函数是可以访问外层函数的作用域，外层函数无法访问里层函数。

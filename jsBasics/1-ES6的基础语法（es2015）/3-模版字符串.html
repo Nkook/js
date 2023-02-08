@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <script>
+   // 1. 支持换行
+   // 2. 嵌入变量
+   // 3. 拼接html 
+   var str = `hello 
+   world`
+   console.log(str)
+
+   let year = "2020"
+   let month = "10"
+   let date = "14"
+
+   // 2020年10月14日
+   // let result = year + "年" + month + "月" + data + "日"
+   let result = `${year}年${month}月${date}日`
+   console.log(result)
+   
+
+
+ </script>
+</body>
+</html>

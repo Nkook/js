@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <script>
+  // 1. 声明之后直接调用
+  // 2. 不可以多次调用，只调用一次
+  // 3. 某些第三方库实现封装
+  // 4. es6有模块化的语法，所以立即执行函数不常用。写在一个模块里就行
+  
+  // (function() {
+  //   console.log(111)
+  // })()
+  
+  // 代码封装：函数里可以调用a,函数外不可以
+  (function() {
+    let a = 10
+    let b = 20
+    console.log(a+b)
+  })() // 30
+
+  console.log(a) // Uncaught ReferenceError: a is not defined
+ 
+   
+ </script>
+</body>
+</html>

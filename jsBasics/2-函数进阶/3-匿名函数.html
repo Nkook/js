@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <script>
+  // 函数声明提升
+  // 1. 没有名字的函数
+  // 2. 回调函数：通常会把匿名函数作为参数传给另一个函数或方法
+  // 3. 当想在某个位置用到函数的时候，并且这个函数不需要调用，就用匿名函数
+
+  // function fun() {
+  //   console.log('hello')
+  // }
+  // setInterval(fun, 1000)
+
+  setInterval(function() {
+    console.log('hello')
+   }, 1000)
+   
+ </script>
+</body>
+</html>

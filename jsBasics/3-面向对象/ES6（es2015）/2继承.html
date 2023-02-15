@@ -19,7 +19,9 @@
    }
    // 如果想传入年龄，也可以给Dog类自己定义一个构造函数
    // name是继承父级的一个属性，使用super关键字 把父级的属性给加进来
+   // 在一个构造方法中可以使用super关键字来调用一个父类的构造方法。
    // 子级的话再用 自己定义的
+  //  在派生类中, 必须先调用 super() 才能使用 "this"。
    class Dog extends Animal {
      constructor(name, age) {
        super(name)

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<style>
+	body { 
+		height: 2000px;
+	}
+</style>
+<body>
+	<h1>window.onscroll</h1>
+ <script>
+  // window.onscroll = function () {
+  //  console.log('1111')
+  // }
+  // 防抖: 在短时间内多次触发事件的话，使用防抖停止事件持续触发。停下来才会触发。
+	// 防抖（debounce）滚动的事件不会连续触发
+  //  let timer = null
+  //  window.onscroll = function() {
+  //    if (timer !== null) {
+	// 		clearTimeout(timer)
+	// 	 }
+	// 	 timer = setTimeout(() => {
+	// 			console.log('1111')
+	// 			timer = null
+	// 	 }, 500)
+  //  }
+	
+	// 节流：多次触发，每隔一段时间都会执行一次事件
+	// 节流（throttle）滚动的事件按时间间隔触发
+		let mark = true
+		window.onscroll = function () {
+			if (mark) {
+				setTimeout(()=> {
+					console.log('1111')
+					mark = true
+				}, 500)
+			}
+			mark = false
+		}
+
+		// 利用闭包的方式封装防抖
+		function debounce(fn) {
+			let timer = null
+			function eventFun() {
+				if (timer !== null) {
+					clearTimeout(timer)
+				}
+				timer = setTimeout(() => {
+					fn()
+					timer = null
+				}, 500)
+			}
+			return eventFun
+		}
+		window.onscroll = debounce( ()=> {
+			console.log('7777')
+		} )
+
+		// 节流封装
+		function throttle(fn) {
+			let mark = true
+			return function () {
+				if (mark) {
+					setTimeout(()=> {
+						fn()
+						mark = true
+					}, 500)
+				}
+				mark = false
+			}
+		}
+ </script>
+</body>
+</html>

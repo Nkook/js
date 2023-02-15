@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+	<button>按钮</button>
+	<ul></ul>
+ <script>
+	// 1、innerHTML： 可以设置文本、标签、属性
+	let btn = document.querySelector('button')
+	let ul = document.querySelector('ul')
+	btn.onclick = function() {
+		ul.innerHTML = `
+			<li>香蕉</li>
+			<li>苹果</li>
+			<li>鸭梨</li>
+		`
+	}
+
+
+	// 2、节点操作
+	// 创建元素节点：createElement
+	// 创建文本节点：createTextNode
+	// 添加节点：appendChild
+	// 删除节点：removeChild
+
+	// 制作水果列表的添加与删除
+	
+ </script>
+</body>
+</html>

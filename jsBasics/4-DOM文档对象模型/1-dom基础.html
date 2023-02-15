@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+    <h1 id="title"›hello world</h1>
+    <button class="btn">1</button>
+    <button class="btn">2</button>
+    <button class="btn">3</button>
+ <script>
+   // dom 操作html元素
+   // 节点类型：元素节点、属性节点、文本节点
+   // 1、document对象
+   //   - DOM通过document对象，为开发者提供了大量的接口（api）来操作DOM树
+  //  获取节点
+  // document.getElementById() // 返回值是一个dom节点
+  // document.getElementsByClassName() // 返回值是一个dom节点的集合
+  // document.querySelector()
+  // document.querySelectorAll()
+  // element.innerHTML： 获取和设置元素内的所有内容
+
+  // let h1 = document. getElementById ("title") ;
+  // h1. innerHTML= "你好世界”；
+  // console.log(h1.innerHTML);
+  
+//   let btns = document.getElementsByClassName("btn")
+//   console.log('btns', btns)
+//   for( let i in btns) {
+//     btns[i].innerHTML = "test"
+//   }
+	// let title = document.querySelector("#title")
+  	let btns = document.querySelectorAll(".btn")
+  	console.log('btns', btns)
+
+	// 2、 事件类型
+	// click、mouseenter、mouseleave
+
+	// 3、设置样式
+	// element.style.color
+	// element.style.backgroundColor
+	// let btn = document.querySelector( "button");
+	// let box = document.querySelector(".box");
+	// box.onmouseenter = function(){
+	// 	this.style.backgroundColor = "blue";
+	// }
+	// box.onmouseleave = function(){
+	// 	this.style. backgroundColor = "red";
+	// }
+	// //事件监听函数
+	// btn.onclick = function() {
+	// 	box.style.backgroundColor = "yellow"
+	// }
+	
+
+	// 4、设置属性
+	// element.src
+	// element.id
+	
+   
+ </script>
+</body>
+</html>

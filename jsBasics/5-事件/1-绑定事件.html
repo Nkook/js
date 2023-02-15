@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <button>按钮</button>
+ <script>
+	// 绑定事件
+    // 1. addEventListener( "eventType" ,fun)
+    // 2. element.onEventType = fun
+
+    // 1. addEventListener在同一元素上的同一事件类型添加多个事件，不会被覆盖，而onEventType会覆盖。
+    // 2. addEventlistener可以设置元素在捕获阶段触发事件，而onEventType不能
+
+	let btn = document. querySelector("button");
+	// btn. onclick = function(){
+	// 	console.log("hello world")
+	// }
+	// btn.onclick = function(){
+	// 	console.log('hello javascript')
+	// } // 只会输出hello javascript
+
+
+	// 两个都会输出
+	btn.addEventListener("click", function(){
+		console. log("hello world")
+	})
+	btn.addEventListener("click", function(){
+		console.log("hello javascript")
+	})
+
+ </script>
+ 
+</body>
+</html>

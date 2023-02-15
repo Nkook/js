@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UT{-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<style>
+	.big{
+	width: 300px;
+	height: 300px;
+	background-color: red;
+	}
+.medium{
+width: 200px;
+height: 200px;
+background-color:yellow;
+}
+.small {
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+}
+
+</style>
+<body>
+	<div class="big">
+		<div class="medium">
+			<div class="small"></div>
+		</div>
+	</div>
+		<script>
+			// 三个div嵌套，都绑定点击事件，点击最内层的元素，事件如何执行
+			// 事件流有两个流向
+			// 事件冒泡：从里到外
+			// 事件捕获：从外到里
+			// addEventListener(evenrType, fun, boolean) 默认是false冒泡，true捕获
+			let big = document.querySelector(".big");
+			let medium = document.querySelector(".medium");
+			let small = document.querySelector(".small");
+			big.addEventListener("click", function(){
+				console.log("Hi,I'm big");
+			})
+			medium.addEventListener("click", function(){
+				console.log("Hi, I'm medium");
+			})
+			small.addEventListener("click", function(){
+				console.log("Hi, I'm small");
+				e.stopPropagation() // 外层的事件不会被触发
+			})
+			// 阻止事件冒泡
+			// e.stopPropagation()
+
+			// 事件默认行为
+			// 为一个可以跳转到百度的a标签设置点击事件：
+			// 去掉事件默认行为
+			// e.preventDefault()
+			// or
+			// return false
+			
+		</script>
+ 
+</body>
+</html>

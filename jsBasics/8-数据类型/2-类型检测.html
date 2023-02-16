@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <script>
+		// 原始数据类型检测：typeof(值)
+		// 引用数据类型检测：值instanceof类型
+
+		let num = 100    // typeof(num)  number 
+		let str = 'hh'   // typeof(str)  string
+		let und  			  // typeof(und)  undefined
+		let nu = null   // typeof(nu)  object
+		let boll = true // typeof(boll) boolean
+
+		// 引用类型： 用typeof检测都是 object
+		let arr = [1, 2, 3]      // arr instanceof Array   true    arr instanceof Object   true
+		let reg = /123/						// reg instanceof RegExp  true
+		let date = new Date()			// date instanceof Date   true
+		// Array RegExp Date ... extends Object 所有的引用对象都继承自Object。 
+ </script>
+</body>
+</html>

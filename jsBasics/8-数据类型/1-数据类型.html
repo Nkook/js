@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+ <script>
+  //  6种数据类型：数值（Number）、字符串（String）、布尔（Boolean）、空（Null）、未定义（Undefined）、对象（Object）
+	// 以上6种分为 2种类型：
+	// 原始类型：Number string boolean null undefined
+	// 引用类型：object: object Array Date Math...
+
+	// 原始类型指向的是具体的内存空间；引用类型指向的是同一个
+	// let str1 = '1'
+	// let str2 = str1
+	// str1 = '2'
+	// console.log(str1)
+	// console.log(str2)
+
+	// let obj1 = {name: 'xiaoming'}
+	// let obj2 = obj1
+	// obj1.name = 'xiaohong'
+	// console.log(obj1)
+	// console.log(obj2)
+
+	// 区别
+	// 1. 赋值的区别：原始类型赋值，引用类型赋的是引用
+	// 2. 比较的区别：原始类型比较的是值；引用类型比较是引用是否指向同一个对象
+	// 3. 传参的区别
+	let str1 = '1'
+	let str2 = '1'
+	console.log(str1 == str2) // true
+
+	let obj1 = {name: 'xiaoming'}
+	let obj2 = {name: 'xiaoming'}
+	let obj3 = obj1
+	console.log(obj1 ===obj2)  // false
+	console.log(obj1 === obj3) // true
+
+	// 原始类型作为参数：无论怎么传参都不会影响外面的值变化
+	// 引用类型作为参数：内部操作了这个对象外部是有影响的
+	function fun (x) {
+		x = 100
+		console.log(`x的值是${x}`) // 100
+	}
+	let number = 10
+	fun(number)
+	console.log(`number的值是${number}`) // 10
+
+	let obj = {name: '小明'}
+	function fun1 (o) {
+		o.name = '哈哈'
+		console.log(`0的值是${o.name}`) // 哈哈
+	}
+	fun1(obj)
+	console.log(`obj的值是${obj.name}`) // 哈哈
+
+
+
+ </script>
+</body>
+</html>

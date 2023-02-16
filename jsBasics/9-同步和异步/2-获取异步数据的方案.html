@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+	<script>
+		//ajax与服务器通信，异步获取数据。
+		// 异步获取数据的方法
+		// let target = "hello world"
+		// // 获取数据的方法
+		// function getData(){ // getData瞬间执行
+		// 	setTimeout(() =>{ // 过500毫秒后执行
+		// 		//reture只能返回同步的数据
+		// 		return target
+		// 	},500)
+		// }
+		// // 我们只能通过getData来获取数据 (target）
+		// let result = getData();
+		// console.log(result) // undefined
+
+		// 1. 通过回调函数获取异步数据
+		// let target = "hello world"
+		// // 获取数据的方法
+		// function getData(fn){
+		// 	setTimeout(() =>{
+		// 		fn(target) // 实参
+		// 	},500)
+		// }
+		// let result = getData( (d)=> {
+		// 		console.log(d) // 拿到参数
+		// });
+
+		// 2. promise
+		// let target = "hello world"
+		// // 获取数据的方法
+		// function getData(fn){
+		// 		return new Promise((resolve) => {
+		// 				setTimeout(() =>{
+		// 						resolve(target)
+		// 				},500)
+		// 		})
+			
+		// }
+		// let p = getData()
+		// p.then((data) => {
+		// 		console.log(data)
+		// })
+
+		// 3. async解决异步
+		let target = "hello world"
+		function getData(fn){
+				return new Promise((resolve) => {
+						setTimeout(() =>{
+								resolve(target)
+						},500)
+				})
+		}
+		// await必须接收promise：等待promise获取到结果后再执行下面的值
+		async function fun() {
+				let data = await getData()
+				console.log(data)
+		}
+		fun()
+
+	</script>
+</body>
+</html>

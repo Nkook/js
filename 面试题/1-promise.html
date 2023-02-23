@@ -7,28 +7,172 @@
  <title>Document</title>
 </head>
 <body>
- <script>
+<script>
+	// 1-9管理状态和结果
+	// 1. 手写的promise通过类来new创建实例，创建一个myPromise类
+	// 2. 在类的构造函数constructor里增加一个参数，func做形参，并执行
+	// 3. func接收两个参数，并定义resolve、reject；需要用this来调用自身class的方法
+	// 4. 定义promise的三种状态：pending、fulfilled、rejected -> 用static来创建静态属性
+	// 5. 需要为每一个实例添加一个【状态属性】。用PromiseState这个字段来保存实例的状态属性，默认pending状态。
+	//    这样在每一个实例被创建以后就会有自身的状态属性可以进行判断和变动了。
+	// 6. 那么在执行resolve()的时候就需要判断状态是否为 待定 pending，如果是 待定 pending的话就把状态改为 成功 fulfilled
+	// 7. 同样在执行reject()的时候就需要判断状态是否为 待定 pending，如果是 待定 pending的话就把状态改为 失败 rejected
+	// 8. 执行 resolve() 和 reject() 可以传参：把这个结果参数命名为PromiseResult
+	//    让每个实例都有PromiseResult属性，并且给他们都赋值null，这里给空值null是因为执行resolve()或者reject()的时候会给结果赋值
+	//    给resolve()添加参数，并且把参数赋值给实例的PromiseResult属性
+	//    同样给reject()添加参数，并且把参数赋值给实例的PromiseResult属性
+	// 9. bind改变this指向：promise1实例创建后执行resolve()看着像是和实例一起执行的，其实不然，也就相当于不在class内部使用这个this，而我们没有在外部定义任何PromiseState 变量，因此这里会报错
+	//    只需要在构造函数constructor中的this.resolve和this.reject后加上，.bind（this）就可以了
+	//    对于resolve来说，这里就是给实例promise1的resolve()方法绑定这个this为当前的实例对象，并且执行this.resolve()方法
 
-    class People {
-     constructor(name) {
-       this.name = name 
-     }
-     eat() {
-     }
-   }
+	// 10-11实现then方法
+	// 10. 先给手写的then添加两个参数，
+	//     一个是 onFulfilled 表示 “当状态为成功时”
+	//    另一个是 onRejected 表示 “当状态为拒绝时”
+	// 11. Promise 只以 第一次为准，第一次成功就永久为fulfilled，第一次失败就永远状态为rejected
+	//     如果当前实例的 PromiseState 状态属性为 fulfilled 成功 的话，我们就执行传进来的 onFulfilled 函数，并且为onFulfilled函数传入前面保留的PromiseResult属性值
+	//     如果当前实例的 PromiseState 状态属性为 rejected 拒绝 的话，我们就执行传进来的 onRejected 函数，并且为onRejected函数传入前面保留的PromiseResult属性值
+
+	//  执行异常throw
+	// 12. 在执行resolve()和reject()之前用try/catch进行判断，在构造函数 constructor里面完善代码，判断生成实例的时候是否有报错
+	//     如果没有报错的话，就按照正常执行resolve()和reject()方法
+	//     如果报错的话，就把错误信息传入给reject()方法，并且直接执行reject()方法
+	//     这里不需要给reject()方法进行this的绑定了，因为这里是直接执行，而不是创建实例后再执行。(具体说明：Ps1)
+
+	// 参数校验
+	// 13. 原生Promise里规定then方法里面的两个参数如果不是函数的话就要被忽略。（具体说明：Ps2）
+	// 	   如果onFulfilled参数是一个函数，就把原来的onFulfilled内容重新赋值给它，如果onFulfilled参数不是一个函数，就将value原封不动的返回
+	//     如果onRejected参数是一个函数，就把原来的onRejected内容重新赋值给它，如果onRejected参数不是一个函数，就throw一个Error
+
+	// 实现异步
+	// 14. 给then方法里面添加setTimeout，需要进行if判断后再添加setTimeout，要不然状态不符合添加异步也是没有意义的，然后在setTimeout里执行传入的函数参数
+	
+	// 回调保存
+	// 15. 给then方法里面添加待定状态情况下的操作
+	//     遇到resolve在异步里包着的话，会先执行promise.then微任务，微任务队列清空后，执行宏任务，此时resolve不会再进入then了
+	//     先执行了then方法，但发现这个时候状态依旧是 pending，而我们手写部分没有定义pending待定状态的时候应该做什么
+	//     直接给then方法里面添加待定状态的情况就可以了，也就是用if进行判断
+	//     这个时候resolve或者reject还没获取到任何值，因此我们必须让then里的函数稍后再执行，等resolve执行了以后，再执行then
+	//	   为了保留then里的函数，我们可以创建 数组 来 保存函数：因为一个promise实例可能会多次 then，也就是经典的 链式调用，而且数组是先入先出的顺序
+	//     在实例化对象的时候就让每个实例都有这两个数组：
+	//	   		onFulfilledCallbacks ：用来 保存成功回调
+	//			onRejectedCallbacks ：用来 保存失败回调
+	//     数组里面放完函数以后，就可以完善resolve和reject的代码了
+	//	   在执行resolve或者reject的时候，遍历自身的callbacks数组，看看数组里面有没有then那边 保留 过来的 待执行函数，然后逐个执行数组里面的函数，执行的时候会传入相应的参数
+
+	class myPromise {
+		static PENDING = 'pending'
+		static FULFILLED = 'fulfilled'
+		static REJECTED = 'rejected'
+		constructor(func) {
+			this.PromiseState = myPromise.PENDING
+			this.PromiseResult = null
+			this.onFulfilledCallbacks = []; // 保存成功回调
+	        this.onRejectedCallbacks = []; // 保存失败回调
+			// func(this.resolve, this.reject)
+			// func(this.resolve.bind(this), this.reject.bind(this))
+			try {
+				func(this.resolve.bind(this), this.reject.bind(this))
+			} catch (error) {
+				this.reject(error)
+			}
+		}
+		resolve(result) {
+			if (this.PromiseState === myPromise.PENDING) {
+				this.PromiseState = myPromise.FULFILLED
+				this.PromiseResult = result
+				this.onFulfilledCallbacks.forEach(callback => {
+					callback(result)
+				})
+			}
+		}
+		reject(reason) {
+			if (this.PromiseState == myPromise.PENDING) {
+				this.PromiseState = myPromise.REJECTED
+				this.PromiseResult = reason
+				this.onRejectedCallbacks.forEach(callback => {
+					callback(reason)
+				})
+			}
+		}
+		then(onFulfilled, onRejected) {
+			onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
+	        onRejected = typeof onRejected === 'function' ? onRejected : reason => {
+				throw reason;
+			}
+			if (this.PromiseState === myPromise.PENDING) {
+	          	this.onFulfilledCallbacks.push(onFulfilled);
+           		this.onRejectedCallbacks.push(onRejected);
+        	}
+
+			if (this.PromiseState == myPromise.FULFILLED) {
+				setTimeout(() => {
+					onFulfilled(this.PromiseResult)
+				})
+			}
+			if (this.PromiseState == myPromise.REJECTED) {
+				setTimeout(() => {
+					onRejected(this.PromiseResult)
+				})
+			}
+		}
+	} 
+
+	console.log(1);
+	let promise1 = new myPromise((resolve, reject) => {
+		console.log(2);
+		resolve('这次一定');
+	})
+	promise1.then(
+		result => {
+			console.log('fulfilled:', result);
+		},
+		reason => {
+			console.log('rejected:', reason)
+		}
+	)
+	console.log(3)
+
+	// let promise1 = new myPromise((resolve, reject) => {
+	// 	resolve('成功')
+	// 	// reject('失败')
+
+	// 	// throw new Error('白嫖不成功');
+	// })
+	// promise1.then(
+	// 	// (result) => {
+	// 	// 	console.log('result', result) // 成功
+	// 	// },
+	// 	undefined,
+	// 	(reason) => {
+	// 		console.log('reason', reason)  //reason Error: 白嫖不成功
+	// 	}
+	// )
 
 
-class Student extends People {
-  constructor(name, number) {
-    super(name)
-    
-    this.number = number
-  }
-  sayHi() {
-    
-  }
-}
-const xialuo = new Student('xialuo', 100)
- </script>
+
+
+	// 具体说明：Ps1
+	// func(this.resolve.bind(this), this.reject.bind(this)); 
+	// 这里的this.reject意思是：把类方法reject()作为参数 传到构造函数constructor 里要执行的func()方法里，
+	// 只是一个参数，并不执行，只有创建实例后调用reject()方法的时候才执行，此时this的指向已经变了，
+	// 所以想要正确调用myPromise的reject()方法就要通过.bind(this))改变this指向。
+
+	// this.reject(error)，这里的this.reject()，是直接在构造函数里执行类方法，this指向不变，
+	// this.reject()就是直接调用类方法reject()，所以不用再进行this绑定。
+
+	// 这里考察了this绑定的一个细节
+	// call、apply和bind都可以改变函数体内部 this 的指向，但是 bind 和 call/apply 有一个很重要的区别：
+	// 一个函数被 call/apply 的时候，会立即执行函数，但是 bind 会创建一个新函数，不会立即执行。
+
+	// 这就是前面为什么说， this.reject.bind(this)只是作为参数，并没有直接执行的原因了!
+
+	
+	// Ps2
+	// Promise 规范如果 onFulfilled 和 onRejected 不是函数，就忽略他们。
+	// 所谓“忽略”并不是什么都不干，对于onFulfilled来说“忽略”就是将value原封不动的返回，
+	// 对于onRejected来说就是返回reason，onRejected因为是错误分支，我们返回reason应该throw一个Error:
+
+</script>
 </body>
 </html>

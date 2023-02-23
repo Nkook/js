@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+	<script>
+		// 3. async解决异步
+		let target = "hello world"
+		function getData(fn){
+				return new Promise((resolve) => {
+						setTimeout(() =>{
+								resolve(target)
+						},500)
+				})
+		}
+		// await必须接收promise：等待promise获取到结果后再执行下面的值
+		async function fun() {
+				let data = await getData()
+				console.log(data)
+		}
+		fun()
+
+	</script>
+</body>
+</html>

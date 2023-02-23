@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+<script>
+	// 1. 原生的promise会用new来创建实例
+	// 2. new实例的时候会传入参数，这个参数是一个函数，这个函数参数会自动执行
+	// 3. 这个参数函数有两个参数resolve reject
+	// 8. 在执行resolve()或者reject()的时候都是可以传入一个参数，这样我们后面就可以使用这个参数了
+	// 10. 原生.then()方法：可以传入两个参数，这两个参数都是函数，一个是当状态为fulfilled 成功 时执行的代码，另一个是当状态为 rejected 拒绝 时执行的代码。
+
+	let promise = new Promise((resolve, reject) => {
+		resolve('成功了')
+	})
+	console.log(promise)
+	// [[Prototype]]: Promise
+	// [[PromiseState]]: "fulfilled"
+	// [[PromiseResult]]: "成功了"
+
+	promise.then(
+		(result)=> {
+			console.log(result) // 成功了
+		},
+		(reason)=> {
+			console.log(reason)
+		}
+	)
+
+</script>
+</body>
+</html>

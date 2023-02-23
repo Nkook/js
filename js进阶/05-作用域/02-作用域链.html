@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 作用域链：当前作用域没有，往上查找
+    
+    // 在作用域中嵌套作用域时，就会形成一个作用域链
+    // 更底层的作用域可以访问上层及其更上层的变量
+    // 但是上层无法直接访问底层的变量
+    let m = 20
+    {
+      let n = 10
+      let x = 30
+      {
+        let n = 50
+        console.log(n) // 50
+        console.log(x) // 30
+        console.log(m) // 20
+      }
+    }
+  </script>
+</body>
+</html>

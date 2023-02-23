@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 对象拷贝的意义：
+    // 赋值只能赋值一个引用，实际指向的还是一个对象。
+    // 对象拷贝克隆，才能得到两个相同的对象。
+
+    // 使用场景：
+    // 将对象作为函数参数的时候，不希望操作原对象
+
+    // let stu = {name: '小明'}
+    // function fun(obj) {
+    //   // 此时stu和obj指向的是一个对象，操作obj会改变外层stu
+    //   // 如果obj变成克隆对象就可以避免修改外层的
+    //   obj.name = '笑哈哈'
+    // }
+    // fun(stu)
+
+
+    // 浅拷贝：对象的属性值都是原始类型
+    let stu = {name: '小明', age: 18}
+    function copyObject(obj) {
+      let newObj = {}
+      // 拷贝算法
+      for (let key in obj) {
+        newObj[key] = obj[key]
+      }
+      return newObj
+    }
+    let stu1 = copyObject(stu)
+    stu1.age = 30
+    console.log(stu)
+    console.log(stu1)
+    
+
+  </script>
+</body>
+</html>

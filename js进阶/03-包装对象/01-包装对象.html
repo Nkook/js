@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 为什么原始类型可以使用方法和属性？
+    // 因为包装对象
+
+    // 包装对象：1. new String()  2. new Number()  3.new Boolean()
+    // 1、含义：原始类型在调用方法和属性的时候，程序的后台会自动将它们转换成对应的包装对象。
+    
+    // let num = 123
+    // console.log(typeof num.toString())
+
+    // let str = "hh kk"
+    // console.log(str.split(" "))
+    // console.log(str.length) // 5 new String(str)
+
+    // 2、转换包装对象后，立即销毁
+    // 转换成包装对象，并成功执行方法后，包装对象会立即销毁，变量又重新回到了原始类型的状态
+    let str = '123'
+    str.name = '小红' // new String(str) 在这里创建了一个包装对象，name值为小红。立即销毁
+    console.log(str.name) // undefined 在这里又创建了一个包装对象，但是name没有赋值
+
+    // 3、包装对象直接比较，和对象一样比较的是引用，如果引用指向的不是一个对象就不想等
+    // 包装对象和基本数据类型比较，引用和基本比较，也是不想等的
+    // 永远不要手动创建包装对象
+    let num1 = new Number(123)
+    let num2 = new Number(123)
+    let num3 = 123
+    console.log(num1 === num2) // false
+    console.log(num1 === num3) // false
+
+    // 4、作用：创建包装对象的构造函数，可以用来做类型转换
+    // String()  Number()  Boolean()
+    let num = 123
+    console.log(String(num))
+    console.log(Boolean(num))
+
+
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 浅拷贝：对象的属性值都是原始类型
+    // 深拷贝：对象的属性值存在引用类型
+    // 深拷贝：1、递归 2、转JSON
+    let stu = {
+      name: '小明',
+      age: 18,
+      bestFriend: {
+        name: '呵呵',
+        age: 20
+      }
+    }
+    function copyObject(obj) {
+      let newObj = {}
+      // 拷贝算法: 递归 深拷贝
+      // for (let key in obj) {
+      //   if (obj[key] instanceof Object) {
+      //     newObj[key] = copyObject(obj[key])
+      //   } else {
+      //     newObj[key] = obj[key]
+      //   }
+      // }
+
+      // 拷贝算法：转JSON
+      let newStr = JSON.stringify(obj) // 转json字符串 {"name":"小明","age":18,"bestFriend":{"name":"呵呵","age":20}}
+      newObj = JSON.parse(newStr) // 再转对象
+      return newObj
+    }
+    let stu1 = copyObject(stu)
+    stu1.age = 30
+    stu1.bestFriend.name = '哈哈'
+    console.log(stu)
+    console.log(stu1)
+    
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 隐式转换的方式：
+    // 1. if 语句
+    // 2. while 语句
+    // 3. 逻辑与
+    // 4. 逻辑或
+    // 5. 逻辑非
+    // 6. ==：使用===代替==，既可以避免歧义，也可以提升性能
+
+    // 一、if语句：各种数据类型是如何实现类型转换的：
+    // 1. 数值类型只有0和NaN会转换成false
+    // 2. null和undefined都会转换成false
+    // 3. 空字符串会转换成fasle，其他为true
+    // 4. 所有的对象都会转换成true
+    
+    // let v = {}
+    // let v = '123'
+    let v = 12
+    if (v) {
+      console.log(111)
+    }
+
+    // 二、while 语句
+    let n = 10
+    while(n) {
+      console.log(n) // 10 9 8 7 6 5 4 3 2 1 当为0的时候隐式转换为false就不执行了
+      n--
+    }
+    
+    // 三、逻辑与 && ：左侧值转换为布尔值，如果为true，那么表达式的返回是 第二个值
+    //                        如果为false，那么表达式的返回是 第一个值
+    // 返回值：取决于左侧的值是true还是false
+    console.log('111' && '2222')  // 2222
+    console.log('' && 'hhh') // ''
+
+    // 四、逻辑或 ||：和逻辑与相反
+
+    // 五、逻辑非 !
+    // 把值转换成布尔值再取反
+    let str = 'dd'
+    console.log(!str) // false
+
+
+    // 六、== 会进行转换
+    // === 既比较类型也比较值，开发中使用这个进行比较
+    console.log('11' == 11) // true
+    
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

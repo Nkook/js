@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1. 闭包：函数嵌套，内部函数就叫做闭包
+    // 2. 内部函数没有执行完成，外部函数内存空间不会被销毁
+    // 不能在外部直接访问内部函数，需要把内部函数作为一个返回值返回出来，外部才可以使用
+    function outerFun() {
+      let n = 10
+      function innerFun() {
+        console.log(n)          // 10 内部作用域可以访问外部作用域
+      }
+      return innerFun           // 返回函数
+    }
+    // innerFun()               // innerFun is not defined 外部无法直接访问内部作用域
+    let fun = outerFun()        // fun就是innerFun
+    fun()
+
+    // 正常一个函数执行完成后，里面的变量就会被销毁
+    // 调用outerFun函数后，n并没有被销毁，因为闭包函数innerFun使用到了n，并且innerFun没有执行完成，所以不会被销毁
+
+  </script>
+</body>
+</html>

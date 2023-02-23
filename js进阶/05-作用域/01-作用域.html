@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function fun() {
+    //   var str = '哈哈哈哈'
+    // }
+    // fun()
+    // console.log(str) // 01-作用域.html:15 Uncaught ReferenceError: str is not defined
+
+    // if (true) {
+    //   // var str1 = '红红火火'
+    //   let str1 = '红红火火' // str1 is not defined
+    // }
+    // console.log(str1) // 红红火火
+
+    // 上面两种情况
+    // 1. 函数外面能否使用函数内部定义的变量
+    // 2. if语句或for语句外面能否使用语句内定义的变量
+
+    // 每一个变量都有自己的作用域
+    // 1. 全局作用域
+    // 2. 局部作用域
+
+    // ES5没有块级作用域的概念
+    // ES6 let
+    {
+      // 语句块  var被废弃，不再使用
+      var str = '1111'  // 1111
+      // let str = 'hello'  // str is not defined
+    }
+    console.log(str)
+
+    // let 和const的用法
+    // 1. 抛弃var,永远使用let定义变量
+    // 2. 通常引入外部模块、或定义函数表达式 使用const定义常量
+    // 3. let const 有块级作用域
+
+
+
+  </script>
+</body>
+</html>

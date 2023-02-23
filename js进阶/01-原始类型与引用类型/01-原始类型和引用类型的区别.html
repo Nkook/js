@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+  <script>
+    // js的变量类型
+    // 1、值类型（基本数据类型）
+    // 字符串（String）、数字(Number)、布尔(Boolean)、未定义（Undefined）、空（Null）、Symbol、bigInt（bigInt是一种内置对象，是处symbol外的第二个内置类型）
+
+    // 2、引用数据类型
+    // 对象(Object)、数组(Array)、函数(Function)、（Date、Map、WeakMap、Set、WeakSet）
+
+    // 原始类型和引用类型的对比
+    // 1、赋值：原始类型赋【值】； 引用类型赋【引用指针】
+    // 2、比较：原始类型比较【值】是否相等； 引用类型比较【引用】是否指向同一个对象
+    // 3、函数传参：原始类型作为参数，函数内的操作不影响实参的值； 引用类型作为参数，函数内的操作影响实参的值
+
+    // // 原始类型赋值
+    // let str1 = '1'
+    // let str2 = str1
+    // str1 = '2'
+    // console.log(str1) // 2
+    // console.log(str2) // 1
+    // // 引用类型赋值
+    // let obj1 = {name: 'hh'}
+    // let obj2 = obj1
+    // obj1.name = '哈哈哈'
+    // console.log(obj1.name) // 哈哈哈
+    // console.log(obj2.name) // 哈哈哈
+
+    // // 原始类型比较 ===
+    // let str1 = '1'
+    // let str2 = '1'
+    // console.log(str1 === str2) // true
+    // // 引用类型的比较 === 
+    // let obj1 = {name: 'hh'}
+    // let obj2 = {name: 'hh'}
+    // console.log(obj1 === obj2) // false
+    // obj2 = obj1
+    // console.log(obj1 === obj2) // true
+
+    // 原始类型传参
+    function fun (num) {
+      num = 100
+    }
+    let a = 10
+    fun(a)
+    console.log(a) // 10
+    // 引用类型传参
+    function fun1 (arr) {
+      arr.push(10)
+    }
+    let b = [1, 2]
+    fun1(b)
+    console.log(b) // [1, 2, 10]
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

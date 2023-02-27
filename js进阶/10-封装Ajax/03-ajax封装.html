@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Ajax</h1>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // axios.get("/data/tea.txt").then((res) => {
+    //   console.log(res.data)  // 奶茶
+    //   return axios.get("/data/hotPot.txt")
+    // }).then((res) => {
+    //   console.log(res.data) // 火锅
+    // })
+
+    // 封装axios方法
+    function axios(method, url) {
+      return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState === 4) {
+            if(xhr.status === 200) {
+              resolve(xhr.responseText) // 数据 奶茶
+            } else {
+              reject('获取数据失败')
+            }
+          }
+        }
+        xhr.open(method, url)
+        xhr.send()
+      })
+    }
+    // axios("get", "/data/tea.txt").then((res) => {
+    //   console.log(res) // 奶茶
+    //   return axios("get", "/data/hotPot.txt")
+    // }).then((res) => {
+    //   console.log(res) // 火锅
+    // })
+
+    async function getData() {
+      let getTea = await axios("get", "/data/tea.txt")
+      console.log(getTea) // 奶茶
+      let getHotPot = await axios('get', "/data/hotPot.txt")
+      console.log(getHotPot) // 火锅
+    }
+    getData()
+
+
+  </script>
+</body>
+</html>

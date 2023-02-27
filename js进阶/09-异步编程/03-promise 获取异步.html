@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Promise 的方式，使用 Promise 的方式可以将嵌套的回调函数作为链式调用。
+    // 但是使用这种方法，有时会造成多个 then 的链式调用，可能会造成代码的语义不够明确。
+    
+    // promise通过resolve将数据返回出来，外面通过promise.then可以拿到数据
+    let tea = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let flag = true
+        if(flag) {
+          resolve('奶茶')
+        } else {
+          reject('获取奶茶失败')
+        }
+      }, 2000)
+    })
+    let hotPot = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let flag = true
+        if(flag) {
+          resolve('火锅')
+        } else {
+          reject('获取火锅失败')
+        }
+      }, 1000)
+    })
+    promise.then((data) => {
+      console.log(data)
+      return hotPot // 返回一个promise 下面可以继续链式调用.then
+    }).then((data) => {
+      console.log(data)
+    }).catch((err) => {
+      console.log(err)
+    })
+  </script>
+</body>
+</html>

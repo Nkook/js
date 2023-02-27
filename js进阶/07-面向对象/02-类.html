@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1. 定义一个类
+    class User {
+      // 2. 在构造函数中添加属性
+      constructor(username, password) {
+        this.username = username
+        this.password = password
+      }
+      // 3. 给类添加方法
+      login() {
+        if (this.username === '小明' && this.password === "123456") {
+          console.log('登陆成功')
+        } else {
+          console.log('登陆失败')
+        }
+      }
+    }
+    // 4. 对象实例化：new一个实例对象user，将User类中的this指向该实例，并且可以使用类中的属性和方法
+    let user = new User('小明', "123456")
+    user.login()
+    console.log(user)
+
+    // 5. 继承：不仅可以用User类的方法，还有自己的方法。Admin继承了User，可以使用User里所有的属性和方法
+    class Admin extends User {
+      // 自己的属性
+      constructor(username, password, id) { // 添加自己的属性id
+        super(username, password) // 继承使用父类User的属性需要通过super
+        this.id = id
+      }
+      // 自己的方法
+      crudUser() {
+        console.log('对用户进行操作')
+      }
+    }
+    let admin = new Admin('呵呵', "1234567", '007')
+    admin.login()
+    admin.crudUser()
+    console.log(admin.id) // 007
+  </script>
+</body>
+</html>

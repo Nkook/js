@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 原型链
+    // 每个对象都有一个原型，这个原型也是个对象，也可以有它自己的原型
+    // 以此类推，形成一个原型链
+    // 查找特定属性的时候，先去这个对象里找，没有的话就去它的原型对象里找，如果还没有的话再去原型对象的原型对象里去找
+
+    function Person() {
+      this.id = '001'
+    }
+    function User() {
+      this.login = function() {
+        console.log('登陆成功')
+      }
+    }
+    User.prototype = new Person()
+
+    function Admin() {}
+    Admin.prototype = new User()
+
+    var admin = new Admin()
+    console.log(admin.id) // 001
+
+  </script>
+</body>
+</html>

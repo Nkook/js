@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // call apply bind 都是函数的方法，改变函数内部this的指向
+    // 1. call，会调用函数，通过参数列表依次传参
+    // 2. apply，会调用函数，通过数组传递传参
+    // 3. bind，不会调用函数，将新的重新绑定this的函数作为返回值，通过参数列表依次传参
+    function fun() {}
+    fun.call()
+    fun.apply()
+    fun.bind()
+    
+    // 函数内部this的指向
+    // 1. 谁调用方法，this指向谁
+    // 2. 构造函数中的this，指向new创建的对象
+    // 3. 全局函数this指向全局对象window
+
+    // call是函数（方法）的方法，通过call，可以改变方法的this指向，让this指向call的第一个参数
+    // 1.全局函数调用call
+    // 2. 对象的方法调用call
+
+    // function fun() {
+    //   console.log(this)
+    // }
+    // let cat = {
+    //   name: 'miao'
+    // }
+    // fun.call(cat) // {name: 'miao'}
+
+    let cat = {
+      name: 'miao'
+    }
+    let dog = {
+      name: 'wang',
+      sayName() {
+        console.log("我是" + this.name)
+      }
+    }
+    dog.sayName.call(cat)  // 我是miao
+
+    // 利用call实现继承
+    
+
+  </script>
+</body>
+</html>

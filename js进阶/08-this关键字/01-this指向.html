@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>按钮</button>
+  <script>
+    // 基本概念
+    // this关键字是一个引用，它指向内存中的一个对象
+    // 1. 全局环境下指向全局对象
+    // 2. 全局函数中的this ，指向全局对象
+    // 3. 内部函数中的this，指向全局对象
+    // 4. 方法中的this，指向调用方法的对象
+    // 5. 事件中的this，指向触发事件的DOM对象
+    // 6. 构造函数中的this，指向new创建的对象
+    // 7. 箭头函数中的this，指向定义函数上下文的this。
+    
+    // 1. 指向谁：指向调用方法的对象。（谁调用了这个方法，this就指向谁）
+    // 最常用的一种情况，一个对象调用了一个方法，那么方法中的this，指向这个对象
+    // let cat = {
+    //   name: '喵喵',
+    //   sayName() {
+    //     console.log(this) // 整个cat对象
+    //   }
+    // }
+    // cat.sayName()
+
+    // 2. 构造函数：this指向new创建出来的对象。(new创建的对象是谁，this就指向谁)
+    // function Cat(name) {
+    //   this.name = name
+    // }
+    // var cat  = new Cat('miaomiao')
+    // console.log(cat.name) // miaomiao
+
+    // 3. ES6 class：this指向new创建出来的对象
+    // class Cat {
+    //   constructor(name) {
+    //     this.name = name
+    //   }
+    // }
+    // let cat = new Cat('miao')
+    // console.log(cat.name)
+
+    // 4. 触发事件：DOM事件被触发时，事件监听函数中的this指向触发事件的DOM对象
+    document.querySelector("button").onclick = function() {
+      console.log(this)  // <button>按钮</button>
+    }
+
+    // 5. 指向全局对象
+    //    1. 在全局环境，this指向全局对象window
+    //    2. 在函数中，this同样指向全局对象window，因为没有从属于某一个对象的函数，是window方法
+    // 方法中的函数，如何指向调用方法的对象
+    // 在全局环境
+    console.log(this) // Window 
+    function fun() {
+      console.log(this) // Window 
+    }
+    fun()
+    window.fun()
+
+    // 在函数中
+    // let cat = {
+    //   name: '喵喵',
+    //   sayName() {
+    //     console.log(this) // cat
+    //     function fun() {
+    //       console.log(this) // Window 谁调用这个函数就指向谁
+    //     }
+    //     fun()
+    //   }
+    // }
+    // cat.sayName()
+
+    // let cat = {
+    //   name: '喵喵',
+    //   sayName() {
+    //     console.log(this) // cat
+    //     setTimeout(function fun() {
+    //       console.log(this) // Window 谁调用这个函数就指向谁
+    //     }, 1000)
+    //   }
+    // }
+    // cat.sayName()
+
+    // 6. 箭头函数
+    //     1. 箭头函数中的this，指向函数定义时的上下文
+    //     2. 通常会在内部函数中使用，异步数据交互时会频繁使用（ajax、计时器）
+    // 如何将内部的this指向cat对象
+    let cat = {
+      name: '喵喵',
+      sayName() {
+        // let self = this
+        // setTimeout(function fun() {
+        //   console.log(self.name) // 喵喵  es5使用：self指向cat
+        // }, 1000)
+        setTimeout(() => {
+          console.log(this.name) // 喵喵  es6使用：箭头函数定义在sayName中，所以this指向sayName的this，就是cat
+        }, 1000)
+      }
+    }
+    cat.sayName()
+    
+  </script>
+</body>
+</html>

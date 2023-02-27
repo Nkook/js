@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // async 函数 的方式，async 函数是 generator 和 promise 实现的一个自动执行的语法糖，它内部自带执行器，
+    // 当函数内部执行到一个 await 语句的时候，如果语句返回一个 promise 对象，那么函数将会等待 promise 对象的状态变为 resolve 后再继续向下执行。
+    // 因此可以将异步逻辑，转化为同步的顺序来书写，并且这个函数可以自动执行。
+    
+    // promise通过resolve将数据返回出来，外面通过promise.then可以拿到数据
+
+    let tea = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let flag = true
+        if(flag) {
+          resolve('奶茶')
+        } else {
+          reject('获取奶茶失败')
+        }
+      }, 2000)
+    })
+    let hotPot = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        let flag = true
+        if(flag) {
+          resolve('火锅')
+        } else {
+          reject('获取火锅失败')
+        }
+      }, 1000)
+    })
+    // promise.then((data) => {
+    //   console.log(data)
+    //   return hotPot // 返回一个promise 下面可以继续链式调用.then
+    // }).then((data) => {
+    //   console.log(data)
+    // }).catch((err) => {
+    //   console.log(err)
+    // })
+
+    // 以上看上去还是要链式调用，比较繁琐
+    // 通过async配合promise对象获取异步数据，让代码看起来更简洁，更像同步代码
+    async function fun() {
+      let getTea = await tea
+      console.log(getTea)
+      let getHotPot = await hotPot
+      console.log(getHotPot)
+    }
+  </script>
+</body>
+</html>

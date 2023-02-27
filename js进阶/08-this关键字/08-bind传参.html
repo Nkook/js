@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // bind（obj，param1，param2，param3······）
+    // 1、call和apply绑定完this会立即调用当前的函数，而bind绑定完this不会立即调用当前函数，而是将函数返回。
+    // 2、call和apply通常用作绑定完立即执行的函数中，而bind通常用来作用在回调函数中定义。
+    let cat = {
+      name: 'miao'
+    }
+    let dog = {
+      name: 'wang',
+      sayName(food1, food2) {
+        console.log(`我是${this.name}，我喜欢吃${food1}和${food2}`)
+      }
+    }
+    dog.sayName('骨头')  // 我是wang，我喜欢吃骨头和undefined
+    // dog.sayName.bind(cat, '鱼', '肉')() // 我是miao，我喜欢吃鱼和肉
+    let newFun = dog.sayName.bind(cat, '鱼', '肉') 
+    newFun() // 我是miao，我喜欢吃鱼和肉
+
+
+  </script>
+</body>
+</html>

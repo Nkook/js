@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 通过原型实现对象继承
+    function User() {
+      this.login = function() {
+        console.log('登陆成功')
+      }
+    }
+    function Admin() {}
+    Admin.prototype = new User() // Admin的原型指向了User的实例对象
+    var admin = new Admin() 
+    admin.login() // 登陆成功
+
+
+  </script>
+</body>
+</html>

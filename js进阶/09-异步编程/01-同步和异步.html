@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 同步：一件事做完才能做下件事
+    // 异步：不影响同步的事情依次执行，异步单独拿出来执行
+
+    // 前端开发中最常见的两种异步情况
+    // 1. ajax：向后台请求数据
+    // 2. 计时器：setInterval setTimeout
+
+    function getTea() {
+      setTimeout(() => {
+        // console.log('奶茶')
+        return "奶茶" // 异步方法里return，下面无法打印。函数执行完毕就结束了获取不到异步的返回值
+      }, 2000)
+      return '123' // 在函数里return下面是可以打印出来的
+    }
+    let result = getTea()
+    console.log(result) // undefined
+  </script>
+</body>
+</html>

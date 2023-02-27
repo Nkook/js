@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Object对象的原型
+    // 1. 所有原型链的终点都是Object.prototype
+    // 2. 只要在Object对象的原型上添加属性和方法，所有对象都可以使用
+
+    // 不建议重写原型对象上的方法意义不大，而且重写后，再在其他地方调用时，改变了原有方法的作用，
+    function Person() {
+      this.id = '001'
+    }
+    function User() {
+      this.login = function() {
+        console.log('登陆成功')
+      }
+    }
+    User.prototype = new Person()
+
+    function Admin() {}
+    Admin.prototype = new User()
+
+    var admin = new Admin()
+    console.log(admin.id) // 001
+
+    Object.prototype.sayHi = function() {
+      console.log('hello')
+    }
+    admin.sayHi() // hello
+
+    // js的内置对象都可以使用Object原型上的方法
+    var arr = [1, 2, 3]
+    arr.sayHi() // hello
+    new Date().sayHi() // hello
+
+    // 比如 toString() 方法就是挂载到Object原型上的方法
+    // 可以直接改写该方法
+    Object.prototype.toString = function() {
+      return "我是被重写的内容"
+    }
+    let obj = {}
+    alert(obj) // 我是被重写的内容
+
+    // 函数重写toString方法，如果不重写，alert是整个函数体；重写后弹出来的是 我重写了函数的toString方法
+    Function.prototype.toString = function() {
+      return "我重写了函数的toString方法"
+    }
+    function fun () {
+      console.log('123')
+    }
+    alert(fun)
+  </script>
+</body>
+</html>

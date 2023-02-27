@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 原型对象（prototype）
+    // 1. 原型对象是一个对象，所有对象都会从原型对象上继承属性和方法
+    // 2. 我们可以使用构造函数（类）的prototype属性，或对象的__proto__属性获取到它
+    // 3. 如果User是Admin的原型对象，那么是不是就可以继承了？
+
+    // es5 构造函数
+    // function User() {}
+    // // User.prototype = {name: '小明'}  // 使用构造函数的prototype属性获取原型对象
+    // var user = new User() 
+    // user.__proto__ = {name: '呵呵'}  // 通过user的__proto__属性来获取原型对象
+    // console.log(user, user.name) // User {} '呵呵'
+
+    // es6
+    class User{}
+    User.prototype.name = "小明"
+    let user = new User()
+    console.log(user, user.name)  // User {} '小明'
+    // 一般不会在prototype上写，es6有继承关键字 extends
+
+    // prototype用来扩展内置对象的功能
+
+  </script>
+</body>
+</html>

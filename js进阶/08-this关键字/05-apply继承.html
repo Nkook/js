@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // call  继承（可以实现多重继承）
+    // apply 和call一模一样
+
+    function User() {
+      this.crud = function() {
+        console.log('增删改查')
+      }
+    }
+    function Person() {
+      this.login = function() {
+        console.log('登陆成功')
+      }
+    }
+    // Admin继承了User和Person的所有方法
+    function Admin() {
+      console.log(this)  // Admin {} 指向new创建出来的实例对象
+      User.apply(this)  // 通过apply让Admin继承了User的方法
+      Person.apply(this)
+    }
+    var admin = new Admin()
+    admin.crud()  // 增删改查
+    admin.login() // 登陆成功
+
+
+
+  </script>
+</body>
+</html>

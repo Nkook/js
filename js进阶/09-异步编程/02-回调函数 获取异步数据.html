@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 如何获取异步数据
+    // 回调函数：将函数作为参数传递给另一个函数
+    // function getTea(fn) {
+    //   setTimeout(() => {
+    //     fn('奶茶') // 将实参传入
+    //   }, 2000)
+    // }
+    // getTea(function(data) { // 将函数作为参数传递给getTea
+    //   console.log(data) // 这里打印出形参 奶茶
+    // })
+
+    function getTea(fn) {
+      setTimeout(() => {
+        fn('奶茶')
+      }, 2000)
+    }
+    function getHot(fn) {
+      setTimeout(() => {
+        fn('火锅')
+      }, 1000)
+    }
+    // 回调函数 的方式，使用回调函数的方式有一个缺点是，
+    // 多个回调函数嵌套的时候会造成回调函数地狱，上下两层的回调函数间的代码耦合度太高，不利于代码的可维护。
+    
+    // 先拿奶茶再拿火锅，把火锅嵌套到奶茶成功之后
+    getTea(function(data) {
+      console.log(data)
+      getHot((data) => {
+        console.log(data)
+      })
+    })
+    // getHot((data) => {
+    //   console.log(data)
+    // })
+
+    // 如果回调函数很多，会形成回调地狱。不好维护，嵌套过多。
+    // es6提出promise
+  </script>
+</body>
+</html>

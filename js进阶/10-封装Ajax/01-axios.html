@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 用http-server开启一个静态的服务器 10-封装Ajax %  http-server
+        默认会开启一个8080端口的服务器，默认访问本地的 http://127.0.0.1:8080
+        这个服务器只有一个01-ajax页面 和data文件夹数据 -->
+  <h1>Ajax</h1>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // axios获取异步数据
+    // 在实际项目开发的过程中，通常是使用第三方ajax库来实现数据交互的，例如jQuery的ajax方法，或是axios
+    // axios.get返回的是一个promise对象，url是本地的服务数据地址
+
+    // 可以看到服务发起一个请求，返回值是 奶茶
+    axios.get("/data/tea.txt").then((res) => {
+      console.log(res.data)  // 奶茶
+      return axios.get("/data/hotPot.txt") // 这里返回一个promise对象，后面可以直接使用.then去获取数据
+    }).then((res) => {
+      console.log(res.data) // 火锅
+    })
+  </script>
+</body>
+</html>

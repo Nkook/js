@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // call（obj，param1，param2，param3······）
+    // obj：指定的对象
+    // param：指定的对象中所带有的参数
+    
+    let cat = {
+      name: 'miao'
+    }
+    let dog = {
+      name: 'wang',
+      sayName(food1, food2) {
+        console.log(`我是${this.name}，我喜欢吃${food1}和${food2}`)
+      }
+    }
+    dog.sayName('骨头')  // 我是wang，我喜欢吃骨头
+    dog.sayName.call(cat, '鱼', '肉') // 我是miao，我喜欢吃鱼和肉
+
+
+  </script>
+</body>
+</html>

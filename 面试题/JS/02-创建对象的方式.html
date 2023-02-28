@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 一、创建对象的方式
+    // 1. 字面量
+    // 2. 工厂模式
+    // 3. 构造函数
+    // 4. {} 或 new Object() （如果对象不用重复创建，这种方式是比较方便的。）
+    // 5. class 类
+
+    // 1. 通过{}创建对象
+    var obj1 = {}
+    obj1.name = '张三'
+    obj1.age = 18
+    obj1.sayName = function() {
+      console.log(this.name)
+    }
+    obj1.sayName() // 张三
+
+    // 2. 通过new Object()创建对象
+    var obj2 = new Object()
+    obj2.name = '李四'
+    obj2.sayName = function() {
+      console.log(this.name)
+    }
+
+    // 3. 使用字面量创建对象
+    var person1 = {name: 'zhang', age:20}
+    // 完全等价于
+    var person2 = {}
+    person2.name='zhang'
+    person2.age=20
+
+    // 小结：前面三种创建对象的方式存在2个问题：1.代码冗余； 2.对象中的方法不能共享，每个对象中的方法都是独立的。
+
+
+    // 4. 使用工厂模式创建对象
+    // 这种方式是使用一个函数来创建对象，减少重复代码，解决了前面三种方式的代码冗余的问题，但是方法不能共享的问题还是存在。
+    function createObj(name) {
+      var obj3 = new Object
+      obj3.name = name
+      obj3.sayName = function() {
+        console.log(this.name)
+      }
+      return obj3
+    }
+    var o1 = createObj('王五')
+    var o2 = createObj('赵六')
+    console.log('o1', o1)
+    console.log('o2', o2)
+    console.log(o1.sayName === o2.sayName) // false
+    console.log(o1 instanceof Object) // true
+
+    // 5. 通过构造函数创建对象
+    // 通过内存模型，可以发现，sayName函数是独立存在于每个对象的，所以p1.sayName===p2.sayName结果为false，还是没有解决方法不能共享的问题。
+    function Person(name) {
+      this.name = name
+      this.sayName = function() {
+        console.log(this.name)
+      }
+    }
+    let p1 = new Person('哈哈哈')
+    let p2 = new Person('hhh')
+    p1.sayName(); // 哈哈哈
+    p2.sayName(); // hhh
+    console.log(p1.constructor === p2.constructor) // true
+    console.log(p1.constructor === Person) // true
+    console.log(p1.sayName === p2.sayName) // false
+
+    // 6. 通过原型模式创建对象
+    // 直接在原型对象上添加属性和方法，可以实现实例方法共享，每个对象调用的是同一个方法。
+    // 每个方法中都有一个原型（prototype），每个原型都有一个构造器（constructor），构造器又指向这个方法。
+    // function Animal(){}
+    // conso.log(Animal.prototype.constructor==Animal); //true
+    function Animal() { }
+
+    Animal.prototype.name = 'animal';
+    Animal.prototype.sayName = function () {
+      console.log(this.name)
+    }
+
+    var a1 = new Animal()
+    var a2 = new Animal()
+
+    a1.sayName();
+
+    console.log(a1.sayName === a2.sayName);//true
+    console.log(Animal.prototype.constructor);//function Animal(){}
+    console.log(Animal.prototype.constructor==Animal);//true
+
+    //存在的问题：如果原型中含有引用类型
+    // 这种方式创建的对象会存在问题，假如原型中包含有引用类型的属性，那么如果某个对象修改了该属性的值，所有的该原型创建的对象访问的值都会改变。基本类型不受影响。
+    function Animal (){}
+    Animal.prototype = {
+        name: 'animal',
+        friends: ['dog','cat'],
+        sayName: function(){
+          console.log(this.name);
+        }
+    };
+    var a1 = new Animal();
+    var a2 = new Animal();
+    a2.friends.push('snake');
+    console.log(a2.friends);//[dog,cat,snake]
+    console.log(a1.friends);//[dog,cat,snake]
+
+    // 7. 通过原型+构造函数的方式创建对象
+    // 这种方式结合了上面两种方式，解决了代码冗余，方法不能共享，引用类型改变值的问题。
+    // 基本类型写在构造函数里，引用类型写在原型对象上
+    function Animal(name){
+        this.name = name;
+        this.friends = ['dog','cat'];
+    }
+    Animal.prototype.sayName = function(){
+        console.log(this.name);
+    };
+    var a1 = new Animal('d');
+    var a2 = new Animal('c');
+    a1.friends.push('snake');
+    console.log(a1.friends); //[dog,cat,snake]
+    console.log(a2.friends); //[dog,cat]
+
+
+  </script>
+</body>
+</html>

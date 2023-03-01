@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 参考：https://juejin.cn/post/6844903711022514184
+    // 类数组对象
+    // 1. 特点：可以通过索引属性访问元素并且拥有 length 属性的对象。
+    // 2. 和数组的区别：不能直接调用数组的方法，但是又和数组比较类似：在访问值、赋值、获取长度上操作一致
+    var arrLike = {
+      0: 'name',
+      1: 'age',
+      2: 'job',
+      length: 3
+    }
+    // 而它所对应的数组应该是这样子的
+    var arr = ['name', 'age', 'job'];
+
+    // 访问
+    console.log(arr[0]); // name
+    console.log(arrLike[0]); // name
+    // 赋值
+    arr[0] = 'new name';
+    arrLike[0] = 'new name';
+    // 获取长度
+    console.log(arr.length); // 3
+    console.log(arrLike.length); // 3
+
+
+    // 3. 不能直接调用数组的方法，可以通过Function.call和Function.apply间接调用
+    // 使用 call： Array.prototype.数组方法.call(arrLike, '值');
+    Array.prototype.push.call(arrLike, 'hobby');
+    console.log(arrLike); // { '0': 'name', '1': 'age', '2': 'job', '3': 'hobby', length: 4 }
+    var arrLikeStr = Array.prototype.join.call(arrLike, '&')
+    console.log(arrLikeStr); // name&age&job&hobby
+
+
+    // 使用 apply：Array.prototype.数组方法.apply(arrLike, ['值']);
+    Array.prototype.push.apply(arrLike, ['hobby']);
+    console.log(arrLike); // { '0': 'name', '1': 'age', '2': 'job', '3': 'hobby', length: 4 }
+    var arrLikeStr = Array.prototype.join.apply(arrLike, ['&'])
+    console.log(arrLikeStr); // name&age&job&hobby
+
+
+    // 4. 类数组转成数组：通过slice/splice
+    // Array.prototype.slice 方法不会改变原先类数组对象，而 Array.prototype.splice 会改变原先的类数组对象，这一点跟数组调用 slice 或 splice 方法时的行为是一致的。
+    // 使用 call：Array.prototype.slice/splice.call(arrLike, 0)
+    console.log(Array.prototype.slice.call(arrLike,0));
+    console.log(Array.prototype.splice.call(arrLike,0));  // splice会改变原先的类数组对象
+    
+    // 使用 apply：Array.prototype.slice/splice.apply(arrLike, [0])
+    console.log(Array.prototype.slice.apply(arrLike,[0]));
+    console.log(Array.prototype.splice.apply(arrLike,[0]));  // splice会改变原先的类数组对象
+
+
+    // 在 JavaScript 中，主要有以下情况中的对象是类数组：
+    // ● 函数里面的参数对象 arguments；
+    // ● 用 getElementsByTagName/ClassName/Name 获得的 HTMLCollection；
+    // ● 用 querySelector 获得的 NodeList。
+
+  </script>
+</body>
+</html>

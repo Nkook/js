@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        1. // 使用 apply 将 foo 的参数传递给 bar
+        function foo() {
+            console.log(this) // window
+            console.log(arguments) // Arguments(3) [1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+            bar.apply(this, arguments);
+        }
+        function bar(a, b, c) {
+         console.log(a, b, c);
+        }
+        foo(1, 2, 3)   //1 2 3
+
+        // 通过在 foo 函数内部调用 apply 方法，用 foo 函数的参数传递给 bar 函数，这样就实现了借用参数的妙用。
+    </script>
+</body>
+</html>

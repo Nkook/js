@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // fill()
+    // array.fill(value, start, end)
+    // 其参数如下：
+    // ● value：必需。填充的值；
+    // ● start：可选。开始填充位置；
+    // ● end：可选。停止填充位置 (默认为 array.length)。
+
+    let arr = [0, 0, 0, 0, 0];
+
+    // 用5填充整个数组
+    arr.fill(5);
+    console.log(arr); // [5, 5, 5, 5, 5]
+    arr.fill(0);      // 重置
+
+    // 用5填充索引大于等于3的元素
+    arr.fill(5, 3);
+    console.log(arr); // [0, 0, 0, 5, 5]
+    arr.fill(0);      // 重置
+
+    // 用5填充索引大于等于1且小于等于4的元素
+    arr.fill(5, 1, 4);
+    console.log(arr); // [0, 5, 5, 5, 0]
+    arr.fill(0);      // 重置
+
+    // 用5填充索引大于等于-1的元素
+    arr.fill(5, -1);
+    console.log(arr); // [0, 0, 0, 0, 5]
+    arr.fill(0);      // 重置
+
+
+
+
+  </script>
+</body>
+</html>

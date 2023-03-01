@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1, [2, [3, 4]]];
+        function flatten(arr) {
+            while (arr.some(item => Array.isArray(item))) {
+                arr = [].concat(...arr);
+            }
+            return arr;
+        }
+        console.log(flatten(arr)); //  [1, 2, 3, 4，5]
+
+        // 先用数组的 some 方法把数组中仍然是组数的项过滤出来，然后执行 concat 操作，
+        // 利用 ES6 的展开运算符，将其拼接到原数组中，最后返回原数组，达到了预期的效果。
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Array的原型上暴露了3个用于检索数组内容的方法：
+    // keys()、values()、entries()。
+    // keys()方法返回数组索引的迭代器，
+    // values()方法返回数组元素的迭代器，
+    // entries()方法返回索引值对的迭代器。
+    let array = ["one", "two", "three", "four", "five"];
+    console.log(Array.from(array.keys()))     // [0, 1, 2, 3, 4]
+    console.log(Array.from(array.values()))   // ["one", "two", "three", "four", "five"]
+    console.log(Array.from(array.entries()))  // [[0, "one"], [1, "two"], [2, "three"], [3, "four"], [4, "five"]]
+  </script>
+</body>
+</html>

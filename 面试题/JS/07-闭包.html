@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 闭包：函数嵌套函数，内部函数就是闭包。内部函数可以访问外部函数的变量
+    // 作用域链：一层层嵌套，当前作用域找不到，往上查找，一层层往外查找
+    // 正常情况下，函数执行完毕，内部变量会销毁，释放内存空间，在外部访问函数内部的变量是访问不到的。
+    // 闭包，内部函数没有执行完成，外部函数变量不会被销毁。不会被垃圾回收
+
+    function outerFun() {
+      let a = 10
+      function innerFun() {
+        console.log(a)
+      }
+      return innerFun
+    }
+    let fun = outerFun() // 这里执行完了，里面的a没有销毁
+    fun() // 10
+
+    // 应用：封装一段代码
+    // 定义两个全局变量和两个全局函数。可能存在冲突和覆盖。通过封装解决
+    // let a = 10
+    // let b = 20
+    // function add() {
+    //   return a+b
+    // }
+    // function sub() {
+    //   return a-b
+    // }
+    // let result1 = add()
+    // let result2 = sub()
+    // console.log(result1, result2) // 30 -10
+
+    let module1 = function() {
+      let a = 10 // 这里就变成了局部变量，变量私有化，外部无法访问。只能通过我return的函数进行访问
+      let b = 20
+      function add() {
+        return a+b
+      }
+      function sub() {
+        return a-b
+      }
+      return {
+        add,
+        sub
+      }
+    }
+    let result1 = module1.add()
+    let result2 = module1.sub()
+    console.log(result1, result2) // 30 -10
+
+
+
+  </script>
+</body>
+</html>

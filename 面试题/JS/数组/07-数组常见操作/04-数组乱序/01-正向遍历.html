@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 主要的实现思路就是：
+        //     1. 取出数组的第一个元素，随机产生一个索引值，将该第一个元素和这个索引对应的元素进行交换；
+        //     2. 第二次取出数据数组第二个元素，随机产生一个除了索引为1的之外的索引值，并将第二个元素与该索引值对应的元素进行交换；
+        //     3. 按照上面的规律执行，直到遍历完成。
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        for (var i = 0; i < arr.length; i++) { // 取随机索引，从第一个元素和随机元素交换，直到第九个元素交换完毕。随机数组产生
+        const randomIndex = Math.round(Math.random() * (arr.length - 1 - i)) + i; // 取一个0-9的随机数并进行四舍五入取整
+        [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]];
+        }
+        console.log(arr)
+
+        // Math.random()是令系统随机选取大于等于 0.0 且小于 1.0 的伪随机 double 值
+        // int  num = (int)(Math.random()*2+1)
+        // 以上代码即设置一个随机1到3(取不到3)的变量num。
+    </script>
+</body>
+</html>

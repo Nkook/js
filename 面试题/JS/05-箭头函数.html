@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 箭头函数
+
+    // function fun() {
+    //   return 100
+    // }
+    // const fun  = function() {
+    //   return 100
+    // }
+
+    // const fun = () => {
+    //   return 100
+    // }
+    const fun = () => 100
+
+    console.log(fun())
+    // 箭头函数：
+    // ()中定义参数，如果只有一个参数，可以不写括号
+    // {}中写函数题，如果函数体中只有返回值，可以不写return
+
+    let obj = {
+      name: '夏明',
+      age: 2,
+      sayName() {
+        console.log(`我是${this.name}`) // 我是夏明
+        // setTimeout(function() {
+        //   console.log(`我是${this.name}`) // 报错
+        // }, 500)
+        setTimeout(() => {
+          console.log(`我是${this.name}`) // 我是夏明
+        }, 500)
+      }
+    }
+    obj.sayName()
+
+    // 普通函数，谁调用这个函数this就指向谁
+    // 箭头函数，在哪定义这个函数this就指向谁
+
+  </script>
+</body>
+</html>

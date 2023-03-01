@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // splice()方法可能是数组中的最强大的方法之一了
+    // 该方法会改变原始数组
+    // 返回
+
+    // arrayObject.splice(index, howmany, item1,.....,itemX)
+    // 其参数如下：
+    //   ● index：必需。整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置。
+    //   ● howmany：必需。要删除的项目数量。如果设置为 0，则不会删除项目。
+    //   ● item1, ..., itemX：可选。向数组添加的新项目。
+
+    // 从上面参数可知，splice主要有三种使用形式：
+    //   ● 删除：需要给splice()传递两个参数，即要删除的第一个元素的位置和要删除的元素的数量；
+    //   ● 插入：需要给splice()传递至少三个参数，即开始位置、0（要删除的元素数量）、要插入的元素。
+    //   ● 替换：splice()方法可以在删除元素的同时在指定位置插入新的元素。同样需要传入至少三个参数，即开始位置、要删除的元素数量、要插入的元素。要插入的元素数量是任意的，不一定和删除的元素数量相等。
+
+    let array = ["one", "two", "three","four", "five"];
+    console.log(array.splice(1, 2));           // 删除：["two", "three"]
+    console.log(array);       // ['one', 'four', 'five']
+
+    let array1 = ["one", "two", "three","four", "five"];
+    console.log(array1.splice(2, 0, 996));      // 插入：[]
+    console.log(array);  //  ['one', 'two', 996, 'three', 'four', 'five']
+
+    let array3 = ["one", "two", "three","four", "five"];
+    console.log(array3.splice(2, 1, 996));      // 替换：["three"]
+    console.log(array); // ['one', 'two', 996, 'four', 'five']
+    
+
+
+  </script>
+</body>
+</html>

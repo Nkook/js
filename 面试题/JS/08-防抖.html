@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <script>
+    // 防抖：停止操作的时候触发
+    // 用户操作事件过于频繁，只要最后一次事件的操作
+
+    // 增加了一个全局变量，防抖的逻辑和业务逻辑混在一起了；不好维护。
+    // 通过闭包封装防抖
+    let inp = document.querySelector("input")
+    // let timer = null
+    // inp.oninput = function() {
+    //   if (timer !== null) {
+    //     clearTimeout(timer)
+    //   }
+    //   timer = setTimeout(() => {
+    //     console.log('打印=====',this.value) // 0.5秒后输出结果
+    //   }, 500)
+    // }
+
+    // 闭包封装
+    inp.oninput = debounce(function() {
+      console.log(this) // window
+      console.log(this.value)
+    }, 500)
+
+    function debounce(fn, delay) {
+      let timer = null
+      return function() {
+        if (timer !== null) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          // this指向的是 <input type="text">
+          fn.call(this) // 通过call改变函数的this指向，指向input
+        })
+      }
+    }
+  </script>
+</body>
+</html>

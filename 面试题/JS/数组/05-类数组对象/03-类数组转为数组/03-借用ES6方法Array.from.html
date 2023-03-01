@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6 新增的 Array.from 方法以及展开运算符的方法来将类数组转化为数组。
+        // 那么还是围绕上面这个 sum 函数来进行改变，
+        // 看下用 Array.from 和展开运算符...是怎么实现转换数组的：
+
+        function sum(a, b) {
+        let args = Array.from(arguments); //  [1, 2]
+        console.log(args.reduce((sum, cur) => sum + cur));
+        }
+        sum(1, 2);    // 3
+
+        function sum(a, b) {
+        let args = [...arguments]; //  [1, 2]
+        console.log(args.reduce((sum, cur) => sum + cur));
+        }
+        sum(1, 2);    // 3
+
+        function sum(...args) { //  [1, 2]
+        console.log(args.reduce((sum, cur) => sum + cur));
+        }
+        sum(1, 2);    // 3
+    </script>
+</body>
+</html>

@@ -7,6 +7,28 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <script>
+    // let const var
+    // let var 可以定义变量
+    // var 没有块级作用域，是个全局变量
+    // let 有块级作用域
+    //      用作：数值变量
+    // const 定义常量，不可被修改；如果定义的对象修改里面的属性值可以修改
+    //      用作：不会被修改的常量、函数表达式、定义对象
+    if(true) {
+      var a = 10 // 10
+      let a = 10 // 报错
+    }
+    console.log(a) 
+
+    const PI = 3.14
+    const obj = {
+      name: '好好'
+    }
+    obj.name = '哈哈哈'
+
+    const fun = function() {}
+
+  </script>
 </body>
 </html>

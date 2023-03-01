@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数组创建
+    // 1. 字面量
+    // 2. 构造函数
+    // 3. ES6构造器
+
+    // 1. 字面量
+    let arr1 = [1, 2, 3]
+
+    // 2. 构造函数
+    // 传一个参数代表数组的长度，传多个参数则是数组的元素
+    let arr2 = new Array(10) // [empty × 10] 长度为10的数组
+    let arr3 = Array();  
+    Array(8.0); // [empty × 8]
+    Array(8.0, 5); // [8, 5]
+
+    // 3. ES6构造器
+    // Array.of   Array.of 用于将参数依次转化为数组项，然后返回这个新数组
+    // 
+    Array.of(8.0); // [8]
+    Array.of(8, 5); // [8, 5]
+
+    // Array.from 有 3 个参数：
+    // ● 类似数组的对象，必选；
+    // ● 加工函数，新生成的数组会经过该函数的加工再返回；
+    // ● this 作用域，表示加工函数执行时 this 的值。
+    var obj = {0: 'a', 1: 'b', 2:'c', length: 3};
+    Array.from(obj, function(value, index){
+      console.log(value, index, this, arguments, arguments.length); // a 0 {0: 'a', 1: 'b', 2: 'c', length: 3} Arguments(2) ['a', 0, callee: ƒ, Symbol(Symbol.iterator): ƒ] 2
+      return value.repeat(3);   // ['aaa', 'bbb', 'ccc'] 必须指定返回值，否则返回 undefined
+    }, obj);
+
+    // 如果这里不指定 this，加工函数就可以是一个箭头函数
+    Array.from(obj, (value) => value.repeat(3)); //  控制台打印 (3) ["aaa", "bbb", "ccc"]
+
+    Array.from('abc');                             // ["a", "b", "c"]
+    Array.from(new Set(['abc', 'def']));           // ["abc", "def"]
+    Array.from(new Map([[1, 'ab'], [2, 'de']]));   // [[1, 'ab'], [2, 'de']]
+
+
+  </script>
+</body>
+</html>

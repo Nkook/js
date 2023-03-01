@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // array.copyWithin(target, start, end)
+    // copyWithin()方法会按照指定范围来浅复制数组中的部分内容，然后将它插入到指定索引开始的位置，开始与结束索引的计算方法和fill方法一样。
+    // 其参数如下：
+    //   ● target'：必需。复制到指定目标索引位置；
+    //   ● start：可选。元素复制的起始位置；
+    //   ● end：可选。停止复制的索引位置 (默认为 array.length)。如果为负值，表示倒数。
+
+    const array = [1,2,3,4,5]; 
+    console.log(array.copyWithin(0,3));  // [4, 5, 3, 4, 5]
+
+  </script>
+</body>
+</html>

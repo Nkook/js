@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // arguments 如何转换成数组：
+        // Array.prototype.slice.call(arguments)
+        // [].slice.call(arguments)
+        //  Array.prototype.concat.apply([], arguments)
+        function sum(a, b) {
+        let args = Array.prototype.slice.call(arguments); // 将arguments转成数组 
+        // let args = [].slice.call(arguments); // 这样写也是一样效果
+        console.log(args.reduce((sum, cur) => sum + cur));
+        }
+        sum(1, 2);  // 3
+
+        function sum(a, b) {
+        let args = Array.prototype.concat.apply([], arguments); [1, 2]
+        console.log(args.reduce((sum, cur) => sum + cur));
+        }
+        sum(1, 2);  // 3
+
+        // 借用 Array 原型链上的各种方法，来实现 sum 函数的参数相加的效果。
+        // 一开始都是将 arguments 通过借用数组的方法转换为真正的数组，最后都又通过数组的 reduce 方法实现了参数转化的真数组 args 的相加，最后返回预期的结果。
+    </script>
+</body>
+</html>

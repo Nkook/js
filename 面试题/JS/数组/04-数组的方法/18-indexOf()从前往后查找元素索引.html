@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // indexOf()、lastIndexOf()、includes()。
+    // 这些方法都接收两个参数：要查找的元素和可选的其实搜索位置。
+    // lastIndexOf()方法会从数组结尾元素开始向前搜索，
+    // 其他两个方法则会从数组开始元素向后进行搜索。
+    // indexOf()和lastIndexOf()返回的是查找元素在数组中的索引值，如果没有找到，则返回-1。
+    // includes()方法会返回布尔值，表示是否找到至少一个与指定元素匹配的项。在比较第一个参数和数组的每一项时，会使用全等（===）比较，也就是说两项必须严格相等。
+    let arr = [1, 2, 3, 4, 5];
+    console.log(arr.indexOf(2))      // 1
+    console.log(arr.lastIndexOf(4))  // 3
+    console.log(arr.indexOf(10)) // -1
+
+    console.log(arr.includes(4))     // true
+    console.log(arr.includes(10)) // false
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数组解构赋值
+
+    // 交换两个变量的值
+    // let [a, b] = [10, 20]
+    // console.log(a)
+    // console.log(b)
+    
+    let c = 10;
+    let d = 20;
+    [c, d] = [d, c];
+    console.log(c, d); // 20 10
+    
+
+    // 对象解构赋值
+    // let {name, age} = {
+    //   name: '姐姐',
+    //   age: 19
+    // }
+    // console.log(name, age) // 姐姐 19
+
+    function createStu () {
+      let name = '小米';
+      let age = 10;
+      return {
+        name: name,
+        age: age
+      }
+    }
+    let obj = createStu()
+    // console.log(obj) // {name: '小米', age: 10}
+    // 只拿名字
+    console.log(obj.name) // 小米 es5写法
+    
+    let {name} = createStu()
+    console.log(name) // 小米
+
+  </script>
+</body>
+</html>

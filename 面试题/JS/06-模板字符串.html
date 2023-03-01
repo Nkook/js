@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="con"></div>
+  <script>
+    // 模板字符串
+    // 1. 支持换行
+    // 2. 支持html标签
+    // 3. 支持参数 ${name}
+    let str = `我是"超人"`
+    let con = document.querySelector('.con')
+    // con.innerHTML = "<h1>哈哈哈<h1>"
+    let banana = '香蕉'
+    con.innerHTML = `<ul>
+        <li>${banana}</li>
+        <li>苹果</li>
+        <li>香蕉</li>
+      </ul>`
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // arguments
+    //   在日常开发中经常会遇到各种类数组对象，最常见的就是在函数中使用的 arguments，
+    // （1）它的对象只定义在函数体中，包括了函数的参数和其他属性。先来看下 arguments 的使用方法：
+
+    function foo(name, age, sex) {
+        console.log(arguments);
+        console.log(typeof arguments); // object
+        console.log(Object.prototype.toString.call(arguments)); // [object Arguments]
+    }
+    foo('jack', '18', 'male');
+
+    // Arguments(3) ['jack', '18', 'male', callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    // 0: "jack"
+    // 1: "18"
+    // 2: "male"
+    // callee: ƒ foo(name, age, sex)
+    // length: 3
+    // Symbol(Symbol.iterator): ƒ values()
+    // [[Prototype]]: Object
+
+    // typeof 这个 arguments 返回的是 object，
+    // 通过 Object.prototype.toString.call 返回的结果是 [object arguments]，而不是 [object array]，说明 arguments 和数组还是有区别的。
+
+    // （2）length 属性就是函数参数的长度。另外 arguments 还有一个 callee 属性，下面看看这个 callee 是干什么的：
+    function foo1(name, age, sex) {
+        console.log(arguments.callee);
+    }
+    foo1('jack', '18', 'male');
+
+    // 可以看出，输出的就是函数自身，如果在函数内部直接执行调用 callee，那它就会不停地执行当前函数，直到执行到内存溢出。
+    // ƒ foo(name, age, sex) {
+    //     console.log(arguments.callee);
+    // }
+
+
+
+
+
+  </script>
+</body>
+</html>

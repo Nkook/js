@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // filter()方法用于过滤数组，满足条件的元素会被返回。
+    // 它的参数是一个回调函数，所有数组元素依次执行该函数，返回结果为true的元素会被返回。
+    // 该方法会返回一个新的数组，不会改变原数组。
+
+    let arr = [1, 2, 3, 4, 5]
+    arr.filter(item => item > 2) 
+    // 结果：[3, 4, 5]
+
+
+    // 可以使用filter()方法来移除数组中的undefined、null、NAN等值
+    let arr1 = [1, undefined, 2, null, 3, false, '', 4, 0]
+    arr1.filter(Boolean)
+    // 结果：[1, 2, 3, 4]
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Array.prototype.数组方法.call(arrayLike, '值')
+        var arrayLike = { 
+            0: 'java',
+            1: 'script',
+            length: 2
+        } 
+        Array.prototype.push.call(arrayLike, 'jack', 'lily'); 
+        console.log(typeof arrayLike); // 'object'
+        console.log(arrayLike);
+        // {0: "java", 1: "script", 2: "jack", 3: "lily", length: 4}
+
+        // arrayLike 其实是一个对象，模拟数组的一个类数组，
+        // 从数据类型上说它是一个对象，新增了一个 length 的属性。
+        // 还可以看出，用 typeof 来判断输出的是 object，它自身是不会有数组的 push 方法的，
+        // 这里用 call 的方法来借用 Array 原型链上的 push 方法，可以实现一个类数组的 push 方法，给 arrayLike 添加新的元素。
+    </script>
+</body>
+</html>

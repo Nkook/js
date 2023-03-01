@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 该方法和的上面的reduce()用法几乎一致，只是该方法是对数组进行倒序查找的。
+    // 而reduce()方法是正序执行的。
+    let arr = [1, 2, 3, 4]
+    let sum = arr.reduceRight((prev, cur, index, arr) => {
+        console.log(prev, cur, index);
+        return prev + cur;
+    }, 5)
+    console.log(arr, sum);
+
+    // 5 4 3
+    // 9 3 2
+    // 12 2 1
+    // 14 1 0
+    // [1, 2, 3, 4] 15
+
+  </script>
+</body>
+</html>

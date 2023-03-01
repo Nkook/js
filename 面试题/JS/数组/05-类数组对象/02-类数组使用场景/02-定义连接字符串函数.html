@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 可以通过 arguments 这个例子定义一个函数来连接字符串。
+        // 这个函数唯一正式声明了的参数是一个字符串，该参数指定一个字符作为衔接点来连接字符串。该函数定义如下：
+        function myConcat(separa) { // 接收第一个实参
+        var args = Array.prototype.slice.call(arguments, 1); // 将类数组通过slice转成数组并选取索引1及以后的值
+        return args.join(separa); // 使用数组方法拼接成字符串
+        }
+        myConcat(", ", "red", "orange", "blue"); // "red, orange, blue"
+        myConcat("; ", "elephant", "lion", "snake"); // "elephant; lion; snake"
+        myConcat(". ", "one", "two", "three", "four", "five"); // "one. two. three. four. five"
+    </script>
+</body>
+</html>

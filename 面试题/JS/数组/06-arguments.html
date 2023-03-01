@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // arguments 是一个经典的类数组对象
+    // 在函数体中定义了 Arguments 对象，其包含函数的参数和其它属性，以 arguments 变量来指代。
+    function fn(name, age, job) {
+        console.log(arguments);
+    }
+    fn('张三', '25', '打工')
+
+    // 控制台输出: 
+    // Arguments(3) ['张三', '25', '打工', callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    //   0: "张三"
+    //   1: "25"
+    //   2: "打工"
+    //   callee: ƒ fn(name, age, job)
+    //   length: 3
+    //   Symbol(Symbol.iterator): ƒ values()
+    //   [[Prototype]]: Object
+
+    // 可以看到 arguments 中包含了函数传递的参数、length、和 callee 属性。
+    // length 属性表示的是实参的长度，即调用函数的时候传入的参数个数。
+    // callee 属性则指向的函数自身，我们可以通过它来调用自身函数。
+
+    // arguments 是一个经典的类数组对象，
+    // 我们可以通过上述的  Function.call 或者 Function.apply 方法来间接调用数组的方法，
+    // 也可以直接通过 Array.prototype.slice  或 Array.prototype.splice  等方法把类数组对象转换成真正的数组。
+  </script>
+</body>
+</html>

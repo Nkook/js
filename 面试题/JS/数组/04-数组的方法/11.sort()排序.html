@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // sort()方法是我们常用给的数组排序方法，该方法会在原数组上进行排序，
+    // 会改变原数组
+    // arrayObject.sort(sortby)
+
+    let array0 = [5, 4, 3, 2, 1];
+    let array2 = array.sort();
+    console.log(array2)  // [1, 2, 3, 4, 5]
+
+    // 其中参数sortby是可选参数，用来规定排序顺序，它是一个比较函数，用来判断哪个值应该排在前面。
+    // 默认情况下，sort()方法会按照升序重新排列数组元素。
+    // 为此，sort()方法会在每一个元素上调用String转型函数，然后比较字符串来决定顺序，
+    // 即使数组的元素都是数值，也会将数组元素先转化为字符串在进行比较、排序。
+    // 这就造成了排序不准确的情况，如下代码：
+
+    let array1 = [0, 1, 5, 10, 15];
+    let array3 = array.sort();
+    console.log(array3)  //  [0, 1, 10, 15, 5]
+
+    function compare(value1, value2) {
+    if(value1 < value2){
+      return -1
+    } else if(value1 > value2){
+      return 1
+    } else{
+      return 0
+    }
+  }
+
+  let array = [0, 1, 5, 10, 15];
+  let array4 = array.sort(compare);
+  console.log(array4)  // [0, 1, 5, 10, 15]
+
+  // 我们使用箭头函数来定义：
+  let array5 = [0, 1, 5, 10, 15];
+
+  let array6 = array5.sort((a, b) => a - b);  // 正序排序
+  console.log(array6)  // [0, 1, 5, 10, 15]
+
+  let array7 = array5.sort((a, b) => b - a);  // 倒序排序
+  console.log(array7)  // [15, 10, 5, 1, 0]
+
+
+  </script>
+</body>
+</html>

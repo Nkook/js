@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // toLocaleString()方法可能会返回和toString()方法相同的结果，但也不一定。
+    // 在调用toLocaleString()方法时会得到一个逗号分隔的数组值的字符串，
+    // 它与toString()方法的区别是，为了得到最终的字符串，会调用每个值的toLocaleString()方法，而不是toString()方法
+
+    let array= [{name:'zz'}, 123, "abc", new Date()];
+    let str = array.toLocaleString();
+    console.log(str); // [object Object],123,abc,2023/2/28 16:39:28
+
+    // 如果数组中的某一项是null或者undefined，则在调用上述三个方法后，返回的结果中会以空字符串来表示。
+  </script>
+</body>
+</html>

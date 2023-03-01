@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // HTMLCollection 简单来说是 HTML DOM 对象的一个接口，这个接口包含了获取到的 DOM 元素集合，返回的类型是类数组对象，
+        // 如果用 typeof 来判断的话，它返回的是 object。它是及时更新的，当文档中的 DOM 变化时，它也会随之变化。
+
+        // 下面来 HTMLCollection 最后返回的是什么，在一个有 form 表单的页面中，在控制台中执行下述代码：
+        var elem1, elem2;
+        // document.forms 是一个 HTMLCollection
+        elem1 = document.forms[0];
+        elem2 = document.forms.item(0);
+        console.log(elem1);
+        console.log(elem2);
+        console.log(typeof elem1); // object
+        console.log(Object.prototype.toString.call(elem1)); // [object HTMLFormElement]
+
+        // 打印结果
+        // <form id="commentform">...</form>
+        // <form id="commentform">...</form>
+
+        // 这里打印出来了页面第一个 form 表单元素，
+        // 同时也打印出来了判断类型的结果，说明打印的判断的类型和 arguments 返回的也比较类似，
+        // typeof 返回的都是 object，和前面的类似。
+
+        // 注意：HTML DOM 中的 HTMLCollection 是即时更新的，当其所包含的文档结构发生改变时，它会自动更新。
+
+    </script>
+</body>
+</html>

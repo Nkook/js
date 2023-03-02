@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // startsWith()：该方法用于检测字符串是否以指定的子字符串开始。
+        // 如果是以指定的子字符串开头返回 true，否则 false。其语法和上面的includes()方法一样。
+        let str = 'Hello world!';
+
+        str.startsWith('Hello') // 输出结果：true
+        str.startsWith('Helle') // 输出结果：false
+        str.startsWith('wo', 6) // 输出结果：true
+        str.startsWith('wo')    // false
+
+    </script>
+</body>
+</html>

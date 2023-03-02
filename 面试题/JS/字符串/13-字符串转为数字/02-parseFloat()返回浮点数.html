@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // parseFloat()
+        // parseFloat() 方法可解析一个字符串，并返回一个浮点数。
+        // 该方法指定字符串中的首个字符是否是数字。
+        // 如果是，则对字符串进行解析，直到到达数字的末端为止，然后以数字返回该数字，而不是作为字符串。
+
+        parseFloat("10.00")      // 输出结果：10.00
+        parseFloat("10.01")      // 输出结果：10.01
+        parseFloat("-10.01")     // 输出结果：-10.01
+        parseFloat("40.5 years") // 输出结果：40.5
+
+        // 如果参数字符串的第一个字符不能被解析成为数字，则 parseFloat 返回 NaN。
+        parseFloat("new40.5")    // 输出结果：NaN
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // split() 方法用于把一个字符串分割成字符串数组。该方法不会改变原始字符串。
+        // string.split(separator,limit) // 分割的标识，分割几个元素
+        // 该方法有两个参数：
+        //     ● separator：必需。字符串或正则表达式，从该参数指定的地方分割 string。
+        //     ● limit：可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。
+
+        let str = "abcdef";
+        str.split("c");    // 输出结果：["ab", "def"]
+        str.split("", 4)   // 输出结果：['a', 'b', 'c', 'd'] 
+
+        // 空字符串 分割每个字符
+        str.split("");     // 输出结果：["a", "b", "c", "d", "e", "f"]
+
+        // 通过正则同时拆分多个分隔符
+        const list = "apples,bananas;cherries"
+        const fruits = list.split(/[,;]/)
+        console.log(fruits);  // 输出结果：["apples", "bananas", "cherries"]
+    </script>
+</body>
+</html>

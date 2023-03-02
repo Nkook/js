@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // charCodeAt()：该方法会返回指定索引位置字符的 Unicode 值，
+        // 返回值是 0 - 65535 之间的整数，表示给定索引处的 UTF-16 代码单元，如果指定位置没有字符，将返回 NaN：
+        let str = "abcdefg";
+        console.log(str.charCodeAt(1)); // "b" --> 98
+
+        // 通过这个方法，可以获取字符串中指定Unicode编码值范围的字符。
+        // 比如，数字0～9的Unicode编码范围是: 48～57，可以通过这个方法来筛选字符串中的数字，
+        // 当然如果你更熟悉正则表达式，会更方便。
+
+    </script>
+</body>
+</html>

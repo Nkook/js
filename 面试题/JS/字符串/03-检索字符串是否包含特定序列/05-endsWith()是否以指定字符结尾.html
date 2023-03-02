@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // endsWith()：该方法用来判断当前字符串是否是以指定的子字符串结尾。
+        // 如果传入的子字符串在搜索字符串的末尾则返回 true，否则将返回 false。
+
+        // string.endsWith(searchvalue, length)
+        // 该方法有两个参数：
+        //     ● searchvalue：必需，要搜索的子字符串；
+        //     ● length： 设置字符串的长度，默认值为原始字符串长度 string.length。
+
+        let str = 'Hello world!';
+
+        str.endsWith('!')       // 输出结果：true
+        str.endsWith('llo')     // 输出结果：false
+        str.endsWith('llo', 5)  // 输出结果：true
+
+        let str1 = '123456789' // 索引最大是8，要想找到6是结尾，那么需要从7往前找，对应倒数索引为6的位置开始
+        str1.endsWith(6, 6) // true
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // parseInt()和parseFloat()方法都用于将字符串转为数字。
+
+        // parseInt() 方法用于可解析一个字符串，并返回一个整数。其语法如下：
+        // parseInt(string, radix)
+        // 该方法有两个参数：
+        //     ● string：必需。要被解析的字符串。
+        //     ● radix：可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。
+
+        // 当参数 radix 的值为 0，或没有设置该参数时，parseInt() 会根据 string 来判断数字的基数。
+        parseInt("10");			  // 输出结果：10
+        parseInt("17",8);		  // 输出结果：15 (8+7)
+        parseInt("010");		  // 输出结果：10 或 8
+
+        // 当参数 radix 的值以 “0x” 或 “0X” 开头，将以 16 为基数：
+        parseInt("0x10")      // 输出结果：16
+
+        // 如果该参数小于 2 或者大于 36，则 parseInt() 将返回 NaN：
+        parseInt("50", 1)      // 输出结果：NaN
+        parseInt("50", 40)     // 输出结果：NaN
+
+        // 只有字符串中的第一个数字会被返回，当遇到第一个不是数字的字符为止:
+        parseInt("40 4years")   // 输出结果：40
+
+        // 如果字符串的第一个字符不能被转换为数字，就会返回 NaN：
+        parseInt("new100")     // 输出结果：NaN
+
+        // 字符串开头和结尾的空格是允许的：
+        parseInt("  60  ")    // 输出结果： 60
+
+
+    </script>
+</body>
+</html>

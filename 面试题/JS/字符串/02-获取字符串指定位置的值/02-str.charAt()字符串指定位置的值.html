@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // charAt()和charCodeAt()方法都可以通过索引来获取指定位置的值：
+        //     ● charAt() 方法获取到的是指定位置的字符；
+        //     ● charCodeAt()方法获取的是指定为值得字符的Unicode值。
+        // string.charAt(index)
+        const str0 = 'hello';
+        str0.charAt(1)  // 输出结果：e 
+
+
+        // 字符串也可以通过索引值来直接获取对应字符，那它和charAt()有什么区别呢？
+        const str = 'hello';
+        str.charAt(1)  // 输出结果：e 
+        str[1]         // 输出结果：e 
+        str.charAt(5)  // 输出结果：'' 
+        str[5]         // 输出结果：undefined
+    </script>
+</body>
+</html>

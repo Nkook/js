@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // search()方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
+        // string.search(searchvalue)
+
+        let str = "abcdef";
+        str.search(/bcd/)   // 输出结果：1 返回 str 中第一个与 regexp 相匹配的子串的起始位置。
+        str.search('c')   // 输出结果：2
+
+        // 注意： 要执行忽略大小写的检索，请追加标志 i。
+        // 该方法不执行全局匹配，它将忽略标志 g，也就是只会返回第一次匹配成功的结果。
+        // 如果没有找到任何匹配的子串，则返回 -1。
+    </script>
+</body>
+</html>

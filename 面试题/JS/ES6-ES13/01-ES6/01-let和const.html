@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //                    var     let     const
+        // 1. 变量提升          ✅      X       X
+        // 2. 全局变量          ✅      X       X
+        // 3. 重复声明          ✅      X       X
+        // 4. 重新赋值          ✅      ✅      X
+        // 5. 暂时性死区        X       ✅      ✅
+        // 6. 块作用域          X       ✅      ✅
+        // 7. 只声明不初始化     ✅      ✅      X
+
+
+        // 在ES6之前是存在变量提升的，所谓的变量提升就是变量可以在声明之前使用：
+        console.log(a); // 输出结果：undefined
+        var a = 1;
+
+        // 这种现象就不太符合我们的直觉，
+        // 所以在ES6中，let和const关键字限制了变量提升，
+        // let 定义的变量添加到 Lexical Environment 后不再进行初始化为 undefined 操作，
+        // JS 引擎只会在执行到词法声明和赋值时才进行初始化。
+        // 而在变量创建到真正初始化之间的时间跨度内，它们无法访问或使用，ES6 将其称之为暂时性死区：
+
+        // 暂时性死区 开始
+        a = "hello";     //  Uncaught ReferenceError: Cannot access 'a' before initialization
+
+        let a;   
+        //  暂时性死区 结束
+        console.log(a);  // undefined
+
+
+    </script>
+</body>
+</html>

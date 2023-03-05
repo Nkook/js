@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 获取深层次属性，例如 system.user.addr.province.name。
+        // 但在获取 name 这个属性前需要一步步的判断前面的属性是否存在，否则并会报错：
+        const name = (system && system.user && system.user.addr && system.user.addr.province && system.user.addr.province.name) || 'default';
+
+        // ES2020 引入了「链判断运算符」?.，可选链操作符( ?. )允许读取位于连接对象链深处的属性的值
+        // ?. 操作符的功能类似于 . 链式操作符，不同之处在于，在引用为null 或 undefined 的情况下不会引起错误，该表达式短路返回值是 undefined。
+        // 与函数调用一起使用时，如果给定的函数不存在，则返回 undefined。
+        const name1 = system?.user?.addr?.province?.name || 'default';
+
+        a?.[x]
+        // 等同于
+        a == null ? undefined : a[x]
+
+        a?.b()
+        // 等同于
+        a == null ? undefined : a.b()
+
+        a?.()
+        // 等同于
+        a == null ? undefined : a()
+    </script>
+</body>
+</html>

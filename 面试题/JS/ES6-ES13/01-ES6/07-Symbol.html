@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6中引入了一个新的基本数据类型Symbol，表示独一无二的值。它是一种类似于字符串的数据类型，它的特点如下：
+        //     ● Symbol的值是唯一的，用来解决命名冲突的问题
+        //     ● Symbol值不能与其他类型数据进行运算
+        //     ● Symbol定义的对象属性不能使用for...in遍历循环，但是可以使用Reflect.ownKeys 来获取对象的所有键名
+        let s1 = Symbol();
+        console.log(typeof s1); // "symbol"
+
+        let s2 = Symbol('hello');
+        let s3 = Symbol('hello');
+        console.log(s2 === s3); // false
+    
+        // Symbol 属性类型比较适合用于两类场景中：常量值和对象属性。
+        // （1）避免常量值重复
+        //     getValue 函数会根据传入字符串参数 key 执行对应代码逻辑：
+        // function getValue(key) {
+        //   switch(key){
+        //     case 'A':
+        //       ...
+        //     case 'B':
+        //     ...
+        //   }
+        // }
+        // getValue('B');
+        // 这段代码对调用者而言非常不友好，因为代码中使用了魔术字符串（Magic string，指的是在代码之中多次出现、与代码形成强耦合的某一个具体的字符串或者数值），导致调用 getValue 函数时需要查看函数代码才能找到参数 key 的可选值。所以可以将参数 key 的值以常量的方式声明：
+        
+        // const KEY = {
+        //   alibaba: 'A',
+        //   baidu: 'B',
+        // }
+        // function getValue(key) {
+        //   switch(key){
+        //     case KEY.alibaba:
+        //       ...
+        //     case KEY.baidu:
+        //       ...
+        //   }
+        // }
+        // getValue(KEY.baidu);
+        // 但这样也并非完美，假设现在要在 KEY 常量中加入一个 key，根据对应的规则，很有可能会出现值重复的情况：
+        // const KEY = {
+        //     alibaba: 'A',
+        //     baidu: 'B',
+        //     tencent: 'B'
+        // }
+        // 这就会出现问题：
+        getValue(KEY.baidu) // 等同于 getValue(KEY.tencent)
+
+        // 所以在这种场景下更适合使用 Symbol，不需要关心值本身，只关心值的唯一性：
+        const KEY = {
+            alibaba: Symbol(),
+            baidu: Symbol(),
+            tencent: Symbol()
+        }
+
+
+        // （2）避免对象属性覆盖
+        //     函数 fn 需要对传入的对象参数添加一个临时属性 user，但可能该对象参数中已经有这个属性了，如果直接赋值就会覆盖之前的值。
+        //     此时就可以使用 Symbol 来避免这个问题。创建一个 Symbol 数据类型的变量，然后将该变量作为对象参数的属性进行赋值和读取，这样就能避免覆盖的情况：
+        function fn(o) { // {user: {id: xx, name: yy}}
+            const s = Symbol()
+            o[s] = 'zzz'
+        }
+    </script>
+</body>
+</html>

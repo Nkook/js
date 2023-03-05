@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Object.fromEntries()方法可以把键值对列表转换为一个对象。
+        // 该方法相当于 Object.entries() 方法的逆过程。 
+        // Object.entries()方法返回一个给定对象自身可枚举属性的键值对数组，
+        // 而Object.fromEntries() 方法把键值对列表转换为一个对象。
+        const object = { key1: 'value1', key2: 'value2' }
+ 
+        const array = Object.entries(object)  // [ ["key1", "value1"], ["key2", "value2"] ]
+        
+        Object.fromEntries(array)             // { key1: 'value1', key2: 'value2' }
+
+        // 用途
+        // （1）将数组转成对象
+        const entries = [
+            ['foo', 'bar'],
+            ['baz', 42]
+        ]
+        Object.fromEntries(entries)  //  { foo: "bar", baz: 42 }
+
+        // （2）将 Map 转成对象
+        const entries1 = new Map([
+            ['foo', 'bar'],
+            ['baz', 42]
+        ])
+        Object.fromEntries(entries1)  //  { foo: "bar", baz: 42 }
+    </script>
+</body>
+</html>

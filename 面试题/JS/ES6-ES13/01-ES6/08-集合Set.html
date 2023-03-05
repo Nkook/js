@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6提供了新的数据结构Set（集合）。
+        // 它类似于数组，但是成员的值都是唯一的，集合实现了iterator接口，所以可以使用扩展运算符和 for…of 进行遍历。
+
+        // Set的属性和方法：
+        // 属性和方法	        概述
+        // size	        返回集合的元素个数
+        // add	        增加一个新的元素，返回当前的集合
+        // delete	    删除元素，返回布尔值
+        // has	        检查集合中是否包含某元素，返回布尔值
+        // clear	    清空集合，返回undefined
+
+        //创建一个空集合
+        let s = new Set();
+        //创建一个非空集合
+        let s1 = new Set([1,2,3,1,2,3]);
+        //返回集合的元素个数
+        console.log(s1.size);       // 3
+        //添加新元素
+        console.log(s1.add(4));     // {1,2,3,4}
+        //删除元素
+        console.log(s1.delete(1));  //true
+        //检测是否存在某个值
+        console.log(s1.has(2));     // true
+        //清空集合
+        console.log(s1.clear());    //undefined
+
+        // 1. 由于集合中元素的唯一性，所以在实际应用中，可以使用set来实现【数组去重】：
+        // 这里使用了Array.form()方法来将数组集合转化为数组。
+        let arr = [1,2,3,2,1]
+        Array.from(new Set(arr))  // [1, 2, 3]
+
+        // 2. 可以通过set来求两个数组的【交集和并集】：
+        // 模拟求交集: 该元素存在set1也存在set2
+        let intersection = new Set([...set1].filter(x => set2.has(x)));
+
+        // 模拟求差集: 该元素存在set1但不存在set2
+        let difference = new Set([...set1].filter(x => !set2.has(x)));
+
+
+        // 3. 数组与集合的相互转化：
+        // Set集合转化为数组
+        const arr1 = [...mySet]
+        const arr2 = Array.from(mySet)
+
+        // 数组转化为Set集合
+        const mySet = new Set(arr1)
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 用反引号``来标识
+        // 字符串中嵌入变量
+        let name = "Bob", time = "today";
+        `Hello ${name}, how are you ${time}?`
+
+        // 字符串中调用函数
+        ` ${fn()}`
+
+        // 在使用模板字符串时，需要注意以下几点：
+        //     ● 如果在字符串中使用反引号，需要使用\来转义；
+        //     ● 如果在多行字符串中有空格和缩进，那么它们都会被保留在输出中；
+        //     ● 模板字符串中嵌入变量，需要将变量名写在${}之中；
+        //     ● 模板字符串中可以放任意的表达式，也可以进行运算，以及引用对象的属性，甚至可以调用函数；
+        //    ● 如果模板字符中的变量没有声明，会报错。
+    </script>
+</body>
+</html>

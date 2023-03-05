@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数值类型 Number 是 64 位浮点数，所以计算精度和表示范围都有一定限制。
+        // ES2020 新增了 BigInt 数据类型，这也是 JavaScript 引入的第八种基本类型。
+        // BigInt 可以表示任意大的整数。其语法如下：
+        // BigInt(value);
+
+        // 在 JavaScript 中，Number 基本类型可以精确表示的最大整数是253。因此早期会有这样的问题：
+        // let max = Number.MAX_SAFE_INTEGER;    // 最大安全整数
+        // let max1 = max + 1
+        // let max2 = max + 2
+        // max1 === max2   // true
+
+        // 有了BigInt之后，这个问题就不复存在了：
+        let max = BigInt(Number.MAX_SAFE_INTEGER);
+        let max1 = max + 1n
+        let max2 = max + 2n
+        max1 === max2   // false
+
+        // 可以通过typeof操作符来判断变量是否为BigInt类型（返回字符串"bigint"）：
+        typeof 1n === 'bigint'; // true 
+        typeof BigInt('1') === 'bigint'; // true 
+        // 还可以通过Object.prototype.toString方法来判断变量是否为BigInt类型（返回字符串"[object BigInt]"）：
+        Object.prototype.toString.call(10n) === '[object BigInt]';    // true
+
+        // BigInt 和 Number 不是严格相等的，但是宽松相等：
+        10n === 10 // false 
+        10n == 10  // true 
+
+        // Number 和 BigInt 可以进行比较：
+        1n < 2;    // true 
+        2n > 1;    // true 
+        2 > 2;     // false 
+        2n > 2;    // false 
+        2n >= 2;   // true
+
+        
+
+    </script>
+</body>
+</html>

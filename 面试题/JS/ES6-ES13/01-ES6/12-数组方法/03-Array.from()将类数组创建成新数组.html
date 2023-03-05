@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Array.from 的设计初衷是快速基于其他对象创建新数组，
+        // 准确来说就是从一个类似数组的可迭代对象中创建一个新的数组实例。
+        // 其实，只要一个对象有迭代器，Array.from 就能把它变成一个数组
+        // （注意：该方法会返回一个的数组，不会改变原对象）。
+
+        // Array.from 有 3 个参数：
+        //     ● 类似数组的对象，必选；
+        //     ● 加工函数，新生成的数组会经过该函数的加工再返回；
+        //     ● this 作用域，表示加工函数执行时 this 的值。
+
+        var obj = {0: 'a', 1: 'b', 2:'c', length: 3};
+
+        Array.from(obj, function(value, index){
+            console.log(value, index, this, arguments.length); // 当前参数的长度
+            return value.repeat(3);   //必须指定返回值，否则返回 undefined
+        }, obj);
+
+        // a 0 {0: 'a', 1: 'b', 2: 'c', length: 3} 2
+        // b 1 {0: 'a', 1: 'b', 2: 'c', length: 3} 2
+        // c 2 {0: 'a', 1: 'b', 2: 'c', length: 3} 2
+        // (3) ['aaa', 'bbb', 'ccc']
+
+        // 如果这里不指定 this，加工函数就可以是一个箭头函数。
+        Array.from(obj, (value) => value.repeat(3));
+        //  控制台打印 (3) ["aaa", "bbb", "ccc"]
+
+
+        // 除了上述 obj 对象以外，
+        // 拥有迭代器的对象还包括 String、Set、Map 等，Array.from 都可以进行处理：
+        // String
+        Array.from('abc');                             // ["a", "b", "c"]
+        // Set
+        Array.from(new Set(['abc', 'def']));           // ["abc", "def"]
+        // Map
+        Array.from(new Map([[1, 'ab'], [2, 'de']]));   // [[1, 'ab'], [2, 'de']]
+
+    </script>
+</body>
+</html>

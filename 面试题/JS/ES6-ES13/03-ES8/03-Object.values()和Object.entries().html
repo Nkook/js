@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在ES5中就引入了Object.keys方法，
+        // 在ES8中引入了跟Object.keys配套的Object.values和Object.entries，
+        // 作为遍历一个对象的补充手段，供for...of循环使用。
+        // 它们都用来遍历对象，它会返回一个由给定对象的自身可枚举属性（不含继承的和Symbol属性）组成的数组，
+        // 数组元素的排列顺序和正常循环遍历该对象时返回的顺序一致，这个三个元素返回的值分别如下：
+        //     ● Object.keys()：返回包含对象键名的数组；
+        //     ● Object.values()：返回包含对象键值的数组；
+        //     ● Object.entries()：返回包含对象键名和键值的数组。
+
+        let obj = { 
+            id: 1, 
+            name: 'hello', 
+            age: 18 
+        };
+        console.log(Object.keys(obj));   // 输出结果: ['id', 'name', 'age']
+        console.log(Object.values(obj)); // 输出结果: [1, 'hello', 18]
+        console.log(Object.entries(obj));   // 输出结果: [['id', 1], ['name', 'hello'], ['age', 18]
+
+        // 注意
+        //     ● Object.keys()方法返回的数组中的值都是字符串，也就是说不是字符串的key值会转化为字符串。
+        //     ● 结果数组中的属性值都是对象本身可枚举的属性，不包括继承来的属性。
+    </script>
+</body>
+</html>

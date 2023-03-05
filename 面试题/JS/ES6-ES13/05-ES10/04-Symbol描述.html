@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过 Symbol() 创建符号时，可以通过参数提供字符串作为描述：
+        let dog = Symbol("dog");  // dog 为描述 
+
+        // 在 ES2019 之前，获取一个 Symbol 值的描述需要通过 String 方法 或 toString 方法：
+        String(dog);              // "Symbol(dog)" 
+        dog.toString();           // "Symbol(dog)"  
+
+        // ES2019 补充了属性 description，用来直接访问描述：
+        dog.description;  // dog
+    </script>
+</body>
+</html>

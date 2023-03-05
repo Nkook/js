@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6中首次引入模块化开发规范ES Module，让Javascript首次支持原生模块化开发。
+        // ES Module把一个文件当作一个模块，每个模块有自己的独立作用域，那如何把每个模块联系起来呢？核心点就是模块的导入与导出。
+        // （1）export 导出模块
+        // （2）import 导入模块
+        // （3）导入导出复合用法
+        // （4）模块的继承
+
+        // （1）export 导出模块
+            // 1. 正常导出
+            // 方式一
+            export var first = 'test';
+            export function func() {
+                return true;
+            }
+
+            // 方式二
+            var first = 'test';
+            var second = 'test';
+            function func() {
+                return true;
+            }
+            export {first, second, func};
+
+            // 2. as关键字
+            // as关键字可以重命名暴露出的变量或方法，经过重命名后同一变量可以多次暴露出去。
+            var first = 'test';
+            export {first as second};
+
+            // 3. export default
+            // export default会导出默认输出，即用户不需要知道模块中输出的名字，在导入的时候为其指定任意名字。
+            // 导出
+            export default function () {
+            console.log('foo');
+            }
+            // 导入
+            import customName from './export-default';
+
+            // 注意：导入默认模块时不需要大括号，导出默认的变量或方法可以有名字，但是对外无效。export default只能使用一次。
+
+
+        // （2）import 导入模块
+            // 1. 正常导入：
+            // 导入模块位置可以是相对路径也可以是绝对路径，.js可以省略，如果不带路径只是模块名，则需要通过配置文件告诉引擎查找的位置。
+            import {firstName, lastName, year} from './profile';
+            //  2. as关键字：
+            // import 命令会被提升到模块头部，所以写的位置不是那么重要，但是不能使用表达式和变量来进行导入。
+            import { lastName as surname } from './profile';
+            // 3. 加载整个模块（无输出）
+            import 'lodash'; //仅仅是加载而已，无法使用
+            // 4. 加载整个模块（有输出）
+            import * as circle from './circle';
+            console.log('圆面积：' + circle.area(4));
+            console.log('圆周长：' + circle.circumference(14));
+            // 注意：import * 会忽略default输出
+
+        // （3）导入导出复合用法
+            // 1. 先导入后导出
+            export { foo, bar } from 'my_module';
+            // 等同于
+            import { foo, bar } from 'my_module';
+            export { foo, boo};
+            // 2. 整体先导入再输出以及default
+            // 整体输出
+            export * from 'my_module';
+            // 导出default，正如前面所说，export default 其实导出的是default变量
+            export { default } from 'foo';
+            // 具名接口改default
+            export { es6 as default } from './someModule';
+        // （4）模块的继承
+            export * from 'circle';
+            export var e = 2.71828182846;
+            export default function(x) {
+            return Math.exp(x);
+            }
+            注意：export * 会忽略default。
+
+    </script>
+</body>
+</html>

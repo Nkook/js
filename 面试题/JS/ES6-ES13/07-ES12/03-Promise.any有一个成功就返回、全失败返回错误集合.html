@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise.any是是 ES2021 新增的特性，它接收一个 Promise 可迭代对象（例如数组），
+        // 只要其中的一个 promise 成功，就返回那个已经成功的 promise
+
+        // 如果可迭代对象中没有一个 promise 成功（即所有的 promises 都失败/拒绝），
+        // 就返回一个失败的 promise 和 AggregateError 类型的实例，它是 Error 的一个子类，用于把单一的错误集合在一起
+
+        const promises = [
+            Promise.reject('ERROR A'),
+            Promise.reject('ERROR B'),
+            Promise.resolve('result'),
+        ]
+
+        Promise.any(promises).then((value) => {
+            console.log('value: ', value)
+        }).catch((err) => {
+            console.log('err: ', err)
+        })
+
+        // 输出结果：value:  result
+
+        // 如果所有传入的 promises 都失败：
+        const promises1 = [
+            Promise.reject('ERROR A'),
+            Promise.reject('ERROR B'),
+            Promise.reject('ERROR C'),
+        ]
+
+        Promise.any(promises1).then((value) => {
+            console.log('value：', value)
+        }).catch((err) => {
+            console.log('err：', err)
+            console.log(err.message)
+            console.log(err.name)
+            console.log(err.errors)
+        })
+        // 输出结果
+        // err：AggregateError: All promises were rejected
+        // All promises were rejected
+        // AggregateError
+        // ["ERROR A", "ERROR B", "ERROR C"]
+    </script>
+</body>
+</html>

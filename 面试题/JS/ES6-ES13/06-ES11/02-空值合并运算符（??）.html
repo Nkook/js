@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 如果某个属性不为 null 和 undefined，那么就获取该属性，
+        // 如果该属性为 null 或 undefined，则取一个默认值：
+        const name = dogName ? dogName : 'default'; 
+
+        // 可以通过 || 来简化：
+        const name1 =  dogName || 'default'; 
+
+        // 但是 || 的写法存在一定的缺陷，当 dogName 为 0 或 false 的时候也会走到 default 的逻辑。
+        // 所以 ES2020 引入了 ?? 运算符。只有 ?? 左边为 null 或 undefined时才返回右边的值：
+        const dogName = false; 
+        const name2 =  dogName ?? 'default';  // name2 = false;
+        
+    </script>
+</body>
+</html>

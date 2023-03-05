@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // matchAll() 是新增的字符串方法，它返回一个包含所有匹配正则表达式的结果及分组捕获组的迭代器。
+        // 因为返回的是遍历器，所以通常使用for...of循环取出。
+        for (const match of 'abcabc'.matchAll(/a/g)) {
+            console.log(match)
+        }
+        //["a", index: 0, input: "abcabc", groups: undefined]
+        //["a", index: 3, input: "abcabc", groups: undefined]
+
+        // 需要注意，该方法的第一个参数是一个正则表达式对象，如果传的参数不是一个正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。
+        // 另外，RegExp必须是设置了全局模式g的形式，否则会抛出异常 TypeError。
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在ES6中就引入了扩展运算符，但是它只能作用于数组，ES2018中的扩展运算符可以作用于对象：
+        // （1）将元素组织成对象
+        const obj = {a: 1, b: 2, c: 3};
+        const {a, ...rest} = obj;
+        console.log(rest);    // 输出 {b: 2, c: 3}
+
+        (function({a, ...obj}) {
+        console.log(obj);    // 输出 {b: 2, c: 3}
+        }({a: 1, b: 2, c: 3}));
+
+        // （2）将对象扩展为元素
+        const obj3 = {a: 1, b: 2, c: 3};
+        const newObj ={...obj3, d: 4};
+        console.log(newObj);  // 输出 {a: 1, b: 2, c: 3, d: 4}
+
+        // （3）可以用来合并对象
+        const obj1 = {a: 1, b:2};
+        const obj2 = {c: 3, d:4};
+        const mergedObj = {...obj1, ...obj2};
+        console.log(mergedObj);  // 输出 {a: 1, b: 2, c: 3, d: 4}
+    </script>
+</body>
+</html>

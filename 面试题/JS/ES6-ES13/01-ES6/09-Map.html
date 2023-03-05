@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6提供了Map数据结构，它类似于对象，也是键值队的集合，
+        // 但是它的键值的范围不限于字符串，可以是任何类型（包括对象）的值，
+        // 也就是说， Object 结构提供了“ 字符串—值” 的对应， 
+        // Map 结构提供了“ 值—值” 的对应， 是一种更完善的 Hash 结构实现。 
+        // 如果需要“ 键值对” 的数据结构， Map 比 Object 更合适。
+        // Map也实现了iterator接口，所以可以使用扩展运算符和 for…of 进行遍历。
+
+        // 属性和方法	    概述
+        // size	        返回Map的元素个数
+        // set	        增加一个新的元素，返回当前的Map
+        // get	        返回键名对象的键值
+        // has	        检查Map中是否包含某元素，返回布尔值
+        // clear	    清空Map，返回undefined
+
+        //创建一个空 map
+        let m = new Map();
+        //创建一个非空 map
+        let m2 = new Map([
+        ['name', 'hello'],
+        ]);
+        //获取映射元素的个数
+        console.log(m2.size);          // 1
+        //添加映射值
+        console.log(m2.set('age', 6)); // {"name" => "hello", "age" => 6}
+        //获取映射值
+        console.log(m2.get('age'));    // 6
+        //检测是否有该映射
+        console.log(m2.has('age'));    // true
+        //清除
+        console.log(m2.clear());       // undefined
+
+        // 只有对同一个对象的引用， Map 结构才将其视为同一个键：
+        let map = new Map(); 
+        map.set(['a'], 555); 
+        map.get(['a']) // undefined
+        // 上面代码的set和get方法， 表面是针对同一个键， 但实际上这是两个值， 内存地址是不一样的， 因此get方法无法读取该键， 所以会返回undefined。
+
+        // 由上可知， Map 的键实际上是跟内存地址绑定的， 只要内存地址不一样， 就视为两个键。 这就解决了同名属性碰撞（ clash） 的问题，在扩展库时， 如果使用对象作为键名， 就不用担心自己的属性与原来的属性同名。
+
+        // 如果 Map 的键是一个简单类型的值（ 数字、 字符串、 布尔值）， 则只要两个值严格相等， Map 将其视为一个键， 包括0和 - 0。 另外， 虽然NaN不严格相等于自身， 但 Map 将其视为同一个键。
+        let map1 = new Map(); 
+        map1.set(NaN, 123); 
+        map1.get(NaN) // 123 
+        map1.set(-0, 123); 
+        map1.get(+0) // 123 
+
+    </script>
+</body>
+</html>

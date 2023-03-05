@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 箭头函数 const counter = (x, y) => x + y;
+        // 相对于普通函数，箭头函数有以下特点：
+        // （1）更加简洁
+        //     如果没有参数，就直接写一个空括号即可
+        //     如果只有一个参数，可以省去参数的括号
+        //     如果有多个参数，用逗号分割
+        //     如果函数体的返回值只有一句，可以省略大括号
+
+        // （2）不绑定 this
+        //     箭头函数不会创建自己的this， 所以它没有自己的this，它只会在自己作用域的上一层继承this。
+        //      所以箭头函数中this的指向在它在定义时已经确定了，之后不会改变。
+
+        // (3）不可作为构造函数
+        // 构造函数 new 操作符的执行步骤如下：
+        //     1. 创建一个对象
+        //     2. 将构造函数的作用域赋给新对象（也就是将对象的__proto__属性指向构造函数的prototype属性）
+        //     3. 指向构造函数中的代码，构造函数中的this指向该对象（也就是为这个对象添加属性和方法）
+        //     4. 返回新的对象
+        // 实际上第二步就是将函数中的this指向该对象。 但是由于箭头函数时没有自己的this的，且this指向外层的执行环境，且不能改变指向，所以不能当做构造函数使用。
+
+        // （4）不绑定 arguments
+        //     箭头函数没有自己的arguments对象。在箭头函数中访问arguments实际上获得的是它外层函数的arguments值。
+
+
+        // (1)简洁
+        // 1. 不传入参数
+        const funcA = () => console.log('funcA');
+        // 等价于
+        const funcA1 = function() {
+        console.log('funcA');
+        } 
+
+        // 2. 传入参数
+        const funcB = (x, y) => x + y;
+        // 等价于
+        const funcB1 = function(x, y) {
+        return x + y;
+        } 
+
+        // 3. 单个参数的简化
+        const funcC = (x) => x;
+        // 对于单个参数，可以去掉 ()，简化为
+        const funcC1 = x => x;
+        // 等价于
+        const funcC2 = function(x) {
+        return x;
+        }
+
+        // 4. 上述代码函数体只有单条语句，如果有多条，需要使用 {}
+        const funcD = (x, y) => { console.log(x, y); return x + y; }
+        // 等价于
+        const funcD1 = function(x, y) {
+        console.log(x, y);
+        return x + y;
+        }
+
+        // （2）不绑定this
+        var id = 'GLOBAL';
+        var obj = {
+            id: 'OBJ',
+            a: function(){
+                console.log(this.id);
+            },
+            b: () => {
+                console.log(this.id);
+            }
+        };
+        obj.a();    // 'OBJ'
+        obj.b();    // 'GLOBAL'
+        new obj.a()  // undefined
+        new obj.b()  // Uncaught TypeError: obj.b is not a constructor
+        // 对象obj的方法b是使用箭头函数定义的，这个函数中的this就永远指向它定义时所处的全局执行环境中的this，
+        // 即便这个函数是作为对象obj的方法调用，this依旧指向Window对象。
+        // 需要注意，定义对象的大括号{}是无法形成一个单独的执行环境的，它依旧是处于全局执行环境中。
+
+        // 同样，使用call()、apply()、bind()等方法也不能改变箭头函数中this的指向：
+        var id = 'Global';
+        let fun1 = () => {
+            console.log(this.id)
+        };
+        fun1();                     // 'Global'
+        fun1.call({id: 'Obj'});     // 'Global'
+        fun1.apply({id: 'Obj'});    // 'Global'
+        fun1.bind({id: 'Obj'})();   // 'Global'
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES2019 对函数的 toString() 方法进行了扩展，以前这个方法只会输出函数代码，但会省略注释和空格。
+        // ES2019 的 toString()则会保留注释、空格等，即输出的是原始代码：
+        function sayHi() {
+            /* dog */
+            console.log('wangwang');
+        }
+
+        sayHi.toString();  // 将输出和上面一样的原始代码
+    </script>
+</body>
+</html>

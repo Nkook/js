@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // for await...of方法被称为异步迭代器，该方法是主要用来遍历异步对象。
+
+        // for await...of 语句会在异步或者同步可迭代对象上创建一个迭代循环，包括 String，Array，类数组，Map， Set和自定义的异步或者同步可迭代对象。
+        // 这个语句只能在 async function内使用：
+        function Gen (time) {
+        return new Promise((resolve,reject) => {
+            setTimeout(function () {
+            resolve(time)
+            },time)
+        })
+        }
+
+        async function test () {
+            let arr = [Gen(2000),Gen(100),Gen(3000)]
+            for await (let item of arr) {
+                console.log(Date.now(),item)
+            }
+        }
+        test()
+        // 1677939672400 2000
+        // 1677939672403 100
+        // 1677939673402 3000
+    </script>
+</body>
+</html>

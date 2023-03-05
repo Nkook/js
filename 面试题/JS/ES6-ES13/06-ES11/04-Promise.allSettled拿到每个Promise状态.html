@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise.allSettled 的参数接受一个 Promise 的数组，返回一个新的 Promise。
+        // 唯一的不同在于，执行完之后不会失败，也就是说当 Promise.allSettled 全部处理完成后，我们可以拿到每个 Promise 的状态，而不管其是否处理成功。
+        const resolved = Promise.resolve(2);
+        const rejected = Promise.reject(-1);
+        const allSettledPromise = Promise.allSettled([resolved, rejected]);
+        allSettledPromise.then(function (results) {
+        console.log(results);
+        });
+        // 返回结果：
+        // [
+        //    { status: 'fulfilled', value: 2 },
+        //    { status: 'rejected', reason: -1 }
+        // ]
+
+        // 可以看到，Promise.allSettled 最后返回的是一个数组，
+        // 记录传进来的参数中每个 Promise 的返回值，
+        // 这就是和 all 方法不太一样的地方。你也可以根据 all 方法提供的业务场景的代码进行改造，其实也能知道多个请求发出去之后，Promise 最后返回的是每个参数的最终状态。
+    </script>
+</body>
+</html>

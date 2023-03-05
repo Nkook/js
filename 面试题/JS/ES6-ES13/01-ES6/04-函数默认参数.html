@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在ES6之前，函数是不支持默认参数的，ES6实现了对此的支持，并且只有不传入参数时才会触发默认值：
+        function getPoint(x = 0, y = 0) {
+            console.log(x, y);
+        }
+
+        getPoint(1, 2);   // 1  2
+        getPoint()        // 0  0 
+        getPoint(1)       // 1  0
+
+        // 当使用函数默认值时，需要注意以下几点：
+        // （1）函数length属性值
+        // 函数length属性通常用来表示函数参数的个数，
+        // 当引入函数默认值之后，length表示的就是【第一个有默认值参数之前的普通参数个数】：
+        const funcA = function(x, y) {};
+        console.log(funcA.length);  // 输出结果：2 
+
+        const funcB = function(x, y = 1) {};
+        console.log(funcB.length);  // 输出结果：1
+
+        const funcC = function(x = 1, y) {};
+        console.log(funcC.length);  // 输出结果 0 
+        
+        // （2）参数作用域
+        // 当给函数的参数设置了默认值之后，参数在被初始化时将形成一个独立作用域，初始化完成后作用域消解：
+        let x = 1;
+        function func(x, y = x) {
+        console.log(y);
+        }
+        func(2);  
+        // 这里最终会打印出2。在函数调用时，参数 x, y 将形成一个独立的作用域，所以参数中的y会等于第一个参数中的x，而不是上面定义的1。
+
+    </script>
+</body>
+</html>

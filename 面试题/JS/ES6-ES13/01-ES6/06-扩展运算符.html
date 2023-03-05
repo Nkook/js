@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 扩展运算符：...  就像是rest参数的逆运算，将一个数组转为用逗号分隔的参数序列，对数组进行解包。
+        // 用途：
+        // （1）将数组转化为用逗号分隔的参数序列
+        function  test(a,b,c){
+            console.log(a); // 1
+            console.log(b); // 2
+            console.log(c); // 3
+        }
+
+        var arr = [1, 2, 3];
+        test(...arr);
+
+        // （2）将一个数组拼接到另一个数组：
+        var arr1 = [1, 2, 3,4];
+        var arr2 = [...arr1, 4, 5, 6];
+        console.log(arr2);  // [1, 2, 3, 4, 4, 5, 6]
+
+        // （3）将字符串转为逗号分隔的数组：
+        var str='JavaScript';
+        var arr= [...str];
+        console.log(arr); // ["J", "a", "v", "a", "S", "c", "r", "i", "p", "t"]
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在ES2022之前，可以使用 Object.prototype.hasOwnProperty() 来检查一个属性是否属于对象。
+
+        // Object.hasOwn 特性是一种更简洁、更可靠的检查属性是否直接设置在对象上的方法：
+        const example = {
+            property: '123'
+        };
+
+        console.log(Object.prototype.hasOwnProperty.call(example, 'property'));
+        console.log(Object.hasOwn(example, 'property'));
+    </script>
+</body>
+</html>

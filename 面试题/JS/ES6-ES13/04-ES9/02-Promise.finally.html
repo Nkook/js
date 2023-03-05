@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES2018 为 Promise 添加了 finally() 方法，表示无论 Promise 实例最终成功或失败都会执行的方法：
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const one = '1';
+                reject(one);
+            }, 1000);
+        });
+
+        promise
+        .then(() => console.log('success'))
+        .catch(() => console.log('fail'))
+        .finally(() => console.log('finally'))
+
+        // 打印结果
+        // fail
+        // finally
+
+        // finally() 函数不接受参数，finally() 内部通常不知道 promise 实例的执行结果，
+        // 所以通常在 finally() 方法内执行的是与 promise 状态无关的操作。
+    </script>
+</body>
+</html>

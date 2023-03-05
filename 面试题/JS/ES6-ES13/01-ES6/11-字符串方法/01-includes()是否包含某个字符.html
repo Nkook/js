@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // includes()：该方法用于判断字符串是否包含指定的子字符串。
+        // 如果找到匹配的字符串则返回 true，否则返回 false。
+        // string.includes(searchvalue, start)
+        // 该方法有两个参数：
+        //     ● searchvalue：必需，要查找的字符串；
+        //     ● start：可选，设置从那个位置开始查找，默认为 0。
+
+        let str = 'Hello world!';
+        str.includes('o')  // 输出结果：true
+        str.includes('z')  // 输出结果：false
+        str.includes('e', 2)  // 输出结果：false
+    </script>
+</body>
+</html>

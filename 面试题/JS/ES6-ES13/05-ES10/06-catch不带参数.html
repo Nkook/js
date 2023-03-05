@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在 ES2019 以前，catch 会带有参数，但是很多时候 catch 块是多余的。而现在可以不带参数：
+        // ES2019 之前
+            try {
+                ...
+            } catch(error) {
+                ...
+            }
+
+            // ES2019 之后
+            try {
+                ...
+            } catch {
+                ...
+            }
+    </script>
+</body>
+</html>

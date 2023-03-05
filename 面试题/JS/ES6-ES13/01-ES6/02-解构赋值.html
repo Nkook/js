@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 一、数组解构
+        const [foo, [[bar], baz]] = [1, [[2], 3]];
+        console.log(foo, bar, baz) // 输出结果：1  2  3
+        // 1. 数组还可以实现不完全解构，只【解构部分内容】：
+        // const [x, y] = [1, 2, 3];   // 提取前两个值
+        // const [, y, z] = [1, 2, 3]  // 提取后两个值
+        // const [x, , z] = [1, 2, 3]  // 提取第一三个值
+
+        // 2. 如果解构时对应的位置没有值就会将变量赋值为【undefined】：
+        const [x, y, z] = [1, 2]; 
+        console.log(z)  // 输出结果：undefined
+
+        // 3. 数组解构赋值可以使用【rest操作符来捕获剩余项】：
+        const [x1, ...y1] = [1, 2, 3];   
+        console.log(x1);  // 输出结果：1
+        console.log(y1);  // 输出结果：[2, 3]
+
+        // 二、对象解构
+        // 1. 对象的解构赋值的本质其实是先找到【同名的属性】，在赋值给对应的变量：
+        let { foo1, bar1 } = { foo1: 'aaa', bar1: 'bbb' };
+        console.log(foo1, bar1); // 输出结果：aaa  bbb
+
+        // 2. 对象的解构赋值也是支持【默认值】的，当定义的变量在对象中不存在时，其默认值才会生效：
+        let { foo2, bar2, baz2 = 'ccc'} = { foo2: 'aaa', bar2: 'bbb', baz2: null };
+        console.log(foo2, bar2, baz2); // 输出结果：aaa  bbb  null
+
+        let { foo3, bar3, baz3 = 'ccc'} = { foo3: 'aaa', bar3: 'bbb' };
+        console.log(foo3, bar3, baz3); // 输出结果：aaa  bbb  ccc
+
+        // 3. 【不能给已声明的变量进行赋值】，因为当缺少 let、const、var 关键词时，将会把 {baz} 理解为代码块从而导致语法错误，所以下面代码会报错：
+        // let baz4;
+        // { baz4 } = { foo4: 'aaa', bar4: 'bbb', baz4: 'ccc' };
+        // 可以使用括号包裹整个解构赋值语句来解决上述问题：
+        let baz4;
+        ({ baz4 } = { foo: 'aaa', bar: 'bbb', baz4: 'ccc' });
+        console.log(baz4)
+
+        // 4. 在对象的解构赋值中，可以将现有对象的【方法赋值给某个变量】
+        let { log, sin, cos } = Math;
+        log(12)  // 输出结果：2.4849066497880004
+        sin(1)   // 输出结果：0.8414709848078965
+        cos(1)   // 输出结果：0.5403023058681398
+
+        // 三、字符串解构
+        // 只要等号右边的值不是对象或数组，就先将其转为类数组对象，在进行解构：
+        const [a, b, c, d, e] = 'hello';
+        console.log(a, b, c, d, e)  // 输出结果：h e l l o
+        // 类数组对象有 length 属性，因此可以给这个属性进行解构赋值：
+        let {length} = 'hello';    // 输出结果： 5
+
+        // 四、数值和布尔值解构赋值
+        // 对数值和布尔值进行解构时，它们将会先被转为对象，然后再应用解构语法
+        let {toString: s} = 123;
+        s === Number.prototype.toString // 输出结果：true
+
+        let {toString: q} = true;
+        q === Boolean.prototype.toString // 输出结果：true
+
+        // 五、函数参数解构赋值
+        // 函数参数表面上是一个数组，在传入参数的那一刻，就会被解构为x和y。
+        function add([x, y]){
+        return x + y;
+        }
+        add([1, 2]);   // 3
+        // 还可以解构函数的返回值：
+        function example() {
+        return [1, 2, 3];
+        }
+        let [a1, b1, c1] = example();
+    </script>
+</body>
+</html>

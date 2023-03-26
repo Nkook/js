@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    如果没有defer或async属性，
+    浏览器会立即加载并执行相应的脚本。
+    它不会等待后续加载的文档元素，读取到就会开始加载和执行，这样就阻塞了后续文档的加载。
+
+    下图可以直观的看出三者之间的区别:
+
+        其中蓝色代表js脚本网络加载时间，红色代表js脚本执行时间，绿色代表html解析。
+    
+    defer 和 async属性都是去异步加载外部的JS脚本文件，它们都不会阻塞页面的解析，其区别如下：
+        执行顺序： 多个带async属性的标签，不能保证加载的顺序；多个带defer属性的标签，按照加载顺序执行；
+        脚本是否并行执行：
+            async属性，表示后续文档的【加载和执行】与js脚本的【加载和执行】是并行进行的，即异步执行；
+            defer属性，加载后续文档的过程和js脚本的【加载】(此时仅加载不执行)是并行进行的(异步)，js脚本需要等到文档所有元素解析完成之后才【执行】，DOMContentLoaded事件触发执行之前。
+
+
+
+</body>
+</html>

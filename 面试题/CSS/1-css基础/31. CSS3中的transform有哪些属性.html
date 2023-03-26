@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <!-- 图形参考：https://blog.csdn.net/m0_46698214/article/details/120888989 -->
+    <style>
+        /* 
+            1、旋转（rotate）
+            rotate（）在一个给定度数顺时针旋转的元素。
+            负值表示元素按逆时针旋转。
+            单位deg，设置的值为正数表示顺时针旋转，如果设置的值为负数，则表示逆时针旋转
+        */
+        div {
+            transform: rotate(30deg);
+        }
+
+        /* 
+            2. 缩放（scale）
+            scale（）：该元素增加或减少的大小，取决于宽度（X轴）和高度（Y轴）的参数。
+            用于对元素进行缩放，可以通过transform-orgin对元素的基点进行设置，
+            同样基点在元素中心位置；基中X表示水平方向缩放的倍数，Y表示垂直方向的缩放倍数，而Y是一个可选参数，如果没有设置Y值，则表示X,Y两个方向的缩放倍数是一样的，并以X为准。
+
+            caleX表示元素只在X轴（水平方向）缩放元素
+            scaleY表示元素只在Y轴（水平方向）缩放元素
+
+
+        */
+        div {
+            transform: scale(2,1.5);
+            /* transform: scaleX(2); */
+            /* transform: scaleY(2); */
+        }
+
+        /* 
+            3. 移动（translate）
+            tarnslate（）根据左（X轴）和顶部（Y轴）位置给定的参数，从当前元素位置移动。
+            translate(x,y)水平方向和垂直方向同时移动（也就是X轴和Y轴同时移动），
+            向右向上为正数，向左向下位移则为负“-”，
+            translateX(x)仅水平方向移动（X轴移动）。translateY(Y)仅垂直方向移动
+        
+        
+        */
+        div {
+            transform: translate(100px, 20px);
+            /* transform: translateX(100px); */
+            /* transform: translateY(20px); */
+        }
+
+
+        /* 
+            4. 扭曲（skew）
+            skew（）包含两个参数值，分别表示X轴和Y轴倾斜的角度，如果第二个参数为空，则默认为0，参数为负表示向相反的方向倾斜
+            skewX（）:表示只在X轴（水平方向）倾斜
+            skewY（）:表示只在Y轴（垂直方向）倾斜
+            倾斜/扭曲；参数表示倾斜角度，单位deg
+            skew（x,y）使元素在水平和垂直方向同时扭曲（X轴和Y轴同时按一定的角度进行扭曲变形），
+        */
+        div {
+            transform: skew(30deg,30deg);
+            /* transform: skewX(30deg); */
+            /* transform: skewY(30deg); */
+        }
+
+        /* 
+            5. 矩阵变形（matrix）
+        */
+
+        
+    </style>
+</body>
+</html>

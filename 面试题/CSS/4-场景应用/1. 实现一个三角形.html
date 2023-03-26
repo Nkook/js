@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <!-- 总体的原则就是通过上下左右边框来控制三角形的方向，用边框的宽度比来控制三角形的角度。 -->
+    <style>
+        /* 上下左右四个三角组成正方形 */
+        /* div {
+            width: 0;
+            height: 0;
+            border: 100px solid;
+            border-color: orange blue red green;
+        } */
+        /* 下三角▼ */
+        div {    
+            width: 0;    
+            height: 0;    
+            border-top: 50px solid red;    
+            border-right: 50px solid transparent;    
+            border-left: 50px solid transparent;
+        }
+        /* 上三角⬆️ */
+        div {
+            width: 0;
+            height: 0;
+            border-bottom: 50px solid red;
+            border-right: 50px solid transparent;
+            border-left: 50px solid transparent;
+        }
+        /* 右三角▶️ */
+        div {
+            width: 0;
+            height: 0;
+            border-left: 50px solid red;
+            border-top: 50px solid transparent;
+            border-bottom: 50px solid transparent;
+        }
+
+        /* 左三角 */
+        div {
+            width: 0;
+            height: 0;
+            border-right: 50px solid red;
+            border-top: 50px solid transparent;
+            border-bottom: 50px solid transparent;
+        }
+
+        /* 左直角 */
+        div {
+            width: 0;
+            height: 0;
+            border-top: 100px solid red;
+            border-right: 100px solid transparent;
+        }
+    </style>
+</body>
+</html>

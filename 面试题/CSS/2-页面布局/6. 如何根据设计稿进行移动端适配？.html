@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        移动端适配主要有两个维度：
+            适配不同像素密度， 针对不同的像素密度，使用 CSS 媒体查询，选择不同精度的图片，以保证图片不会失真；
+            适配不同屏幕大小， 由于不同的屏幕有着不同的逻辑像素大小，所以如果直接使用 px 作为开发单位，会使得开发的页面在某一款手机上可以准确显示，但是在另一款手机上就会失真。为了适配不同屏幕的大小，应按照比例来还原设计稿的内容。
+
+        为了能让页面的尺寸自适应，可以使用 rem，em，vw，vh 等相对单位。
+
+     -->
+
+     <!-- 
+        rem是一个倍数单位，它是基于html的font-size的倍数，
+        只要我们在不同的设备上设置一个合适的初始值，当设备发生变化，font-size就会自动等比适配大小。
+    
+      -->
+
+      <!-- 
+            1. 响应式布局，通过@media实现一套html配合多套css实现适配
+                不凡官网采用@media
+                不凡科技网站
+                @media就是写多个版本的css覆盖前面的
+            2. 通过rem或者vw、vh等实现不同的设备有相同的比例进而实现适配
+                小米移动端商城采用了rem
+            3. 同时采用媒体监听@media和rem等比适配。
+                王者荣耀官网
+            4. vw、vh
+                vw是相对单位，1vw表示屏幕宽度的1%，需要缩放的元素采用vw，不需要采用px
+                具体实现方法与rem类似，至于转换问题也可以参考rem的插件形式
+                
+       -->
+</body>
+</html>

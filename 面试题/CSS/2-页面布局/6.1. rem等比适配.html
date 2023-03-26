@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- 4. 一般是设备宽度的1/10
+        因为设备的宽度有很多，这个值是动态的，必须通过js去计算
+-->
+<html lang="en" style="font-size: 75px;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 1. 统一视口  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* 3. 给盒子写样式  */
+        .box {
+            /* px无法实现等比缩放 */
+            /* width: 375px;
+            height: 375px; */
+            /* 
+                6. 思考：如果设计稿是750px,设备宽度也是750px,这个元素是375px。得到的html的fint-size=75px, 375px换算成rem是 5rem
+                        如果设计稿是375px,设备宽度也是375px,这个元素是375/2=187.5px。得到的html的fint-size=37.5px, 187.5px换算成rem是 5rem
+                    5rem在375px设备上，宽度是5*37.5 = 187.5px
+            */
+            /* 
+                7. 问题：假如设计稿给定这个元素是200px,又等于多少rem? 计算麻烦
+                    在扩展设置里安装插件叫 px to rem & rpx & vw (cssrem) 
+                    /* 创建.cssrem文件无效 
+                    需要 首选项 -> 设置 -> Cssrem: Root Font Size 将值改为75。
+                    下面输入具体的像素时，如375px 自动转成 5rem 
+            */
+            /* 8. 在写样式的时候，设计稿给多大像素，就直接写，会自动转成rem */
+            /* 9. 弊端：如果写px比如300写成了301px可以直观看到，但是如果转成了rem那么就看不出来了
+                        一般会保留px源码，同时通过第三方工具动态监听转换比如gulp */
+            width: 5rem;
+            height: 5rem;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        1. 移动端 设计稿750px
+        假设有一个元素是375px，那么按照比例，当前元素在任何宽度的设备上，都应该占有整体宽度的1/2
+     -->
+     <!-- 2. 写一个盒子 -->
+     <div class="box"></div>
+
+     <script>
+        // 5. 根据设备宽度计算 html的font-size
+        function resetHtmlFont() {
+            // 获取html对象 并动态设置font-size = 设备宽度 / 10
+            document.documentElement.style.fontSize = screen.width / 10 + 'px'
+        }
+        resetHtmlFont()
+        // 如果窗口大小变化了，则重新计算 基础的 font-size
+        window.onresize = resetHtmlFont
+     </script>
+</body>
+</html>

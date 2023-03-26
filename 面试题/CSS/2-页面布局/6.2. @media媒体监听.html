@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 1. 统一视口  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>媒体监听的适配</title>
+    <style>
+        /* 2. 样式 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            width: 100%;
+            height: 100px;
+            background-color: green;
+        }
+        .header .header-c {
+            width: 1200px;
+            height: 100%;
+            background-color: pink;
+            margin: 0 auto;
+        }
+        .header .header-c .nav-item {
+            float: left;
+            width: 100px;
+            height: 100%;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+        }
+        .header .header-c .nav-item:hover {
+            color: red;
+        }
+        /* 3. css的媒体监听语法。监听屏幕宽度，如果最大宽度为750px，小于750为移动端，大于750不做处理（一般区分是否是移动端就按照750划分） */
+        @media screen and (max-width: 750px) {
+            /* body {
+                background-color: yellow;
+            } */
+            /* 对原来的html元素重新针对移动端做一个适配即可 */
+            header {
+                height: 40px;
+            }
+            .header .header-c {
+                position: relative;
+                width: 100%;
+            }
+            .header .header-c .nav {
+                position: absolute;
+                top: 100px;
+                left: 0;
+                width: 100%;
+                height: auto;
+            }
+            /* 独占一行 不能浮动 */
+            .header .header-c .nav-item {
+                float: none;
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+                border-bottom: 1px solid #333;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 需求：一个导航在pc端一套样式，在移动端一套样式 -->
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 版心 -->
+        <div class="header-c">
+            <!-- 导航 -->
+            <ul class="nav">
+                <li class="nav-item">首页</li>
+                <li class="nav-item">分类</li>
+                <li class="nav-item">发现</li>
+                <li class="nav-item">我的</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

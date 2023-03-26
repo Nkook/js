@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 三栏布局一般指的是页面中一共有三栏，左右两栏宽度固定，中间自适应的布局，三栏布局的具体实现： -->
+    <style>
+        /* 1. 利用flex布局，
+                左右两栏设置固定大小，中间一栏设置为flex:1。 */
+                .outer {
+                    display: flex;
+                    height: 100px;
+                }
+
+                .left {
+                    width: 100px;
+                    background: tomato;
+                }
+
+                .right {
+                    width: 100px;
+                    background: gold;
+                }
+
+                .center {
+                    flex: 1;
+                    background: lightgreen;
+                }
+        /* 2. 利用绝对定位，
+                左右两栏设置为绝对定位，
+                中间设置对应方向大小的margin的值。 */
+                .outer {
+                    position: relative;
+                    height: 100px;
+                }
+
+                .left {
+                    position: absolute;
+                    width: 100px;
+                    height: 100px;
+                    background: tomato;
+                }
+
+                .right {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 200px;
+                    height: 100px;
+                    background: gold;
+                }
+
+                .center {
+                    margin-left: 100px;
+                    margin-right: 200px;
+                    height: 100px;
+                    background: lightgreen;
+                }
+        /* 3. 利用浮动，
+                左右两栏设置固定大小，并设置对应方向的浮动。
+                中间一栏设置左右两个方向的margin值，
+                注意这种方式**，中间一栏必须放到最后：** */
+
+                .outer {
+                    height: 100px;
+                }
+
+                .left {
+                    float: left;
+                    width: 100px;
+                    height: 100px;
+                    background: tomato;
+                }
+
+                .right {
+                    float: right;
+                    width: 200px;
+                    height: 100px;
+                    background: gold;
+                }
+
+                .center {
+                    height: 100px;
+                    margin-left: 100px;
+                    margin-right: 200px;
+                    background: lightgreen;
+                }
+    </style>
+</body>
+</html>

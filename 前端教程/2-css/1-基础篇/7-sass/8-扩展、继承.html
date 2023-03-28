@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        %flex {
+            display: flex;
+        }
+
+        .some-class {
+            height: 50%;
+            background-color: black;
+        }
+
+        %flex_with_color {
+            @extend %flex;
+            @extend .some-class;
+        }
+
+        %button_styles {
+            height: 50px;
+            width: 200px;
+        }
+
+        div {
+            @extend %flex_with_color;
+
+            button {
+                @extend %button_styles;
+                color: #424242;
+                background-color: #d966fb;
+            }
+        }
+
+        /* 编译css后 */
+        div {
+            display: flex;
+        }
+
+        .some-class, div {
+            height: 50%;
+            background-color: black;
+        }
+
+        div button {
+            height: 50px;
+            width: 200px;
+        }
+
+        div button {
+            color: #424242;
+            background-color: #d966fb;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 
+        有时需要编写一个仅用于扩展的样式规则。 
+        在这种情况下，可以使用占位符选择器，它看起来像以 % 而不是 . 开头的类选择器。
+     -->
+</body>
+</html>

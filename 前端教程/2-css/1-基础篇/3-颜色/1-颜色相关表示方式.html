@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1. css颜色 */
+        div {
+            color: black;
+            border: 1px solid blueviolet;
+            background: skyblue;
+        }
+
+        /* 2. RGB 颜色
+            RGB 指的就是红-绿-蓝，这个顺序非常重要。
+            每种颜色使用 0 到 255 之间的数字指定。
+            最常见的 RGB 值黑色：rgb(0,0,0) 和白色：rgb(255,255,255)。
+        */
+        div {
+            color: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,0,0,0.8);
+            background: rgba(0,125,0,0.2);
+        }
+
+        /* 3. Hex 颜色
+            用十六进制值来表示 CSS 中的颜色，这也是我们用的最多的颜色表示方式。
+            十六进制使用 16 个符号表示，使用 0 - 9 表示值 0 到 9，A - F 表示值 10 到 15，
+        */
+        div {
+            color: #000000;
+            border: 1px solid #00FF00;
+            background: #FF0000;
+        }
+
+        /* 4. HSL 颜色
+                HSL 全称是 Hue-Saturation-Lightness，分别表示色调、饱和度和亮度。
+                ● 色调：色调描述了色轮上的值，从 0 到 360 度，从红色开始（0 和 360）；
+                ● 饱和度：饱和度是所选色调的鲜艳程度，100% 表示完全饱和的亮色，0% 表示完全不饱和的灰色；
+                ● 亮度：颜色的亮度级别，较低的值会更暗，更接近黑色，较高的值会更亮，更接近白色。
+                hsl(Hue, Saturation, Lightness)
+        */
+        div {
+            background-color: hsl(180deg, 50%, 50%);
+        }
+
+        div {
+            background-color: hsl(0.5turn, 50%, 50%);
+        }
+
+        div {
+            background-color: hsl(180, 50%, 50%);
+        }
+
+        /* 5. HWB 颜色
+            HWB 全称为Hue-Whiteness-Blackness，表示色调、白度和黑度。
+                ● 色调：色轮中的一个角度；
+                ● 白度：表示要混合的白色量的百分比。值越高，颜色越白。
+                ● 黑度：表示要混合的黑色量的百分比。值越高，颜色越黑。
+        */
+        div {
+            /* hwb()也可以添加alpha值来表示透明度，也使用斜杠来分隔： */
+            hwb(194 0% 0%) 
+            hwb(194 0% 0% / .5) 
+        }
+
+        /*  */
+
+
+        
+    </style>
+</head>
+<body>
+    
+</body>
+</html>

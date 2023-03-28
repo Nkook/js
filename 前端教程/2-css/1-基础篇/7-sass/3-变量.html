@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        $red: #ee4444;
+        $black: #222;
+        $bg-color: #3e5e9e;
+        $link-color: red;
+        $p-color: #282A36;
+
+        $font-p: 13px;
+        $font-h1: 28px;
+
+        $base-font: 'Noto Sans KR', sans-serif;
+
+        /* 变量的使用： */
+        body {
+            background-color : $bg-color;
+            font-size : $font-p;
+            font-family : $base-font;
+        }
+
+        h1 {
+            font-size: $font-h1;
+            color: $black;
+        }
+
+        p {
+            font-size: $font-p;
+            color: $black;
+        }
+
+        a {
+            color: $link-color;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        当Sass编译成CSS时，所有的变量都会被替换为定义的变量值。变量可以减少重复、进行复杂的数学运算等。
+
+        需要注意，CSS变量是有范围的，位于顶层的变量都是全局变量，在块中定义的变量都是局部变量。
+        全局变量可以在任何地方使用，局部变量只能在变量定义的块中使用。
+
+        变量值是可以覆盖的：
+        sass变量是可以指定默认值的：
+        在 @import 之前覆盖模块默认值：
+            $message-color: black;
+            @import 'my-module';
+
+            .message {
+                color: $message-color;
+            }
+            编译成的CSS代码如下：
+            p.message {
+                color: black;
+            }
+     -->
+</body>
+</html>

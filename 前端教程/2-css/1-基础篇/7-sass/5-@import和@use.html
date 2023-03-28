@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* normalize.scss */
+        body {
+            padding:0;
+            margin:0;
+        }
+
+        body, html {
+            width:100%;
+            min-height:100%;
+        }
+
+        /* styles.scss */
+        @import 'normalize';
+
+        content {
+            max-width:660px;
+        }
+
+        /* 可以使用 @use 来代替，它的基本用法与@import 相同： */
+        @use 'normalize';
+
+        content {
+            max-width:660px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 
+        @import 将文件分块并导入到一个父文件中：
+            假设 normalize.scss 和 styles.scss 都在同一个文件夹中，可以将一个导入另一个，如上所示。
+            在使用@import时，所有变量、mixin 等都可以全局访问，因为一切都是全局的，
+            所以库必须为其所有成员添加前缀以避免命名冲突。因此不建议使用 @import。
+
+        @use 来代替，它的基本用法与@import 相同：
+            使用 @use 导入的文件称为模块。 要使用这些模块的 mixin 或变量，必须使用命名空间来调用它们。
+             默认情况下，命名空间是文件名（不带扩展名）。
+            src/_colors.scss:
+            $accent-color: #535353;
+            @mixin dark-background {
+                background-color:#000;
+                color:#fff;
+            }
+
+            styles.scss
+            @use 'src/colors';
+            body {
+                color: colors.$accent-color;
+            }
+            .dark-region {
+                @include colors.dark-background;
+            }
+            
+            还可以使用 as 来使用自定义命名空间：
+            @use 'src/colors' as c;
+            body  {
+                color: c.$accent-color;
+            }
+
+            当 _ 被添加到 SCSS 文件的文件名前时，解析器知道它是一个部分文件并且它仅用于导入。 
+            导入时，_ 部分是可选的。 注意，这里使用 src/colors 来导入 src/_colors.scss。
+     -->
+</body>
+</html>

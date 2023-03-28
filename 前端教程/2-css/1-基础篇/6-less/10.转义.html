@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        转义（Escaping）允许你使用任意字符串作为属性或变量值。
+        任何 ~"anything" 或 ~'anything' 形式的内容都将按原样输出，除非 interpolation。
+
+        @min768: ~"(min-width: 768px)";
+            .element {
+                @media @min768 {
+                    font-size: 1.2rem;
+                }
+        }
+
+        //编译后
+        @media (min-width: 768px) {
+            .element {
+                font-size: 1.2rem;
+            }
+        }
+        //从 Less 3.5 开始，可以简写为：
+        @min768: (min-width: 768px);
+            .element {
+                @media @min768 {
+                    font-size: 1.2rem;
+                }
+        }
+     -->
+</body>
+</html>

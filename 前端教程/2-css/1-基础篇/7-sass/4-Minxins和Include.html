@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        mixin 是一组可以重用的 CSS 声明，语法类似于JavaScript中的函数，
+        使用 @mixin 指令来代替 function 关键字。
+        调用 mixin 是通过 @include 语句完成的。
+            以下是用 mixins 使元素水平垂直居中的方法：
+                @mixin absolute-center() {
+                    position:absolute;
+                    left:50%;
+                    top:50%;
+                    transform:translate(-50%,-50%);
+                }
+
+                .element {
+                    @include absolute-center();
+                }
+            
+            当然，mixin也是支持传递参数的：
+                @mixin square($size) {
+                    width:$size;
+                    height:$size;
+                }
+                div {
+                    @include square(60px);
+                    background-color:#000;
+                }
+
+            参数可以是可选的，可选参数的定义和Sass变量的定义形式是一样的：
+                @mixin square($width: 50px) {
+                    width:$size;
+                    height:$size;
+                }
+
+            将 CSS 规则传递给 mixins。 这些规则可以在使用 @content 的 mixin 中使用。
+                @mixin hover-not-disabled {
+                    &:not([disabled]):hover {
+                        @content;
+                    }
+                }
+                .button {
+                    border: 1px solid black;
+                    @include hover-not-disabled {
+                        border-color: blue;
+                    }
+                }
+                这样mixin中的@content在编译后就会变成border-color: blue;这样写有助于减少&:not([disabled]):hover部分的重复。
+     -->
+</body>
+</html>

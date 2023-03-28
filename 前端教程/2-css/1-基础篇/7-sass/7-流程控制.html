@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        在 Sass 中有四种类型的流程控制规则：
+            @if /@else、@each、@for 和@while。
+
+            1. 其中 @if 和 @else 类似于 JavaScript 中的 if 和 else。
+            @mixin theme($is-dark: false) {
+                @if $is-dark {
+
+                }
+                @else {
+                    
+                }
+            }
+
+            2. @each 类似于 JavaScript 中的 for of：
+            注意：#{$size} 表示法用于使用变量制作动态属性名称和选择器，这称为插值。
+            $sizes: 40px, 50px, 80px;
+            @each $size in $sizes {
+                .icon-#{$size} {
+                    font-size: $size;
+                    height: $size;
+                    width: $size;
+                }
+            }
+
+            3. @for 类似于 JavaScript 中的 for 循环：
+            @for $i from 1 through 4 {
+                .bubble-#{$i} {
+                    transition-delay: .3 * $i;
+                }
+            }
+
+            4. @while（不常用）类似于 JavaScript 中的 while 循环。
+     -->
+</body>
+</html>

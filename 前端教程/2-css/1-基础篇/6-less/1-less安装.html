@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 官网写的很细 https://less.bootcss.com/#%E6%A6%82%E8%A7%88 -->
+    <!-- 
+        安装编译与依赖
+            1. 安装：npm install -g less
+            2. 手动编译：lessc demo.less demo.css  在demo.less文件下运行可以进行.less文件的编译
+            3. 在webpack中使用要配合对应的less-loader使用：less@3.9.0     less-loader@4.1.0
+            4. 如果是 .vue 文件要在 style 标签上增加属性 lang="less"
+     -->
+     <!-- // webpack.config.js 配置webpack -->
+        module.exports = {
+        module: {
+            rules: [
+            {
+                test: /\.less$/i,
+                use: [
+                // compiles Less to CSS
+                'style-loader',
+                'css-loader',
+                'less-loader',
+                ],
+            },
+            ],
+        },
+        };
+</body>
+</html>

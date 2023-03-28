@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* (01).额外标签法
+                是W3C推荐的做法是通过在浮动元素末尾添加一个空的标签
+                    ● 优点： 通俗易懂，书写方便
+                    ● 缺点： 添加许多无意义的标签，结构化较差。不如添加伪元素
+                在浮动元素后使用一个空元素如<div class="clear"></div>，
+                并在CSS中赋予.clear{clear:both;}属性即可清理浮动。
+                亦可使用<br class="clear" />或<hr class="clear" />来进行清理。
+        */
+
+        /* (2).父级添加overflow属性方法
+                可以给父级添加 overflow 属性，将其属性值设置为 hidden、 auto 或 scroll 。
+                优点：代码简洁
+                缺点：无法显示溢出的部分
+                注意：是给父元素添加代码
+        */
+        .father {
+            overflow:hidden | auto | scroll;
+        }
+
+        /* (3).使用after伪元素清除浮动
+                :after 方式为空元素额外标签法的升级版，好处是不用单独加标签了
+                给浮动元素的父容器添加一个clearfix的class，
+                然后给这个class添加一个:after伪元素实现元素末尾添加一个看不见的块元素（Block element）清理浮动。
+                ● 优点： 符合闭合浮动思想  结构语义化正确
+                ● 缺点： 由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。
+                ● 代表网站： 百度、淘宝网、网易等
+        */
+        .clearfix:after {  
+            content: ""; 
+            display: block; 
+            clear: both;  
+        }   
+
+        .clearfix { *zoom: 1;}   /* IE6、7 专有 */
+
+        /* (4).使用双伪元素清除浮动
+                ● 优点：  代码更简洁
+                ● 缺点：  由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。
+                ● 代表网站： 小米、腾讯等
+        */
+        .clearfix:before,.clearfix:after { 
+            content:"";
+            display:table; 
+        }
+        .clearfix:after {
+            clear:both;
+        }
+        .clearfix {
+            *zoom:1;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <!-- 
+        1 为什么要清除浮动
+            因为父级盒子很多情况下，不方便给高度，
+            但是子盒子浮动就不占有位置，最后父级盒子高度为0，就影响了下面的标准流盒子。
+
+        总结：
+            ● 由于浮动元素不再占用原文档流的位置，所以它会对后面的元素排版产生影响
+            ● 准确地说，并不是清除浮动，而是清除浮动后造成的影响
+
+        清除浮动的本质是清除浮动元素造成的影响：浮动的子标签无法撑开父盒子的高度：
+            ● 如果父盒子本身有高度，则不需要清除浮动
+            ● 清除浮动之后，父级就会根据浮动的子盒子自动检测高度。
+            ● 父级有了高度，就不会影响下面的标准流了
+
+        2. 清除浮动的方法
+            在CSS中，clear 属性用于清除浮动
+                ● 语法：
+                ● 选择器{clear:属性值;}
+            属性值      描述
+            left        不允许左侧有浮动元素（清除左侧浮动的影响）
+            right       不允许右侧有浮动元素（清除右侧浮动的影响）
+            both        同时清除左右两侧浮动的影响
+            
+            但是我们实际工作中， 几乎只用 clear: both;
+
+        3 .清除浮动总结
+            清除浮动的方式              优点            缺点
+            额外标签法（隔墙法）    通俗易懂，书写方便      添加许多无意义的标签，结构化较差。
+            父级overflow:hidden;    书写简单            溢出隐藏
+            父级after伪元素         结构语义化正确        由于IE6-7不支持:after，兼容性问题    
+     -->
+</body>
+</html>

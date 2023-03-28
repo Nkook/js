@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            article {
+                p {
+                    font-size: 100%;
+                    color: black;
+                    padding: 10px;
+
+                    @media (max-width: 768px) {
+                        font-size: 150%;
+                    }
+                }
+            }
+        }
+        /* 编译成的CSS代码如下： */
+        body article p {
+            font-size: 100%;
+            color: black;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            body article p {
+                font-size: 150%;
+            }
+        }
+
+        /* 媒体查询是支持嵌套的，并将所有适用的查询与 and 运算符结合起来： */
+        p {
+            @media (max-width: 768px) {
+                font-size: 150%; 
+                @media (orientation: landscape) {
+                    line-height: 75%; 
+                }
+            }
+        }
+        /* 编译成的CSS代码如下： */
+        @media (max-width: 768px) {
+            p {
+                font-size: 150%;
+            }
+        }
+
+        @media (max-width: 768px) and (orientation: landscape) {
+            p {
+                line-height: 75%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* em */
+        .parent {
+            width: 300px;
+            height: 300px;
+            font-size: 20px;
+        }
+        /* 自身没有font-size 就相对于父元素的，自身有就相对于自己 */
+        .child {
+            border: 1em solid ; /* 此时边框是20px */
+        }
+        .child {
+            font-size: 30px;
+            border: 1em solid ;/* 此时边框是30px */
+        }
+
+        /* rem */
+        .child {
+            font-size: 30px;
+            border: 1rem solid ; /* 此时边框是25px */
+        }
+
+        html {
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        相对单位就是相对于另一个长度的长度。CSS中的相对单位主要分为两大类：
+            ● 字体相对单位，他们都是根据font-size来进行计算的。常见的字体相对单位有：em、rem、ex、ch；
+            ● 视窗相对单位，他们都是根据视窗大小来决定的。常见的视窗相对单位有vw、vh、vmax、vmin。
+        
+        (1) em 是相对于父元素的字体大小进行计算的。
+        如果当前对行内文本的字体尺寸未进行显示设置，则相对于浏览器的默认字体尺寸。
+        当DOM元素嵌套加深时，并且同时给很多层级显式的设置了font-size的值的单位是em，那么就需要层层计算，复杂度会很高。
+
+        (2) rem 它是根据页面的根元素（根元素）的字体大小来计算的。
+
+        （3）vw、vh、vmax 和 vmin: 都是视窗单位，所谓的视窗，在web端指的就是可视区域，移动端的视窗指的就是布局视窗。如果视窗大小发生了变化，那么这些值都会随之变化。这四个单位指的是：
+            ● vw：视窗宽度的百分比；
+            ● vh：视窗高度的百分比；
+            ● vmax：较大的 vh 和 vw；
+            ● vmin：较小的 vh 和 vw。
+     -->
+
+     <!-- 
+        em：
+            如果自身元素是没有设置字体大小的，
+            那么就会根据其父元素的字体大小作为参照去计算，
+            如果元素本身已经设置了字体，那么就会基于自身的字体大小进行计算。
+
+        em单位除了可以作用于 font-size之外，还可以运用于其他使用长度的属性，
+        比如border-width、width、height、margin、padding、text-shadow等。
+      -->
+
+      <div class="parent">
+        <div class="child">
+           子元素
+        </div>
+    </div>
+
+    <!-- 
+
+        使用 em 和 rem 可以让我们灵活的够控制元素整体的放大和缩小，而不是固定大小。那何时应使用 em，何时应使用 rem 呢？可以根据两者的差异来进行选择：
+            ● 两者在客户端中计算出来的样式都会以px的形式显示；
+            ● rem是相对于根元素html的font-size计算，em 相对于元素的font-size计算；
+            ● 当需要根据浏览器的font-size设置缩放时，应该使用 rem；
+            ● 使用 em 应该根据组件的font-size来定，而不是根元素的font-size来定；
+            ● rem 可以从浏览器字体设置中继承 font-size 值， em 可能受任何继承过来的父元素 font-size 的影响。
+     -->
+
+     <!-- 
+        假如一个浏览器的高度是800px，
+        那么1vh的值就是8px。vh和vw的大小总是和视窗的高度和宽度有关。
+
+        vmin 和 vmax 与视窗宽度和高度的最大值和最小值有关。
+        假如一个浏览器高度为500px，宽度为1200px，那么1vmin就是5px，1vmax就是12px。
+
+        这些单位都是长度单位，所以可以在任何允许使用长度单位的地方使用。这些单位比较适合用于创建全视区界面，例如移动设备的界面，因为元素是根据视区的尺寸而变化的，与文档树中的任何元素都没有关系。
+      -->
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 注意，在编写Sass时，要嵌套嵌套太深，尽量不要超过三层，
+        超过之后就会导致代码难以维护，并且在编译为CSS时就会出现不必要的选择器，就会导致CSS文件变大。 */
+        nav {
+            background : #C39BD3;
+            padding : 10px;
+            height: 50px;
+        
+            ul {
+                display: flex;
+                list-style : none;
+                justify-content: flex-end;
+
+                li {
+                    color: white;
+                    margin-right: 10px;
+                } 
+            }
+        }
+
+        /* 我们还可以在嵌套中使用 &，比如鼠标在按钮上悬浮时，改变颜色。在CSS中是这样的： */
+        button {
+            background-color: #535353;
+            color: #000;
+            &:hover {
+                background-color: #000;
+                color: #fff;
+            }
+        }
+
+        /* Sass还支持使用:来嵌套属性： */
+        add-icon {
+            background : {
+                image: url("./assets/arrow-right-solid.svg");
+                position: center center;
+                repeat: no-repeat;
+                size: 14px 14px;
+            }
+        }
+        /* 上面的代码编译为如下CSS： */
+        .add-icon {
+            background-image: url("./assets/arrow-right-solid.svg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 14px 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        嵌套的写法是Sass的一大特点，通过嵌套这些代码，可以得到类似HTML结构的CSS代码，使代码更具可读性。
+
+     -->
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* （1）绝对定位
+                可以通过将使用绝对定位和变换实现元素的垂直居中： */
+                .container {
+                    position: relative;
+                }
+
+                .content {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                /* 如果块元素的高度已知，也可以使用负边距来代替transform： */
+                .container {
+                    position: relative;
+                }
+
+                .content {
+                    height: 100px;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -50px;
+                }
+
+        /* 2. 通用 */
+                /* （1）Flex 布局 */
+                .container {
+                    display: flex;
+                    align-items: center;
+                }
+                /* 主轴切换为垂直方向 */
+                .flex {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                /* （2）Grid 布局 */
+                .container {
+                    display: grid;
+                    align-content: center;
+                }
+                .container {
+                    display: flex;
+                    align-content: center;
+                    grid-auto-flow: column;
+                }
+    </style>
+</head>
+<body>
+    <!-- 1. 块级元素 -->
+    <div class="container">
+        <div class="content">垂直居中</div>
+    </div>
+
+</body>
+</html>

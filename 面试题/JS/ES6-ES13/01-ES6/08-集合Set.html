@@ -8,6 +8,7 @@
 </head>
 <body>
     <script>
+        // 参考（写的很好）：https://blog.csdn.net/yiyueqinghui/article/details/107773347
         // ES6提供了新的数据结构Set（集合）。
         // 它类似于数组，但是成员的值都是唯一的，集合实现了iterator接口，所以可以使用扩展运算符和 for…of 进行遍历。
 
@@ -19,6 +20,7 @@
         // has	        检查集合中是否包含某元素，返回布尔值
         // clear	    清空集合，返回undefined
 
+        // 一、增删改查
         //创建一个空集合
         let s = new Set();
         //创建一个非空集合
@@ -34,20 +36,48 @@
         //清空集合
         console.log(s1.clear());    //undefined
 
-        // 1. 由于集合中元素的唯一性，所以在实际应用中，可以使用set来实现【数组去重】：
+        // 二、遍历方法
+        // 1. 遍历keys()
+        let list2=new Set(['a','b','c'])
+        for(let key of list2.keys()){
+            console.log(key)//a,b,c
+        }
+
+        // 2. 遍历values()
+        let list=new Set(['a','b','c'])
+        for(let value of list.values()){
+            console.log(value)//a,b,c
+        }
+        
+        // 3. 遍历 entries()
+        let list1=new Set(['4','5','hello'])
+        for (let item of list1.entries()) {
+            console.log(item); // ['4','4']   ['5','5']   ['hello','hello'] 
+        }
+        
+        // 4. 遍历 forEach()
+        let list3=new Set(['4','5','hello'])
+        list3.forEach((value, key) => console.log(key + ' : ' + value)) // 4:4    5:5   hello:hello
+        
+        // 三、使用场景
+        // 1. 数组去重 由于集合中元素的唯一性，所以在实际应用中，可以使用set来实现【数组去重】：
         // 这里使用了Array.form()方法来将数组集合转化为数组。
         let arr = [1,2,3,2,1]
-        Array.from(new Set(arr))  // [1, 2, 3]
+        Array.from(new Set(arr))  // [1, 2, 3] 或者[...new Set(arr)]
 
-        // 2. 可以通过set来求两个数组的【交集和并集】：
+        // 2. 字符串去重
+        let str = "352255";
+        let unique = [...new Set(str)].join("");     // 352 
+
+        // 3. 交集和并集 可以通过set来求两个数组的【交集和并集】：
         // 模拟求交集: 该元素存在set1也存在set2
         let intersection = new Set([...set1].filter(x => set2.has(x)));
 
-        // 模拟求差集: 该元素存在set1但不存在set2
+        // 4. 差集: 该元素存在set1但不存在set2
         let difference = new Set([...set1].filter(x => !set2.has(x)));
 
 
-        // 3. 数组与集合的相互转化：
+        // 四、 数组与集合的相互转化：
         // Set集合转化为数组
         const arr1 = [...mySet]
         const arr2 = Array.from(mySet)

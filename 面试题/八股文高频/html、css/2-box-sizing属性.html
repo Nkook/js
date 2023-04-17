@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* 标准盒模型 */
+    div {
+        box-sizing: content-box;
+        width: 200px; /* 只包括内容的宽度 */
+        padding: 20px;
+        border: 1px solid #ccc;
+        margin: 10px;
+    }
+
+    /* IE盒模型 */
+    div {
+        box-sizing: border-box;
+        width: 200px; /* 包括内容、内边距、边框的宽度 */
+        padding: 20px;
+        border: 1px solid #ccc;
+        margin: 10px;
+    }
+
+</style>
+<body>
+    <script>
+        /*
+            box-sizing是CSS3中一个非常有用的属性，它用来定义盒模型的计算方式。
+            盒模型由四个部分组成：content（内容）、padding（内边距）、border（边框）和margin（外边距）。
+            在标准盒模型中，元素的宽度和高度只包括内容的宽度和高度，不包括内边距、边框和外边距。
+            而在IE盒模型中，元素的宽度和高度包括了内容、内边距、边框。
+
+            box-sizing属性可以有以下几个取值：
+                content-box：标准盒模型，元素的宽度和高度只包括内容的宽度和高度。
+                border-box：IE盒模型，元素的宽度和高度包括了内边距、边框和内容的宽度和高度。
+                padding-box：元素的宽度和高度包括了内容的宽度和高度以及内边距的宽度和高度，但不包括边框和外边距。
+                inherit：继承父元素的box-sizing属性。
+        */
+    </script>
+</body>
+</html>

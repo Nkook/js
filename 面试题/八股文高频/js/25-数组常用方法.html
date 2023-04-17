@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. join: array.join('符号') 把数组转成字符串，不改变原数组。返回拼接好的字符串
+        2. split: string.split('符号') 以字符为标准进行分割字符串，返回数组
+
+        3. push: array.push(参数) 把参数添加到数组尾部，改变原数组。此方法返回最新的数组长度length
+        4. pop: 删除数组尾部一个元素，改变原数组。返回删除的元素
+        5. unshift: array.unshift(参数) 把参数添加到数组头部，改变原数组。此方法返回最新的数组长度length
+        6. shift: 删除头部一个元素，改变原数组。返回删除的元素
+
+        7. reverse: 反转数组，改变原数组。返回更改后数组
+        8. sort: 排序。更改原数组。返回改后的数组。sort((a, b) => {return a-b})
+            默认 a < b
+            return a-b < 0 升序
+            return b-a > 0 降序
+        
+        9. concat: 数组拼接。arr1.concat(arr2) 不更改原数组，返回拼接后的新数组
+        10. splice: 截取/删除/增加，3个参数。更改原数组，返回删除的数据 数组格式
+                arr('开始下标', '截取长度', '被填充替换的数据')
+        11. slice: 截取/删除数组，不更改原数组
+            arr.slice('开始下标', '结束下标不包含')
+        
+     -->
+    <script>
+        // 1. join
+        var arr1 = [1, 2, 'hello']
+        console.log(arr1.join()) // 1,2,hello
+        console.log(arr1.join('--')) // 1--2--hello
+        console.log('join不改变原数组', arr1) // [1, 2, 'hello']
+
+        // 2. split
+        console.log('111%fff%uuu'.split('%')) //  ['111', 'fff', 'uuu']
+
+        // 3. push
+        var arr2 = [1, 2, 3, 4, 5, 6]
+        console.log('push尾部增加，返回数组长度', arr2.push(99), arr2) // 7  [1, 2, 3, 4, 5, 6, 99]
+        console.log('pop尾部删除，返回删除元素', arr2.pop(), arr2) // 99    [1, 2, 3, 4, 5, 6]
+        console.log('unshift头部增加，返回数组长度', arr2.unshift(8), arr2) // 7  [8, 1, 2, 3, 4, 5, 6]
+        console.log('shift头部删除，返回删除元素', arr2.shift(), arr2)  // 8   [1, 2, 3, 4, 5, 6]
+
+        // 7. reverse
+        var arr3 = [1, 2, 3, 4, 5, 6]
+        console.log('reverse改变原数组', arr3.reverse()) // [6, 5, 4, 3, 2, 1]
+        
+        // 8. sort()
+        var arr4 = [6, 10, 3, 17, 4, 5]
+        // 升序
+        console.log(arr4.sort((a, b) => a-b)) // [3, 4, 5, 6, 10, 17]
+        // 降序
+        // console.log(arr4.sort((a, b) => b-a)) //  [17, 10, 6, 5, 4, 3]
+
+        // 9. concat()
+        var arr5 = ['a', 'b', 'c']
+        var arr6 = [1, 2]
+        console.log(arr5.concat(arr6)) // ['a', 'b', 'c', 1, 2]
+
+        // 10. splice()
+        var arr7 = [1, 2, 3, 4, 5, 6]
+        // console.log('splice会改变原数组，返回删除元素组成数组', arr7.splice(2, 2), arr7) //  [3, 4]  [1, 2, 5, 6]
+        console.log(arr7.splice(2, 2, 'a', 'b'), arr7) //  [3, 4]  [1, 2, 'a', 'b', 5, 6]
+        
+        // 11. slice()
+        var arr8 = [1, 2, 3, 4, 5, 6] // 删除2 3 4
+        console.log('slice不改变原数组，返回删除元素组成数组', arr8.slice(1, 4), arr8) //  [2, 3, 4]  [1, 2, 3, 4, 5, 6]
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. typeof() 基本数据类型 ：字符串、数字、布尔
+        console.log(typeof Array) // object
+        console.log(typeof {}) // object
+        console.log(typeof null) // object
+        // 2. instanceof 
+        // 语法： 数据 instanceof 构造原型
+        var arr = []
+        console.log(arr instanceof Array) // true
+
+        // 3. 最准确的
+        // Object.prototype.toString.call()
+        Object.prototype.toString.call(1) // '[object Number]'
+        Object.prototype.toString.call('1') // '[object String]'
+        Object.prototype.toString.call(null) // '[object Null]'
+        Object.prototype.toString.call(undefined) // '[object Undefined]'
+        Object.prototype.toString.call(true) // '[object Boolean]'
+        Object.prototype.toString.call({}) // '[object Object]'
+        Object.prototype.toString.call([]) // '[object Array]'
+
+        // 先使用 Object.prototype.toString.call(1) 获取数据类型的字符串表示，
+        // 然后使用 slice() 方法截取字符串的第 8 个字符到倒数第 1 个字符，得到具体的数据类型字符串。
+        // 使用 slice() 方法：
+        const str = Object.prototype.toString.call(1);
+        const type = str.slice(8, -1);
+        console.log(type); // "Number"
+
+        // 使用正则表达式：
+        const str1 = Object.prototype.toString.call(1);
+        const type1 = str1.match(/\[object (\w+)\]/)[1];
+        console.log(type1); // "Number"
+
+
+
+    </script>
+</body>
+</html>

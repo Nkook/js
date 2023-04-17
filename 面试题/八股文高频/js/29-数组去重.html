@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 利用Set 和 ...
+        var arr = [1,9,8,8,7,2,5,3,3,3,2,3,1,4,5,444,55,22];
+        let arr1 = [...new Set(arr)] //或者 Array.from(new Set(arr))
+        console.log('arr1', arr1, Array.prototype.slice.call(arr1, 0)) // 类数组 转成数组
+
+        // 2. filter 和 indexOf
+        var arr2 = ['apple','apps','pear','apple','orange','apps'];
+        console.log(arr2)    
+        var newArr = arr2.filter(function(item,index){
+            return arr2.indexOf(item) === index;  // indexOf 如果找到一个 item，则返回 item 的第一次出现的位置。
+        });
+        console.log(newArr); 
+
+        // 3. for循环 和 indexOf
+        // 借助indexOf 如果新数组中不存在该item时，将item放入新数组中
+        // var arr = [1,9,8,8,7,2,5,3,3,3,2,3,1,4,5,444,55,22];
+        function noRepeat () {
+            var newArr1 = [] // 临时新数组
+            for(var i=0; i<arr.length; i++) { // 循环需要去重的数组
+                if ( newArr1.indexOf(arr[i]) === -1 ) { // 检测新数组中是否存在当前item，不存在就为-1，将值推入新数组中
+                    newArr1.push(arr[i])
+                }
+            }
+            return newArr1
+        }
+        var arr3 = noRepeat(arr);
+        console.log(arr3);  
+
+        // 3. for循环 和 indexOf
+        // 借助indexOf 如果老数组中该item的索引 和 当前循环索引值 相等时，将item放入新数组中。不等时就说明该item不是第一次出现了。
+        var arr = [1,9,8,8,7,2,5,3,3,3,2,3,1,4,5,444,55,22];
+        function noRepeat(arr) {
+            var newArr2 = [];
+            for (var i = 0; i < arr.length; i++) {
+                if ( arr.indexOf(arr[i]) == i ) { // 检测当前数组元素出现的第一个索引值 是否与循环中的索引 相等
+                    newArr2.push(arr[i]); // 将当前元素item第一次出现时放入新数组中
+                }
+            }
+            return newArr2;
+        }
+        var arr4 = noRepeat(arr);
+        console.log(arr4);  
+
+        // 4. includes 方法用来判断一个数组是否包含一个指定的值，如果包含则返回 true，否则返回false
+        function noRepeat1() {
+            var newArr3 = []
+            for(i=0; i<arr.length; i++) {
+                if (!newArr3.includes(arr[i])) {
+                    newArr3.push(arr[i])
+                }
+            }
+            return newArr3
+        }
+        console.log('noRepeat1', noRepeat1(arr))
+
+        // 5. reduce 对象数组去重
+        //reduce第一个参数是遍历需要执行的函数，第二个参数是item的初始值
+        var arr5 = [{"id":1,"name":"张三"},{"id":2,"name":"李四"},{"id":3,"name":"王五"},{"id":2,"name":"张三"}];
+        var obj = {};
+        arr5 = arr5.reduce(function(item, next) {
+                // console.log('item---next', item, next, obj) // [] {"id":1,"name":"张三"} {}
+                obj[next.id] ? '' : obj[next.id] = true && item.push(next);
+                return item;
+            }, []);
+        console.log('arr5', arr5);
+
+        // 6. Map
+        // has 检查Map中是否包含某元素，返回布尔值
+        var arr6 = [{"id":1,"name":"张三"},{"id":2,"name":"李四"},{"id":3,"name":"王五"},{"id":2,"name":"张三"},{'id':4,'name':'李四'}];
+
+        function unique(arr){
+            const res= new Map()
+            // console.log('res', res) Map中没有这个id的时候，将该id放入Map；有这个id的时候，不放。
+            return arr.filter((a)=> !res.has(a.id) && res.set(a.id,1) && !res.has(a.name) && res.set(a.name,1))
+        }
+        //输出结果：
+        console.log('arr6', unique(arr6))
+        // [
+        //     {
+        //         "id": 1,
+        //         "name": "张三"
+        //     },
+        //     {
+        //         "id": 2,
+        //         "name": "李四"
+        //     },
+        //     {
+        //         "id": 3,
+        //         "name": "王五"
+        //     }
+        // ]
+
+        // 7. 双层for循环 splice（ES5中最常用）
+        var arr11 = [1, 3, 1, 2, 3]
+        function unique1(arr){            
+            for(var i=0; i<arr.length; i++){
+                // console.log('iii', i)
+                for(var j=i+1; j<arr.length; j++){
+                    // console.log('jjj', j)
+                    if(arr[i]==arr[j]){  //第一个等同于第二个，splice方法删除第二个
+                        arr.splice(j,1); // 开始下标j，截取长度1
+                        j--; // 删掉一个后，索引值也要减掉一个
+                    }
+                }
+            }
+            return arr;
+        }
+        console.log('arr7', unique1(arr11))
+
+
+    </script>
+</body>
+</html>

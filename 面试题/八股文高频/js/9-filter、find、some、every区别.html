@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            filter、find、some、every都是JavaScript中常用的数组方法，它们的作用不同。
+
+            filter方法用于过滤数组中的元素，返回一个新的数组，新数组中包含符合条件的元素。
+            filter方法的参数是一个回调函数，该函数接受当前元素、索引和原数组作为参数，在回调函数中返回一个布尔值，表示该元素是否符合条件。
+        */
+        const arr = [1, 2, 3, 4, 5];
+        const even = arr.filter(num => num % 2 === 0);
+        console.log(even); // [2, 4]
+
+        /*
+            find方法用于查找数组中符合条件的元素，返回第一个符合条件的元素，如果找不到，则返回undefined。
+            find方法的参数也是一个回调函数，该函数接受当前元素、索引和原数组作为参数，在回调函数中返回一个布尔值，表示该元素是否符合条件。
+        */
+        const arr1 = [1, 2, 3, 4, 5];
+        const num1 = arr1.find(num => num > 3);
+        console.log(num1); // 4
+
+        /*
+            some方法用于检查数组中是否存在符合条件的元素，返回一个布尔值，有一个符合就为true。表示是否存在符合条件的元素。
+            some方法的参数也是一个回调函数，该函数接受当前元素、索引和原数组作为参数，在回调函数中返回一个布尔值，表示该元素是否符合条件。
+        */
+        const arr2 = [1, 2, 3, 4, 5];
+        const hasEven = arr2.some(num => num % 2 === 0);
+        console.log(hasEven); // true
+
+        /*
+            every方法用于检查数组中所有元素是否都符合条件，返回一个布尔值，全部符合返回true，有一个不符合就返回false。表示是否所有元素都符合条件。
+            every方法的参数也是一个回调函数，该函数接受当前元素、索引和原数组作为参数，在回调函数中返回一个布尔值，表示该元素是否符合条件。
+        */
+        const arr3 = [1, 2, 3, 4, 5];
+        const allEven = arr3.every(num => num % 2 === 0);
+        console.log(allEven); // false
+
+
+
+    </script>
+</body>
+</html>

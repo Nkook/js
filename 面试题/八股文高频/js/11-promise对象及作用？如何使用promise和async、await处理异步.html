@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            Promise 对象是 JavaScript 中用于处理异步操作的一种方式，它可以让异步操作更加简洁、易读、可维护。
+            Promise 对象的作用主要有以下几个方面：
+                1. 解决回调地狱问题
+                    在传统的异步编程中，经常会出现回调地狱的问题，即多个异步操作嵌套在一起，导致代码难以阅读和维护。
+                    而 Promise 对象可以通过链式调用的方式来解决这个问题，让代码更加清晰和易于理解。
+                2. 统一异步操作的错误处理
+                    在传统的异步编程中，经常会出现错误处理不一致的问题，导致代码难以维护。
+                    而 Promise 对象可以通过 catch 方法来统一处理异步操作中的错误，让代码更加健壮。
+
+                3. 支持并发异步操作
+                    在传统的异步编程中，经常会出现多个异步操作之间的依赖关系，导致代码难以维护。
+                    而 Promise 对象可以通过 Promise.all 或 Promise.race 方法来支持并发异步操作，让代码更加高效。
+        */
+        // 例如，下面是一个使用回调函数的异步操作：
+        getData(function(data) {
+            getMoreData(data, function(moreData) {
+                processData(moreData, function(result) {
+                // ...
+                })
+            })
+        })
+        // 使用 Promise 对象可以将上面的代码改写为：
+        getData()
+            .then(getMoreData)
+            .then(processData)
+            .then(function(result) {
+                // ...
+            })
+
+        // 2. 
+        // 例如，下面是一个使用回调函数的异步操作：
+        getData(function(data) {
+            getMoreData(data, function(moreData) {
+                processData(moreData, function(result) {
+                // ...
+                }, function(error) {
+                // 处理错误
+                })
+            }, function(error) {
+                // 处理错误
+            })
+            }, function(error) {
+            // 处理错误
+            })
+        // 使用 Promise 对象可以将上面的代码改写为：
+        getData()
+            .then(getMoreData)
+            .then(processData)
+            .catch(function(error) {
+                // 处理错误
+            })
+
+        // 3. 
+        // 例如，下面是一个使用回调函数的并发异步操作：
+        getData1(function(data1) {
+            getData2(function(data2) {
+                processData(data1, data2, function(result) {
+                // ...
+                })
+            }, function(error) {
+                // 处理错误
+            })
+            }, function(error) {
+            // 处理错误
+            })
+        // 使用 Promise 对象可以将上面的代码改写为：
+        Promise.all([getData1(), getData2()])
+        .then(function([data1, data2]) {
+            return processData(data1, data2)
+        })
+        .then(function(result) {
+            // ...
+        })
+        .catch(function(error) {
+            // 处理错误
+        })
+        
+    </script>
+</body>
+</html>

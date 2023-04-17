@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            浅拷贝：两个变量同时指向一份数据。修改其中一个，都会发生变化。
+            深拷贝：两个变量指向两份同样的数据
+        */
+
+        // 浅拷贝
+        let obj1 = {
+            a: 1,
+            b: 2
+        }
+        
+        var obj2 = obj1
+        obj2.a = 3
+        console.log('obj1', obj1) // 都改变了
+        console.log('obj2', obj2)
+
+        // 深拷贝
+        // 1. JSON.parse(JSON.stringify()) 先把对象转成字符串，再转成一个新的对象
+        //  缺点：undefined、函数、RegExp、Date 等特殊类型 无法复制
+        let newObj1 = {
+            a: 1,
+            b: 2
+        }
+        let newObj2 = JSON.parse(JSON.stringify(newObj1))
+        newObj1.a = 3
+        newObj1.c = 4
+        console.log('newObj1', newObj1) // {a: 3, b: 2, c: 4}
+        console.log('newObj2', newObj2) // {a: 1, b: 2}
+
+        // 2. 递归拷贝
+        var obj3 = {
+            a: 1,
+            b: 2,
+            list: [1, 2, {name: '张三'}],
+            c: undefined,
+            obj: {},
+            d: ()=>{
+                alert('哈哈哈哈')
+            }
+        }
+        function deep(obj) {
+            if (!(obj instanceof Array || obj instanceof Object)) { return obj } // 如果不是复杂数据类型就直接返回它自身
+            // 判断数据类型是否是数组/对象  进行新数据声明
+            // 新建一个地址targetObj
+            var targetObj = obj instanceof Array ? [] : {}
+            // 循环 obj
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) { // 忽略从原型继承的属性，不进行拷贝
+                    const value = obj[key] // key对应的value值
+                    if (value instanceof Array || value instanceof Object) { // 判断属性值是否是数组/对象？
+                        targetObj[key] = deep(value) // 是的话需要对属性值进行递归处理
+                    } else {
+                        targetObj[key] = value
+                    }
+                }
+            }
+            return targetObj
+        }
+        var obj4 = deep(obj3)
+        obj3.list.name = '李四'
+        console.log('obj3', obj3) // 李四
+        console.log('obj4', obj4) // 张三
+
+    </script>
+</body>
+</html>

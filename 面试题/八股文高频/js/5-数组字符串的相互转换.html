@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数组转字符串
+        // 1. join()
+        const array = [1, 2, 3];
+        const str = array.join(); // "1,2,3"
+
+        // 字符串转数组
+        // 2. split()
+        const str1 = "1 2 3";
+        const array1 = str1.split(' '); // ["1", "2", "3"]
+
+        // 数组转换为字符数组
+        // 3. map()
+        const array2 = [1, 2, 3];
+        const charArray = array2.map(String); // ["1", "2", "3"]
+    </script>
+</body>
+</html>

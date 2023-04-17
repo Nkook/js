@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        遍历一个对象的属性可以使用for...in循环或Object.keys()方法。
+
+            for...in循环会遍历对象的所有可枚举属性（包括自有属性和继承属性），并将属性名赋值给循环变量。
+
+            for...in循环遍历的是对象的可枚举属性，
+            如果想要遍历对象的所有属性（包括不可枚举属性），
+            可以使用Object.getOwnPropertyNames()方法或Object.getOwnPropertySymbols()方法。
+
+            Object.keys()方法。
+                Object.keys()方法可以返回一个对象的所有可枚举属性的属性名，不包括继承自原型链上的属性。
+
+        */
+        const obj = {
+            name: 'John',
+            age: 30,
+            gender: 'male'
+        };
+
+        for (let key in obj) {
+            console.log(key + ': ' + obj[key]);
+        }
+
+        const obj1 = {a: 1, b: 2, c: 3};
+        const props = Object.keys(obj1);
+        for (let i = 0; i < props.length; i++) {
+            console.log(props[i] + ': ' + obj1[props[i]]);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 导出文件 myModule.js
+        export const myVariable = 'Hello World';
+
+        export function myFunction() {
+        console.log('This is my function');
+        }
+
+        export class myClass {
+            constructor() {
+                console.log('This is my class');
+            }
+        }
+
+        // 导入模块  app.js
+        import { myVariable, myFunction, myClass } from './myModule.js';
+
+        console.log(myVariable); // 'Hello World'
+
+        myFunction(); // 'This is my function'
+
+        const instance = new myClass(); // 'This is my class'
+
+        /*
+            在上面的示例中，使用import语句从myModule.js中导入了myVariable、myFunction和myClass。
+            我们可以像常规变量、函数和类一样使用它们。
+
+            注意：在浏览器中使用ES6模块化时，需要在<script>标签中设置type="module"。
+        */
+        // 这将告诉浏览器该脚本是一个ES6模块。
+        <script type="module" src="app.js"></script>
+
+
+
+    </script>
+</body>
+</html>

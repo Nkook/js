@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击</button>
+    <script>
+        // this指的是当前代码执行的上下文
+        // 顶层全局作用域window
+        console.log('window', window)
+
+        // 1. 声明的全局变量挂载在window上
+        var a = 1
+        console.log('this', this, this === window)
+
+        // 2. 在方法和函数执行的内部this。谁调用方法，this就指向谁。 .前面是谁就指向谁
+        function fun1() {
+            console.log('fun1---this', this) // window
+        }
+        fun1()
+
+        var obj = {
+            fun2: function() {
+                console.log('fun2---this', this) // obj
+            },
+            obj2: {
+                fun3: function() {
+                    console.log('fun3---this', this) // obj2
+                }
+            }
+        }
+        obj.fun2() // obj
+        obj.obj2.fun3() // obj2
+
+        // 3. 箭头函数里的this指向声明的当前上下文的环境，并且不可改变this的指向
+        // 重点：普通函数的this是执行的时候确定的；箭头函数的this是声明的时候确定的。
+        var obj3 = {
+            obj4: {
+                fun4: function(p1, p2) {
+                    // console.log('fun4---this', this, this===obj3.obj4) // obj4  true
+                    console.log('fun4---this', this) // {obj99: 1}
+                },
+                fun5: ()=> {
+                    console.log('fun5---this', this) // window
+                }
+            }
+        }
+        obj3.obj4.fun4() // obj4
+        obj3.obj4.fun5() // window
+
+        // 改变this指向方法：call apply bind
+        /*
+            call 改变this指向并立即执行函数，参数逗号分隔
+            apply 改变this指向并立即执行函数，参数数组形式
+            bind  改变this指向不会立即执行函数，需要自己调用    
+        */
+        // obj3.obj4.fun4.call({obj99: 1}, 'a', 'b')
+        // obj3.obj4.fun4.apply({obj99: 1}, ['a', 'b'])
+        // obj3.obj4.fun4.bind({obj99: 1}, 'a', 'b')()
+
+        // 绑定事件需要改变this指向，不需要自动执行时，使用bind
+        document.querySelector("#btn").onclick = obj3.obj4.fun4.bind({obj99: 1}, 'a', 'b')
+
+
+    </script>
+</body>
+</html>

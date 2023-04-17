@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            async和await是ES2017中的新特性，用于简化异步编程的语法。
+            async函数是一个返回Promise对象的异步函数，await关键字用于等待Promise对象的结果。
+
+            async函数可以用于替代Promise对象的then方法，使异步代码更加清晰易读。
+            在async函数内部，可以使用await关键字等待Promise对象的结果，将异步代码变成类似于同步代码的形式，更加易于理解和维护。
+        */
+
+        // 例如，下面的代码使用Promise对象实现了异步操作：
+        function fetchData() {
+            return fetch('https://api.example.com/data')
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+        }
+
+        // 使用async和await关键字可以简化上述代码，如下所示：
+        async function fetchData() {
+            try {
+                const response = await fetch('https://api.example.com/data');
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        // 可以看到，使用async和await关键字可以让异步代码更加清晰易读，同时也可以更好地处理异步操作中的错误。
+
+
+    </script>
+</body>
+</html>

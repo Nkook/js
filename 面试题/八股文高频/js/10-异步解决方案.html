@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 异步解决方法
+        // 1. callback 回调函数
+        // 2. promise
+        // 3. async / await
+
+        // 什么是异步？ 异步需要等待执行
+        // function fun() {
+        //     var res
+        //     setTimeout(() => {
+        //         res = '你好'
+        //     }, 100)
+        //     console.log(res) // undefined
+        // }
+        // fun()
+
+        // 1. callback 回调函数
+        // 将函数作为参数传入，在获取数据的地方，执行这个参数，就可以拿到值了
+        function fun(callback) {
+            var res
+            setTimeout(() => {
+                res = '你好'
+                callback(res)
+            }, 100)
+            console.log(res) // undefined
+        }
+        fun((res) => {
+            console.log('res', res) // 你好
+        })
+
+        // 2. promise
+        // 三种状态：pending=> resolve/reject 
+        function p1() {
+            return new Promise((resolve, reject) => {
+                // resolve('成功') // 只会走到一种状态
+                reject('失败')
+            })
+        }
+        p1().then(res=>{
+            console.log('res', res) // 成功
+        }).catch(err=> {
+            console.log('err', err) // 失败
+        })
+
+        // Promise.all() 多个异步执行完进行操作
+        // 有一个reject，就返回该错误，拿到错误的数据
+        // 都是resolve，返回所有resolve数据组成的数组
+        // Promise.all([p1(), p2(), p3()]).then(res => {
+        //     console.log('Promise.all', res)
+        // }).catch(err=> {
+        //     console.log('Promise.all的err', err)
+        // })
+        
+        // 3. async /await
+        function fun2 () {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve([1, 2, 3])
+                }, 100)
+            })
+        }
+        // async 可以单独使用，返回的是promise对象
+        // await 必须配合async使用，不然会报错。后面跟的是个异步/promise
+        async function getData() {
+            const res = await fun2()
+            console.log('res', res)
+        }
+        getData()
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. forEach() 对数组中的每一项进行操作，没有返回值。
+        2. map()    对数组中的每一项进行操作，返回一个新数组。新数组为return的结果
+        3. filter() 循环过滤符合条件的数组，返回一个新数组。
+        4. find()   查找符合条件的第一个元素返回，只会返回符合条件的第一个。
+        5. findIndex() 查找符合条件的第一个元素下标返回，只会返回符合条件的第一个。
+        6. some()   有一个真则真，返回布尔true。后面的都不会再遍历了。
+        7. every()  有一个假则假，返回布尔false。后面的都不会再遍历了。
+        8. reduce() 累加
+     -->
+     <script>
+        var list = [
+            {
+                name: '章三',
+                age: 17
+            },
+            {
+                name: '里斯',
+                age: 20
+            },
+            {
+                name: '还好',
+                age: 19
+            },
+        ]
+
+        var res1 = list.forEach( item => {
+            item.class = '一年级'
+        })
+        console.log('res1', res1)
+
+        var res2 = list.map(item => {
+            if (item.age > 18) {
+                return item
+            }
+        })
+        console.log('res2', res2)
+
+        var res3 = list.filter(item => {
+            return item.age > 18
+        })
+        console.log('res3', res3)
+
+        //find
+        var res4 = list.find(item => {
+            return item.age > 18
+        })
+        console.log('res4', res4)
+
+        //findIndex
+        var res5 = list.findIndex(item => {
+            return item.age > 18
+        })
+        console.log('res5', res5) // 5
+
+
+        // some
+        // 如果年龄大于18就加钱
+        var res6 = list.some(item => {
+            return item.age > 30
+        })
+        console.log('res6', res6) // false
+        var res7 = list.some(item => {
+            return item.age > 10
+        })
+        console.log('res7', res7) // true
+
+        // every
+        var res9 = list.every(item => {
+            return item.age > 18
+        })
+        console.log('res9', res9) // false
+
+        var res8 = list.every(item => {
+            return item.age > 10
+        })
+        console.log('res8', res8) // true
+
+        // reduce
+        var arr9 = [1, 2, 3, 4, 5]
+        console.log('arr9', arr9.reduce((current, sum) => current+ sum)) // arr9 15
+
+        
+     </script>
+</body>
+</html>

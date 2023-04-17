@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            Cookie、localStorage、sessionStorage都是用于在浏览器端存储数据的技术，
+            但它们在存储的数据类型、大小、有效期和作用域等方面有所不同。
+
+            1. Cookie
+                Cookie是存储在浏览器端的小型文本文件，可以设置其过期时间，
+                一般用于存储会话信息或用户偏好设置等。
+                Cookie的大小一般限制在4KB左右，每次请求都会携带Cookie，因此会增加网络请求的负担。
+
+            2. localStorage
+                localStorage也是存储在浏览器端的数据，但与Cookie不同的是，
+                它不会随着每次请求都被发送到服务器，因此可以存储更多的数据。
+                localStorage的大小一般限制在5-10MB左右，可以设置其永久保存或在浏览器关闭后清除。
+                localStorage的作用域是同源的，即只能在同一域名下的页面之间共享。
+
+            3. sessionStorage
+                sessionStorage也是存储在浏览器端的数据，但与localStorage不同的是，
+                它的数据只在当前会话中有效，当用户关闭浏览器窗口时，数据将被清除。
+                sessionStorage的大小和作用域与localStorage相同。
+
+            综上所述，Cookie、localStorage、sessionStorage都有其适用的场景，
+            需要根据具体的需求进行选择。
+            如果需要存储较小的数据，且需要在每次请求中发送到服务器，则可以选择Cookie；
+            如果需要存储较大的数据，并且不需要在每次请求中发送到服务器，则可以选择localStorage；
+            如果需要存储临时的会话信息，则可以选择sessionStorage。
+        
+        */
+    </script>
+</body>
+</html>

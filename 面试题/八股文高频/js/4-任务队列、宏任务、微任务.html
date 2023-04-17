@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            JavaScript 中的任务队列是一种事件循环机制，用于处理异步任务。
+            任务队列包括宏任务队列和微任务队列。
+
+            宏任务是指当前执行栈中执行的代码块称为宏任务（例如，script、setTimeout、setInterval 等），
+            当宏任务执行完毕后，会检查微任务队列是否有任务需要执行，如果有，则会依次执行微任务队列中的任务，直到微任务队列为空，然后再执行下一个宏任务。这个过程称为事件循环。
+
+            微任务是指当前宏任务执行完毕后立即执行的任务（例如，Promise、process.nextTick 等），
+            微任务的执行顺序优先于下一个宏任务，即微任务队列中的任务必须在下一个宏任务之前执行完毕。
+        
+        */
+        console.log('start');
+
+        setTimeout(function() {
+            console.log('setTimeout');
+        }, 0);
+
+        Promise.resolve().then(function() {
+            console.log('Promise');
+        });
+
+        console.log('end');
+
+        // start
+        // end
+        // Promise
+        // setTimeout
+    </script>
+</body>
+</html>

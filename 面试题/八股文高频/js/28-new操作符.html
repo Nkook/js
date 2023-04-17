@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="a"></div>
+    <div id="b"></div>
+    <script>
+        // 构造函数（函数名首字母大写）
+        function Fun1() {
+
+        }
+        var obj1 = new Fun1()
+        /*
+            1. 创建一个实例对象，将构造函数的this指向这个对象
+            2. 对象的__proto__指向构造函数的prototype
+            3. 执行构造函数中的代码，对该对象进行初始化
+            4. 返回该对象
+                如果构造函数中没有显式地返回一个对象，则 new 操作符会返回该实例对象。
+                如果构造函数中返回了一个对象（例如另一个对象或数组等），则 new 操作符会返回该对象，而不是新创建的实例对象。
+        */
+       console.log(obj1.__proto__ === Fun1.prototype) // true
+
+       function Build({id = "#app", text}) {
+            var rootDom = document.querySelector(id)
+            this.buildDom = function() {
+                var el = document.createElement('p')
+                var textNode = document.createTextNode(text)
+                el.appendChild(textNode)
+                rootDom.appendChild(el)
+            }
+       }
+       var dom1 = new Build({
+        id: '#a',
+        text: '哈哈哈'
+       })
+       dom1.buildDom()
+
+       var dom2 = new Build({
+        id: '#b',
+        text: '好好'
+       })
+       dom2.buildDom()
+    </script>
+</body>
+</html>

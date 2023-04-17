@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            闭包是指函数可以访问其词法作用域外部的变量的能力。
+            具体来说，当一个函数内部定义了另一个函数，并且内部函数引用了外部函数的变量时，就会形成一个闭包。
+        */
+        function outerFunction(x) {
+            function innerFunction(y) {
+                return x + y;
+            }
+            return innerFunction;
+        }
+
+        const addFive = outerFunction(5);
+        console.log(addFive(3)); // 输出 8
+
+        // 使用
+        // 1. 创建私有变量：使用闭包可以创建私有变量，这样可以避免全局变量的污染，同时也可以保护变量的安全性。
+        // 2. 缓存函数的结果：使用闭包可以缓存函数的结果，避免重复计算，提高性能。
+        // 3. 模拟块级作用域：在js中，没有块级作用域，只有函数作用域和全局作用域。但是可以使用闭包来模拟块级作用域，从而避免变量污染。
+        
+        // 1. 在这个例子中，counter 函数返回了一个内部函数，内部函数访问了 count 变量，
+        // 但是外部无法直接访问 count 变量，从而实现了私有变量的效果。
+        function counter() {
+        let count = 0;
+        return function() {
+            count++;
+            console.log(count);
+        };
+        }
+
+        const increment = counter();
+        increment(); // 输出 1
+        increment(); // 输出 2
+
+        // 2. 
+        // 在这个例子中，memoize 函数接受一个函数作为参数，返回一个新函数，新函数可以缓存原函数的结果。
+        // 当新函数被调用时，先检查缓存中是否已经有该参数的结果，
+        // 如果有，则直接返回缓存中的结果，否则调用原函数计算结果，并将结果存入缓存中。
+        function memoize(func) {
+            console.log('func', func)
+            const cache = {};
+            return function(...args) {
+                console.log('args', args, ...args)
+                const key = JSON.stringify(args);
+                console.log('key', key)
+                if (cache[key]) {
+                    console.log('cache[key]', cache[key])
+                    return cache[key];
+                }
+                const result = func(...args);
+                cache[key] = result;
+                console.log('result', result)
+                return result;
+            };
+        }
+
+        function fibonacci(n) {
+            console.log('n', n)
+            if (n <= 1) {
+                return n;
+            }
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+
+        const memoizedFibonacci = memoize(fibonacci);
+        console.log(memoizedFibonacci(10)); // 输出 55
+
+        // 3.
+        // 在这个例子中，使用 let 声明变量 i，可以使得每次循环都创建一个新的变量 i，从而避免变量污染。
+        // 同时使用闭包来延迟输出，从而实现了模拟块级作用域的效果。
+        function doSomething() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(function() {
+                    console.log(i);
+                }, i * 1000);
+            }
+        }
+
+        doSomething(); // 输出 0 1 2 3 4
+    </script>
+</body>
+</html>

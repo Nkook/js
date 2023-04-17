@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            JavaScript中的每个对象都有一个原型，原型是一个对象，它包含了一些属性和方法，
+            当我们访问一个对象的属性或方法时，如果这个对象本身没有这个属性或方法，
+            它会去它的原型中查找，如果原型中也没有，它会去原型的原型中查找，
+            一直找到Object.prototype为止，这个过程就是原型链。
+
+            使用原型链的方式：
+                1. 通过Object.create()方法创建对象的原型链
+                2. 通过构造函数创建对象的原型链
+                3. 使用class关键字创建对象的原型链
+        */
+
+        // prototype    构造函数原型对象这个属性只有函数对象才有
+        // __proto__    所有的对象都有这个属性，指向对应构造函数的prototype
+        // constructor  __proto__下面的constructor指向构造函数自己。用于判断这个对象是否通过该构造函数创建的
+
+        // 对象访问属性的时候，在自身属性查找，找不到再去__proto__原型链上查找，直到找不到为止返回undefined
+        // 原型链的终点 Object.prototype
+        // 所有对象都有__proto__
+
+        function Person() {
+            this.name = '小红'
+        }
+        
+        Person.prototype.age = 10
+        Object.prototype.hobby = '吃饭'
+        const p1 = new Person()
+
+        console.log('p1', p1)
+        console.log('p1', p1.age) // p1.__proto__
+        console.log('p1', p1.hobby) // p1.__proto__.__proto__
+
+        // console.log(Person.prototype === p1.__proto__) // true
+        // console.log(Person.prototype.__proto__ === p1.__proto__.__proto__) // true
+        // console.log(Person.prototype.__proto__.__proto__) // null
+        // constructor用于判断这个对象是否通过该构造函数创建的
+        console.log(p1.__proto__.constructor === Person) // true
+        console.log(p1.__proto__.__proto__.constructor === Object) // true
+
+        // 1. 通过Object.create()方法创建对象的原型链
+        var animal = {
+            eat: function() {
+                console.log('I am eating');
+            }
+        };
+
+        var dog = Object.create(animal);
+        dog.bark = function() {
+            console.log('I am barking');
+        };
+
+        dog.bark(); // I am barking
+        dog.eat(); // I am eating
+
+        // 2. 通过构造函数创建对象的原型链
+        function Animal() {}
+        Animal.prototype.eat = function() {
+            console.log('I am eating');
+        };
+
+        function Dog() {}
+        Dog.prototype = Object.create(Animal.prototype);
+        Dog.prototype.constructor = Dog;
+        Dog.prototype.bark = function() {
+            console.log('I am barking');
+        };
+
+        var dog = new Dog();
+        dog.bark(); // I am barking
+        dog.eat(); // I am eating
+
+        // 3. 使用class关键字创建对象的原型链
+        class Animal {
+            eat() {
+                console.log('I am eating');
+            }
+        }
+
+        class Dog extends Animal {
+            bark() {
+                console.log('I am barking');
+            }
+        }
+
+        var dog = new Dog();
+        dog.bark(); // I am barking
+        dog.eat(); // I am eating
+
+
+        
+
+
+
+        
+
+    </script>
+</body>
+</html>

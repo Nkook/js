@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1. 语法上的区别：
+                箭头函数使用箭头（=>）来定义函数，而普通函数使用 function 关键字来定义函数。
+            2. this 的指向：
+                箭头函数中的 this 指向的是定义时所在的作用域，而普通函数中的 this 指向的是运行时所在的作用域。
+                在普通函数中，如果需要使用外部作用域的 this，可以使用闭包或者 call()、apply()、bind() 等方法来改变 this 的指向。
+            3. arguments 对象：
+                箭头函数没有自己的 arguments 对象，它会捕获外部作用域的 arguments 对象。
+            4. 构造函数：
+                箭头函数不能用作构造函数，不能使用 new 关键字来创建对象，因为箭头函数没有自己的 this，也没有 prototype 属性。
+            5. 返回值：
+                箭头函数可以省略 return 关键字，如果函数体只有一个表达式，可以直接将表达式作为返回值。而普通函数必须使用 return 关键字来返回值。
+            
+                以下是一个简单的示例，展示箭头函数与普通函数的区别：
+        */
+        const obj = {
+            name: 'Tom',
+            sayName: function () {
+                console.log(this.name); // Tom
+                setTimeout(function () { // this 指向的是 setTimeout 函数的作用域
+                    console.log(this.name); // undefined
+                }, 100);
+                setTimeout(() => { // 箭头函数中的 this 指向的是 sayName 方法的作用域
+                    console.log(this.name); // Tom
+                }, 100);
+            }
+        };
+
+        obj.sayName();
+
+    </script>
+</body>
+</html>

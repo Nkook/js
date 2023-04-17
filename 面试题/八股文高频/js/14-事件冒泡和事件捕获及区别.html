@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="outer">
+        <div id="inner">
+          <button id="btn">Click me</button>
+        </div>
+    </div>
+    <script>
+        /*
+            事件冒泡和事件捕获是DOM事件传播机制的两种方式，都是为了解决在DOM树中有多个元素响应同一个事件时的问题。
+
+                事件冒泡：事件先在最内层的元素触发，然后逐级向上传播，直到最外层的元素。
+                例如，当用户点击某个元素时，事件会先在该元素上触发，然后逐级向上传播，直到根元素（document对象）。
+
+                事件捕获：与事件冒泡相反，事件从最外层的元素开始触发，然后逐级向下传播，直到最内层的元素。
+                例如，当用户点击某个元素时，事件会先在根元素上触发，然后逐级向下传播，直到该元素。
+
+            区别：
+
+                1. 触发顺序不同：事件冒泡是从内向外传播，事件捕获是从外向内传播。
+
+                2. 监听方式不同：事件冒泡是默认的事件传播方式，可以通过addEventListener的第三个参数设置为true来使用事件捕获。例如：
+                    element.addEventListener('click', handleEvent, true); // 使用事件捕获
+                
+                3. 停止传播方式不同：可以通过stopPropagation方法来停止事件的传播，但是在事件冒泡模式下，会从内向外依次停止传播，而在事件捕获模式下，会从外向内依次停止传播。
+
+                4. 兼容性不同：事件冒泡在大多数浏览器中都被支持，而事件捕获在早期的浏览器中可能不被支持。
+
+                总体来说，事件冒泡是默认的事件传播方式，在大多数情况下都能够满足需求；而事件捕获则较少使用，通常只在需要在事件到达目标元素之前拦截和处理事件时使用。
+        */
+
+        /*
+            阻止事件冒泡和事件捕获可以使用事件对象的stopPropagation()方法。
+            该方法可以阻止事件的传播，使事件只触发当前元素的事件处理程序，不再向上或向下传播。
+        */
+
+        // 1. 如何阻止事件冒泡：
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', function(event) {
+            event.stopPropagation();
+            console.log('Button clicked');
+        });
+        document.getElementById('inner').addEventListener('click', function() {
+            console.log('Inner div clicked');
+        });
+        document.getElementById('outer').addEventListener('click', function() {
+            console.log('Outer div clicked');
+        });
+
+        // 2. 如何阻止事件捕获：
+        const btn1 = document.getElementById('btn');
+        btn1.addEventListener('click', function(event) {
+            event.stopPropagation();
+            console.log('Button clicked');
+        }, true);
+        document.getElementById('inner').addEventListener('click', function() {
+            console.log('Inner div clicked');
+        }, true);
+        document.getElementById('outer').addEventListener('click', function() {
+            console.log('Outer div clicked');
+        }, true);
+    </script>
+    
+</body>
+</html>

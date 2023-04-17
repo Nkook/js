@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            JavaScript 采用词法作用域（lexical scoping），也称为静态作用域。词法作用域是指变量的作用域是在代码编写时就确定的，而不是在代码运行时确定的。
+            JavaScript 有两种作用域：全局作用域和函数作用域。
+
+                1. 全局作用域：全局作用域是指在代码中任何地方都可以访问的变量或函数，它们的作用域在整个程序中都是可见的。在浏览器中，全局作用域就是指 window 对象，所有的全局变量和函数都是 window 对象的属性和方法。全局作用域中定义的变量和函数可以被任何函数和代码块访问。
+
+                2. 局部作用域：局部作用域是指在代码块或函数中定义的变量。
+                             函数作用域是指在函数内部定义的变量和函数，只能在该函数内部访问，外部无法访问。函数作用域可以保证函数内部的变量和函数不会污染全局作用域。
+                
+                在 ES6 中，还引入了块级作用域，即通过 let 和 const 声明的变量，它们的作用域仅限于代码块内部。例如：
+        */
+        var globalVar = 'global'; // 全局作用域
+        function test() {
+        var a = 1; // 函数作用域
+        if (true) {
+            let b = 2; // 块级作用域
+            const c = 3; // 块级作用域
+        }
+            console.log(a); // 1
+            console.log(b); // ReferenceError: b is not defined
+            console.log(c); // ReferenceError: c is not defined
+        }
+        test()
+
+        /*
+            a 是在函数作用域中定义的变量，可以在函数内部的任何地方访问。
+            而 b 和 c 是在代码块中定义的变量，只能在代码块内部访问, 在代码块外部访问会报错。
+        */
+
+        // 【作用域链】
+        /*
+            作用域链（Scope Chain）是指在 JavaScript 中，每个函数都有自己的作用域，函数内部可以访问外部函数的变量，这种嵌套关系形成了一条链式结构，称为作用域链。
+
+            在查找变量时，JavaScript 引擎会先在当前函数的作用域中查找，如果找不到，就会向上一级作用域中查找，直到找到全局作用域为止。这个查找的过程就是作用域链的运行过程。
+
+            作用域链的关键在于 JavaScript 采用的是词法作用域，也就是说，变量的作用域是在代码编写时就确定的，而不是在代码运行时确定的。因此，作用域链的结构是固定的，无法在运行时修改。
+        */
+        var a = 1;
+
+        function foo() {
+        var b = 2;
+
+        function bar() {
+            var c = 3;
+            console.log(a, b, c); // 1 2 3
+        }
+
+        bar();
+        console.log(a, b); // 1 2
+        }
+
+        foo();
+        console.log(a); // 1
+
+        // 在 JavaScript 的作用域链中，如果最终在全局作用域中也找不到变量，那么 JavaScript 引擎会抛出一个 ReferenceError 异常。这通常意味着变量未定义或拼写错误。
+        function foo() {
+            console.log(a); // ReferenceError: a is not defined
+        }
+        foo();
+
+
+    </script>
+</body>
+</html>

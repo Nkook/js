@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        JavaScript中的对象是引用类型的数据，当多个实例引用同一个对象时，
+        只要一个实例对这个对象进行操作，其他实例中的数据也会发生变化。
+
+        而在Vue中，更多的是想要复用组件，那就需要每个组件都有自己的数据，这样组件之间才不会相互干扰。
+
+        所以组件的数据不能写成对象的形式，而是要写成函数的形式。
+        数据以函数返回值的形式定义，这样当每次复用组件的时候，就会返回一个新的data，
+        也就是说每个组件都有自己的私有数据空间，它们各自维护自己的数据，不会干扰其他组件的正常运行。
+
+     -->
+
+     <!-- 
+        在 Vue 中，组件中的 data 选项可以是一个对象，也可以是一个返回对象的函数。
+        当 data 是一个对象时，这个对象会被所有实例共享，因此如果多个组件使用同一个组件定义，它们的 data 会相互影响，这是不希望看到的。
+
+        为了避免这种情况，Vue 推荐将 data 定义为一个函数，
+        每个实例都可以调用这个函数来返回一个独立的对象。
+        这样每个实例的 data 都是独立的，互相之间不会影响。
+      -->
+      <script>
+        Vue.component('my-component', {
+            data() {
+                return {
+                count: 0
+                }
+            },
+            template: '<div>{{ count }}</div>'
+        })
+
+        // 在这个例子中，data 被定义为一个函数，每个实例都可以调用这个函数来返回一个独立的对象。
+        // 这样即使有多个 my-component 实例，它们的 data 也是独立的，互相之间不会影响。
+      </script>
+</body>
+</html>

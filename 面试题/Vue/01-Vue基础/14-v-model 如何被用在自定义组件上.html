@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        可以。v-model 实际上是一个语法糖，如：
+     -->
+     <input v-model="searchText">
+     <!-- 等同于 -->
+     <input
+        v-bind:value="searchText"
+        v-on:input="searchText = $event.target.value"
+     >
+
+     
+     <!-- 用在自定义组件上也是同理： -->
+     <custom-input v-model="searchText"></custom-input>
+     <!-- 等同于 -->
+     <custom-input
+        v-bind:value="searchText"
+        v-on:input="searchText = $event"
+     ></custom-input>
+
+     <!-- 显然，custom-input 与父组件的交互如下：
+            1. 父组件将searchText变量传入custom-input 组件，使用的 prop 名为value；
+            2. custom-input 组件向父组件传出名为input的事件，父组件将接收到的值赋值给searchText；
+    
+     -->
+     <!-- 所以，custom-input 组件的实现应该类似于这样： -->
+     Vue.component('custom-input', {
+        props: ['value'],
+        template: `
+          <input
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+          >
+        `
+      })
+      
+     
+
+</body>
+</html>

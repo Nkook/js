@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    1. MVC：
+        (1) Model数据层: 负责存储页面的业务数据
+        (2) View视图: 负责页面的显示逻辑，以及相应数据的操作
+        (3) Controller控制器: 是View 层和 Model 层的纽带，它主要负责用户与应用的响应操作，当用户与页面产生交互的时候，Controller 中的事件触发器就开始工作了，通过调用 Model 层，来完成对 Model 的修改，然后 Model 层再去通知 View 层更新。 
+        View接受用户行为通知Controller，Controller通知Model进行数据更新
+        Model通过View进行页面更新。
+        Model和View进行了交互。
+
+                        通知视图更改
+    【Model数据层】      -------------->     【View视图】  
+         
+         /\                                     /
+           \通知数据更改                         /用户行为
+            \                                 /
+             \                              \/
+
+                    【Controller控制器】
+
+    2. MVVM：用户行为更改数据，数据可以主动触发视图更新
+        （1）Model代表数据模型，数据和业务逻辑都在Model层中定义；
+        （2）View代表UI视图，负责数据的展示；
+        （3）ViewModel负责监听Model中数据的改变并且控制视图的更新，处理用户交互操作；
+        双向数据绑定通过ViewModel进行交互
+        Model和View不直接交互。
+       
+        【Model数据层】                          【View视图】  
+             
+             /\  \ 数据更改                            /\
+     通知数据更改\  \                                 / 用户行为
+                \  \                               /
+                 \  \/                           \/
+                           业务逻辑
+                        【ViewModel】
+    
+
+    3. MVP
+    MVP 模式与 MVC 唯一不同的在于 Presenter 和 Controller。
+    在 MVC 模式中使用观察者模式，来实现当 Model 层数据发生变化的时候，通知 View 层的更新。
+    这样 View 层和 Model 层耦合在一起，当项目逻辑变得复杂的时候，可能会造成代码的混乱，并且可能会对代码的复用性造成一些问题。
+    MVP 的模式通过使用 Presenter 来实现对 View 层和 Model 层的解耦。
+    MVC 中的Controller 只知道 Model 的接口，因此它没有办法控制 View 层的更新，
+    MVP 模式中，View 层的接口暴露给了 Presenter 因此可以在 Presenter 中将 Model 的变化和 View 的变化绑定在一起，以此来实现 View 和 Model 的同步更新。
+    这样就实现了对 View 和 Model 的解耦，Presenter 还包含了其他的响应逻辑。
+
+</body>
+</html>

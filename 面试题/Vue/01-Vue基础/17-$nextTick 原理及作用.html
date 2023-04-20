@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // $nextTick() 解决改变数据后，DOM没有立刻更新。需要操作新DOM时可以写在里面。
+
+        // 改变数据
+        vm.message = 'changed'
+
+        // 想要立即使用更新后的DOM。这样不行，因为设置message后DOM还没有更新
+        console.log(vm.$el.textContent) // 并不会得到'changed'
+
+        // 这样可以，nextTick里面的代码会在DOM更新后执行
+        Vue.nextTick(function(){
+            console.log(vm.$el.textContent) //可以得到'changed'
+        })
+    </script>
+    <!-- 
+        一、原理：
+        Vue 实现响应式并不是数据发⽣变化之后 DOM ⽴即变化，⽽是按⼀定的策略进⾏ DOM 的更新。
+        简单来说，Vue 在修改数据后，视图不会立刻更新，而是等同一事件循环中的所有数据变化完成之后，再统一进行视图更新。
+
+        $nextTick 是在下次 DOM 更新循环结束之后执⾏延迟回调，在修改数据之后使⽤ $nextTick，则可以在回调中获取更新后的 DOM，在下次 DOM 更新循环结束之后执行延迟回调。
+        
+        简单的理解是：
+            当数据更新了，在dom中渲染后，⾃动执⾏该函数
+
+        Vue在更新data之后并不会立即更新DOM上的数据，就是说如果我们修改了data中的数据，再马上获取DOM上的值，我们取得的是旧值，
+        我们把获取DOM上值的操作放进$nextTick里，就可以得到更新后得数据。
+
+     -->
+     <!-- 
+        二、什么时候使用$nextTick
+            1、Vue⽣命周期的created()钩⼦函数进⾏的DOM操作⼀定要放在Vue.nextTick()的回调函数中，
+            原因是在created()钩⼦函数执⾏的时候,DOM 其实并未进⾏任何渲染，⽽此时进⾏DOM操作⽆异于徒劳，
+            所以此处⼀定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。
+            mounted () {
+                this.$nextTick(function () {
+                    // Code that will run only after the
+                    // entire view has been rendered
+                })
+            }
+            2、当项⽬中改变data函数的数据，想基于新的dom做点什么，对新DOM⼀系列的js操作都需要放进Vue.nextTick()的回调函数中
+            例子1：
+                点击按钮显示原本以 v-show = false 隐藏起来的输入框，并获取焦点。
+                showsou(){
+                    this.showit = true
+                    this.$nextTick(function () {
+                        // DOM 更新了
+                        document.getElementById("keywords").focus()
+                    })
+                }
+            例子2：
+                点击获取元素宽度。
+                <div id="app">
+                    <p ref="myWidth" v-if="showMe">{{ message }}</p>
+                    <button @click="getMyWidth">获取p元素宽度</button>
+                </div>
+
+                getMyWidth() {
+                    this.showMe = true;
+                    // this.message = this.$refs.myWidth.offsetWidth;
+                    // 报错 TypeError: this.$refs.myWidth is undefined
+                    this.$nextTick(()=>{
+                        // dom元素更新后执行，此时能拿到p元素的属性
+                        this.message = this.$refs.myWidth.offsetWidth;
+                    })
+                }
+      -->
+
+      <!-- 
+        三、$nextTick 为什么是是在下次 DOM 更新循环结束之后执⾏延迟回调，而不是在本次数据循环完成后执行
+            Vue 在更新数据时，会将修改操作放入一个队列中，这个队列被称为“异步更新队列”或“事件循环队列”。
+            在这个队列中，所有的修改操作都是异步执行的，即当数据发生变化时，Vue 并不会立即更新 DOM，而是等到下一次更新时才会将所有的修改操作一起执行。
+
+            这种设计的好处是可以尽可能地减少 DOM 操作，提高应用的性能。
+            如果每次数据更新时都立即更新 DOM，会导致频繁的 DOM 操作，从而导致浏览器性能下降。
+
+            因此，Vue 设计了 $nextTick() 方法，让开发者可以在下一次更新时获取到更新后的 DOM。
+            这个方法的实现原理就是将回调函数放入到异步更新队列中，等待下一次更新时执行。
+            由于异步更新队列是在下一次事件循环中执行，因此 $nextTick() 的回调函数也会在下一次事件循环中执行，即下一次 DOM 更新循环结束之后执行。
+
+            总之，Vue 之所以采用异步更新队列的方式更新 DOM，是为了减少 DOM 操作，提高应用的性能。
+            而 $nextTick() 方法则是为了让开发者可以在下一次更新时获取到更新后的 DOM。
+       -->
+
+      <!-- 
+        $nextTick（）执行原理
+            1. Vue 在更新 DOM 时是异步执行的。
+            只要侦听到数据变化，Vue 将开启一个任务队列，并缓冲在同一事件循环中发生的所有数据变更。
+            2. 如果同一个 watcher 被多次触发，只会被推入到队列中一次。（这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的）
+            然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行任务队列 (已去重的) 工作。
+            3. Vue 在内部对异步队列尝试使用原生的 Promise.then（微任务）、MutationObserver 和 setImmediate，
+            如果执行环境不支持，则会采用 setTimeout(fn, 0)（宏任务）代替。
+       -->
+
+</body>
+</html>

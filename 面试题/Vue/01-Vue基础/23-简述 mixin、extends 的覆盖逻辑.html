@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        在Vue中，mixin和extends都是用来实现组件代码复用的机制。它们的覆盖逻辑如下：
+
+            mixin：mixin用于混入一些公共的代码到组件中，可以混入多个mixin。
+            如果多个mixin中有相同的选项，比如methods、computed等，那么这些选项会被合并成一个对象，如果有重复的键名，则后面的会覆盖前面的。
+
+            extends：extends用于扩展一个已有的组件，只能扩展一个组件。
+            如果扩展的组件和被扩展的组件有相同的选项，比如props、data等，那么扩展组件中的选项会覆盖被扩展组件中的选项。
+
+            总结一下，mixin和extends都是用于实现组件的代码复用，但是它们的作用略有不同。
+            mixin是用于混入一些公共的代码到组件中，可以混入多个mixin；
+            extends是用于扩展一个已有的组件，只能扩展一个组件。
+            在使用mixin和extends时，需要注意它们的覆盖逻辑，以免产生意外的错误。
+     -->
+     <script>
+        // 1. mixin实操案例：
+        // 假设我们有两个组件，一个是Button组件，一个是Input组件，它们都需要使用到一个名为mixins的mixin。
+        // 那么，我们可以这样定义mixins：
+        const mixins = {
+            data() {
+                return {
+                text: ''
+                }
+            },
+            methods: {
+                onInput(event) {
+                this.text = event.target.value;
+                }
+            }
+        }
+        // 然后，在Button组件和Input组件中使用mixins，代码如下：
+        Vue.component('Button', {
+            mixins: [mixins],
+            template: '<button @click="onClick">{{ text }}</button>',
+            methods: {
+                onClick() {
+                alert('Hello');
+                }
+            }
+            });
+
+            Vue.component('Input', {
+            mixins: [mixins],
+            template: '<input type="text" :value="text" @input="onInput" />'
+        });
+        // 在上面的代码中，我们通过mixins选项将mixins混入到Button和Input组件中，从而使它们都具有了data和methods中的属性和方法。
+
+        // 2. extends实操案例：
+        // 假设我们有一个名为BaseButton的组件，它是一个基础的按钮组件。现在我们需要在BaseButton组件的基础上，扩展一个PrimaryButton组件，它是一个带有背景色的按钮。那么，我们可以这样定义PrimaryButton：
+        Vue.component('BaseButton', {
+            template: '<button>Base Button</button>'
+        });
+
+        Vue.component('PrimaryButton', {
+            extends: 'BaseButton',
+            template: '<button style="background-color: blue;">Primary Button</button>'
+        });
+        // 在上面的代码中，我们通过extends选项将BaseButton组件扩展到PrimaryButton组件中，
+        // 然后在PrimaryButton组件中覆盖BaseButton组件的template从而实现了一个有背景色的按钮组件。
+
+
+
+     </script>
+</body>
+</html>

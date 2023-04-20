@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        当在项目中直接设置数组的某一项的值，或者直接设置对象的某个属性值，这个时候，你会发现页面并没有更新。这是因为Object.defineProperty()限制，监听不到变化。
+            解决方式：
+                this.$set(你要改变的数组/对象，你要改变的位置/key，你要改成什么value)
+
+                this.$set(this.arr, 0, "OBKoro1"); // 改变数组this.$set(this.obj, "c", "OBKoro1"); // 改变对象
+
+            调用以下几个数组的方法
+                splice()、 push()、pop()、shift()、unshift()、sort()、reverse()
+            
+                vue源码里缓存了array的原型链，然后重写了这几个方法，触发这几个方法的时候会observer数据，
+                意思是使用这些方法不用再进行额外的操作，视图自动进行更新。 
+                推荐使用splice方法会比较好自定义,因为splice可以在数组的任何位置进行删除/添加操作
+            
+
+            vm.$set 的实现原理是：
+                如果目标是数组，直接使用数组的 splice 方法触发相应式；
+                如果目标是对象，会先判读属性是否存在、对象是否是响应式，
+                最终如果要对属性进行响应式处理，则是通过调用 defineReactive 方法进行响应式处理
+                （ defineReactive 方法就是 Vue 在初始化对象时，给对象属性采用 Object.defineProperty 动态添加 getter 和 setter 的功能所调用的方法）
+     -->
+
+     <script>
+        // Vue可以通过watch属性监听对象或数组某个属性的变化。
+
+        // 以对象为例，假设有一个对象person，其中包含了name和age两个属性，那么可以通过以下方式监听name属性的变化：
+
+        new Vue({
+        data: {
+            person: {
+            name: 'Tom',
+            age: 20
+            }
+        },
+        watch: {
+            'person.name': function(newName, oldName) {
+            console.log('Name changed from ' + oldName + ' to ' + newName);
+            }
+        }
+        })
+        // 上述代码中，watch属性为一个对象，该对象的键名为要监听的属性，这里为'person.name'，键值为回调函数。每次该属性发生变化时，回调函数��将被触发，第一个参数为变化后的新值，第二个参数为变化前的旧值。
+
+        // 对于数组，可以通过以下方式监听某个元素的变化：
+
+        new Vue({
+        data: {
+            list: ['apple', 'banana', 'orange']
+        },
+        watch: {
+            'list.1': function(newVal, oldVal) {
+            console.log('Element changed from ' + oldVal + ' to ' + newVal);
+            }
+        }
+        })
+        // 上述代码中，watch属性同样为一个对象，该对象的键名为要监听的元素，这里为'list.1'，键值为回调函数。每次该元素发生变化时，回调函数都将被触发，第一个参数为变化后的新值，第二个参数为变化前的旧值。
+
+        // 需要注意的是，Vue的watch属性只能用于监听Vue实例中的数据变化，而不能用于监听外部数据的变化。如果需要监听外部数据的变化，可以使用第三方库或者原生的JavaScript方法进行监听。
+     </script>
+</body>
+</html>

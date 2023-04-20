@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Vue的template到render的过程主要分为以下几个步骤：
+
+            解析template：Vue首先会将template模板解析成抽象语法树（AST），这个过程是通过Vue的模板编译器完成的。
+
+            生成render函数：Vue会将AST转化为render函数，render函数返回虚拟DOM节点树，用于渲染页面。这个过程是通过Vue的编译器完成的。
+
+            执行render函数：当组件需要重新渲染时，Vue会执行render函数，生成新的虚拟DOM节点树。
+
+            对比新旧虚拟DOM：Vue会对比新旧虚拟DOM，找出差异，这个过程叫做Diff算法。
+
+            更新页面：Vue会根据差异更新页面，只更新有变化的部分，提高页面性能。
+
+        需要注意的是，当使用template模板时，Vue会在运行时编译模板，这会导致一定的性能损失。因此，在生产环境中，建议使用render函数来编写组件的模板，这样可以避免模板编译的性能损失。
+     -->
+</body>
+</html>

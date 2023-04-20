@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    当一个Vue实例创建时，Vue会遍历data中的属性，
+    用 Object.defineProperty（vue3.0使用proxy ）将它们转为 getter/setter，
+    并且在内部追踪相关依赖，在属性被访问和修改时通知变化。 
+    每个组件实例都有相应的 watcher 程序实例，
+    它会在组件渲染的过程中把属性记录为依赖，
+    之后当依赖项的setter被调用时，会通知watcher重新计算，从而致使它关联的组件得以更新。
+    
+
+    <!-- 
+        Vue的基本原理是响应式数据绑定和组件化。
+        具体来说，Vue使用了一个双向绑定的数据模型，即当数据发生变化时，视图自动更新；
+        当视图发生变化时，数据也会自动更新。
+        这个过程是通过Vue的响应式系统实现的，即当数据发生变化时，Vue会自动检测并更新相关的视图。
+        这个过程是基于Object.defineProperty()实现的。
+
+        Vue还支持组件化，即将一个页面划分为多个组件，每个组件都有自己的数据、模板和逻辑。
+        通过组件化，可以将一个复杂的应用程序分解为多个小的、可复用的组件，从而提高应用程序的可维护性和可扩展性。
+
+        除此之外，Vue还提供了一些其他的特性，比如指令、过滤器、插件等，这些特性都可以帮助开发者更加高效地开发Vue应用程序。
+     -->
+</body>
+</html>

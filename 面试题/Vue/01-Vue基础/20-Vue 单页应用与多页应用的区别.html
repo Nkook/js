@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script> -->
+        // 概念：
+        // SPA单页面应用（SinglePage Web Application），指只有一个主页面的应用，一开始只需要加载一次js、css等相关资源。所有内容都包含在主页面，对每一个功能模块组件化。单页应用跳转，就是切换相关组件，仅仅刷新局部资源。
+        // MPA多页面应用 （MultiPage Application），指有多个独立页面的应用，每个页面必须重复加载js、css等相关资源。多页应用跳转，需要整页资源刷新。
+
+        对比项\模式     SPA                         MPA
+        结构        一个主页面+许多模块的组件        许多完整的页面
+        体验        页面切换快，体验佳；当初次加载    页面切换慢，网速慢的时候，
+                    文件过多时，需要做相关优化       体验尤其不好
+        资源文件     组件公用的资源只需要加载一次      每个页面都要加载公用资源
+
+        适用场景     对体验度和流畅度有较高要求的应用， 适用于对SEO要求较高的应用
+                    不利于SEO（可借助SSR优化SEO）
+
+        过度动画      Vue提供了transition的封装组件， 很难实现
+                     容易实现
+        内容更新      相关组件的切换，即局部更新        整体HTML的切换，费钱（重复HTTP请求）
+
+        路由模式      可以使用hash，也可使用history    普通链接跳转
+
+        数据传递      因为单页面，使用全局变量就好       cookie、localStorage等缓存方案，
+                    （vuex）                        URL参数，调用接口保存等
+
+        相关成本      前期开发成本较高，后期维护较为容易   前期开发成本低，后期维护麻烦，可能一个功能需要改很多地方
+    <!-- </script> -->
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        在Vue中，对响应式处理利用的是Object.defineProperty对数据进行拦截，
+        而这个方法并不能监听到数组内部变化，数组长度变化，数组的截取变化等，所以需要对这些操作进行hack，让Vue能监听到其中的变化。
+
+            一、 Vue中封装的数组方法有以下几个：
+                push()：向数组末尾添加一个或多个元素。
+                pop()：从数组末尾移除一个元素。
+                shift()：从数组开头移除一个元素。
+                unshift()：向数组开头添加一个或多个元素。
+                splice()：从数组中添加或移除元素。
+                sort()：对数组进行排序。
+                reverse()：反转数组元素的顺序。
+                这些数组方法被封装在Vue实例的响应式系统中，当数组发生变化时，Vue会自动检测到变化并更新视图。
+                具体来说，当调用这些数组方法时，Vue会执行以下操作：
+                    在数组上调用原始的数组方法比如push()、pop()等。
+                    通知Vue响应式系统数组已经发生变化。
+                    Vue会重新计算虚拟DOM和真实DOM之间的差异，并更新视图。
+                    这样，就可以实现页面的自动更新。
+            
+            二、vue为什么只检测了改变原数组的方法，并没有检测slice concat等不改变原数组的方法
+                是因为Vue的响应式系统是基于JavaScript对象的getter和setter实现的。
+
+                当我们使用改变原数组的方法比如push、pop、shift、unshift、splice、sort、reverse等，
+                会触发数组对象的setter方法，从而通知Vue的响应式系统数组已经发生了变化，Vue会重新计算虚拟DOM和真实DOM之间的差异，并更新视图。
+
+                而slice、concat等不改变原数组的方法，只是返回了一个新的数组，没有触发数组对象的setter方法，因此Vue无法检测到数组的变化。
+                如果我们需要使用这些不改变原数组的方法，可以使用Vue.set或者Array.prototype.splice方法来触发响应式更新。
+                Vue.set可以用来向响应式对象中添加新的属性，而Array.prototype.splice可以用来改变数组的内容，从而触发响应式更新。
+
+        */
+
+        // 源码实现
+        // 缓存数组原型
+        const arrayProto = Array.prototype;
+        // 实现 arrayMethods.__proto__ === Array.prototype
+        export const arrayMethods = Object.create(arrayProto);
+        // 需要进行功能拓展的方法
+        const methodsToPatch = [
+        "push",
+        "pop",
+        "shift",
+        "unshift",
+        "splice",
+        "sort",
+        "reverse"
+        ];
+
+        /**
+         * Intercept mutating methods and emit events
+         */
+        methodsToPatch.forEach(function(method) {
+        // 缓存原生数组方法
+        const original = arrayProto[method];
+        def(arrayMethods, method, function mutator(...args) {
+            // 执行并缓存原生数组功能
+            const result = original.apply(this, args);
+            // 响应式处理
+            const ob = this.__ob__;
+            let inserted;
+            switch (method) {
+            // push、unshift会新增索引，所以要手动observer
+            case "push":
+            case "unshift":
+                inserted = args;
+                break;
+            // splice方法，如果传入了第三个参数，也会有索引加入，也要手动observer。
+            case "splice":
+                inserted = args.slice(2);
+                break;
+            }
+            // 
+            if (inserted) ob.observeArray(inserted);// 获取插入的值，并设置响应式监听
+            // notify change
+            ob.dep.notify();// 通知依赖更新
+            // 返回原生数组方法的执行结果
+            return result;
+        });
+        });
+        // 简单来说就是，重写了数组中的那些原生方法，首先获取到这个数组的__ob__，也就是它的Observer对象，如果有新的值，就调用observeArray继续对新的值观察变化（也就是通过target__proto__ == arrayMethods来改变了数组实例的型），然后手动调用notify，通知渲染watcher，执行update。
+    </script>
+</body>
+</html>

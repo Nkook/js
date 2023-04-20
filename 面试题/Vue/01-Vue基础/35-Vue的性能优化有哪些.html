@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        （1）编码阶段
+
+            尽量减少data中的数据，data中的数据都会增加getter和setter，会收集对应的watcher
+            v-if和v-for不能连用
+                v-if和v-for不能连用是因为Vue的编译过程是先解析v-for指令生成对应的虚拟节点，再解析v-if指令。如果两个指令连用，那么v-for指令会先生成所有对应的虚拟节点，然后再进行v-if的条件判断，这会影响性能，并可能导致逻辑错误。
+                
+                <ul>
+                    <li v-for="student in students" v-if="student.age > 18">{{ student.name }}</li>
+                </ul>
+                v-if和v-for不能连用是因为v-for会优先执行，而v-for的重复渲染会破坏v-if的条件判断逻辑，导致渲染出错误的结果。
+                这样的代码看上去没什么问题，但是实际上却会出现意想不到的结果。由于v-for的循环渲染会先于v-if的条件判断，所以这段代码会先渲染所有学生的li标签，然后再对每个学生的li标签进行条件判断，由于渲染出来的li标签不会被销毁，所以一些不符合条件的标签仍然保留在页面中，导致最终渲染出来的结果不符合预期。
+                因此，为了避免这种问题，我们应该尽量避免在相同的元素上同时使用v-for和v-if指令。如果确实需要使用这两个指令，可以考虑使用计算属性或者过滤器来处理数据，或者使用外层元素包裹内层元素进行条件判断。
+            如果需要使用v-for给每项元素绑定事件时使用事件代理
+            SPA 页面采用keep-alive缓存组件
+            在更多的情况下，使用v-if替代v-show
+            key保证唯一
+            使用路由懒加载、异步组件
+            防抖、节流
+            第三方模块按需导入
+            长列表滚动到可视区域动态加载
+            图片懒加载
+
+        （2）SEO优化
+
+            预渲染
+            服务端渲染SSR
+
+        （3）打包优化
+
+            压缩代码
+            Tree Shaking/Scope Hoisting
+            使用cdn加载第三方模块
+            多线程打包happypack
+            splitChunks抽离公共文件
+            sourceMap优化
+
+        （4）用户体验
+
+            骨架屏
+            PWA
+            还可以使用缓存(客户端缓存、服务端缓存)优化、服务端开启gzip压缩等。
+     -->
+</body>
+</html>

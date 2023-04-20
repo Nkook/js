@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    delete 只是被删除的元素变成了 empty/undefined 其他的元素的键值还是不变。
+    Vue.delete 直接删除了数组 改变了数组的键值。
+    <script>
+        /*
+            delete是JavaScript原生的操作符之一，用于删除一个对象的属性，可以用于删除数组的属性，并不会更改数组的长度。
+            而Vue.delete是Vue框架提供的API，专门用于删除Vue实例中的响应式数组中的元素，会触发视图更新，并且会更新数组的长度。
+            Vue.delete接受三个参数，第一个参数是要操作的数组，第二个参数是要删除的元素的索引或键名，第三个参数是可选的，是一个回调函数，在元素被删除后执行。
+        */
+        new Vue({
+            data: {
+                list: ['apple', 'banana', 'orange']
+            }
+        })
+        Vue.delete(vm.list, 1);
+        Vue.delete(vm.list, 1, function() {
+            // 执行一些操作
+        });
+    </script>
+</body>
+</html>

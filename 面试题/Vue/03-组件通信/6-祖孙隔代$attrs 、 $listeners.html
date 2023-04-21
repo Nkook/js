@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        $attrs属性 子组件实例的父组件传递的非 prop 属性
+        $listeners属性 子组件实例的父组件传递的事件监听器
+
+        在父组件中子组件标签上v-bind="$attrs" v-on="$listeners"绑定这俩属性后，
+        在子组件的mounted函数中通过this.$attrs、this.$listeners访问父组件中的属性和方法
+
+        默认情况下，子组件会自动继承父组件的所有属性，包括非 prop 属性。
+        如果要禁用默认继承行为，可以在组件选项中设置 inheritAttrs: false。
+     -->
+     
+    <!-- 
+    考虑一种场景，如果A是B组件的父组件，B是C组件的父组件。如果想要组件A给组件C传递数据，这种隔代的数据，该使用哪种方式呢？
+    如果是用props/$emit来一级一级的传递，确实可以完成，但是比较复杂；如果使用事件总线，在多人开发或者项目较大的时候，维护起来很麻烦；如果使用Vuex，的确也可以，但是如果仅仅是传递数据，那可能就有点浪费了。
+
+    针对上述情况，Vue引入了$attrs / $listeners，实现组件之间的跨代通信。
+
+    先来看一下inheritAttrs，它的默认值true，继承所有的父组件属性除props之外的所有属性；inheritAttrs：false 只继承class属性 。
+
+    先来看一下inheritAttrs，它的默认值true，继承所有的父组件属性除props之外的所有属性；inheritAttrs：false 只继承class属性 。
+        $attrs：继承所有的父组件属性（除了prop传递的属性、class 和 style ），一般用在子组件的子元素上
+        $listeners：该属性是一个对象，里面包含了作用在这个组件上的所有监听器，可以配合 v-on="$listeners" 将所有的事件监听器指向这个组件的某个特定的子元素。（相当于子组件继承父组件的事件） -->
+
+    <!-- A组件（APP.vue）： -->
+    <template>
+        <div id="app">
+            <!-- 此处监听了两个事件，可以在B组件或者C组件中直接触发  -->
+            <child1 :p-child1="child1" :p-child2="child2" @test1="onTest1" @test2="onTest2"></child1>
+        </div>
+    </template>
+    <script>
+        import Child1 from './Child1.vue';
+        export default {
+            components: { Child1 },
+            methods: {
+                onTest1() {
+                    console.log('test1 running');
+                },
+                onTest2() {
+                    console.log('test2 running');
+                }
+            }
+        };
+    </script>
+
+    <!-- B组件（Child1.vue）：
+    <template>
+        <div class="child-1">
+            <p>props: {{pChild1}}</p>
+            <p>$attrs: {{$attrs}}</p>
+            <child2 v-bind="$attrs" v-on="$listeners"></child2>
+        </div>
+    </template>
+    <script>
+        import Child2 from './Child2.vue';
+        export default {
+            props: ['pChild1'],
+            components: { Child2 },
+            inheritAttrs: false,
+            mounted() {
+                this.$emit('test1'); // 触发APP.vue中的test1方法
+            }
+        };
+    </script> -->
+
+    <!-- C 组件 (Child2.vue)：
+    <template>
+        <div class="child-2">
+            <p>props: {{pChild2}}</p>
+            <p>$attrs: {{$attrs}}</p>
+        </div>
+    </template>
+    <script>
+        export default {
+            props: ['pChild2'],
+            inheritAttrs: false,
+            mounted() {
+                this.$emit('test2');// 触发APP.vue中的test2方法
+            }
+        };
+    </script> -->
+
+    <!-- 在上述代码中：
+
+        C组件中能直接触发test的原因在于 B组件调用C组件时 使用 v-on 绑定了$listeners 属性
+        在B组件中通过v-bind 绑定$attrs属性，C组件可以直接获取到A组件中传递下来的props（除了B组件中props声明的） -->
+
+    
+    具体案例：更容易懂
+    
+     <!-- 
+        父组件
+        <template>
+            <div>
+                <child-component v-bind="$attrs" v-on="$listeners" />
+                <button v-on:click="showMessage">Show Message</button>
+            </div>
+        </template>
+
+        <script>
+            import ChildComponent from './ChildComponent.vue'
+
+            export default {
+            components: {
+                ChildComponent
+            },
+            data() {
+                return {
+                message: 'Hello World'
+                }
+            },
+            methods: {
+                showMessage() {
+                console.log(this.message)
+                }
+            }
+            }
+        </script>
+
+      -->
+
+      <!-- 
+        子组件
+        <template>
+            <div v-on="$listeners">
+                <button v-on:click="$emit('show-message')">Show Message</button>
+            </div>
+        </template>
+
+        <script>
+            export default {
+            mounted() {
+                console.log(this.$attrs)
+                console.log(this.$listeners)
+            }
+            }
+        </script>
+       -->
+    
+       <!-- 
+        父组件通过 v-bind="attrs" 把所有非 prop 属性传递给子组件，
+             通过 v-on="listeners" 把所有事件监听器传递给子组件。
+
+        子组件在 mounted 钩子函数中打印 $attrs 和 $listeners，
+        可以看到 attrs 包含了父组件传递的所有非 prop 属性，
+            listeners 包含了父组件传递的所有事件监听器。
+
+        子组件还定义了一个 Show Message 按钮，并通过 $emit('show-message') 触发 show-message 事件。
+        父组件通过 v-on:show-message="showMessage" 监听该事件，并执行 showMessage 方法来显示 message 数据。
+
+        需要注意的是，子组件的 show-message 事件需要在 $listeners 中声明，否则父组件无法监听该事件。<div v-on="$listeners">
+        同时，父组件需要在模板中使用 v-on:show-message="showMessage" 把 show-message 事件和 showMessage 方法绑定起来。<button v-on:click="showMessage">Show Message</button>
+        -->
+
+</body>
+</html>

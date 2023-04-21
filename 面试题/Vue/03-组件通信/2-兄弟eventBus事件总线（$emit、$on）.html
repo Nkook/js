@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        维护一个EventBus.js
+        A组件引入EventBus，通过EventBus.$emit发射事件并携带参数。相当于把该参数存入了eventBus中。
+        B组件引入EventBus，通过EventBus.$on接收事件和参数
+     -->
+    eventBus事件总线（$emit / $on）
+    eventBus事件总线适用于父子组件、非父子组件等之间的通信，使用步骤如下： 
+    
+    （1）创建事件中心管理组件之间的通信
+    // event-bus.js
+    import Vue from 'vue'
+    export const EventBus = new Vue()
+
+    （2）发送事件 假设有两个兄弟组件firstCom和secondCom：
+        <template>
+            <div>
+            <first-com></first-com>
+            <second-com></second-com>
+            </div>
+        </template>
+        
+        <script>
+            import firstCom from './firstCom.vue'
+            import secondCom from './secondCom.vue'
+            export default {
+                components: { firstCom, secondCom }
+            }
+        </script>
+        <!-- 在firstCom组件中发送事件：
+        <template>
+            <div>
+              <button @click="add">加法</button>    
+            </div>
+          </template>
+          
+          <script>
+            import {EventBus} from './event-bus.js' // 引入事件中心
+            
+            export default {
+                data(){
+                return{
+                    num:0
+                }
+                },
+                methods:{
+                add(){
+                    EventBus.$emit('addition', {
+                    num:this.num++
+                    })
+                }
+                }
+            }
+          </script> -->
+
+    （3）接收事件 在secondCom组件中发送事件：
+    <!--     
+      <template>
+        <div>求和: {{count}}</div>
+      </template>
+      
+      <script>
+        import { EventBus } from './event-bus.js'
+        export default {
+            data() {
+            return {
+                count: 0
+            }
+            },
+            mounted() {
+            EventBus.$on('addition', param => {
+                this.count = this.count + param.num;
+            })
+            }
+        }
+      </script> -->
+
+      在上述代码中，这就相当于将num值存贮在了事件总线中，在其他组件中可以直接访问。
+      事件总线就相当于一个桥梁，不用组件通过它来通信。
+
+      虽然看起来比较简单，但是这种方法也有不变之处，如果项目过大，使用这种方式进行通信，后期维护起来会很困难。
+    
+
+
+</body>
+</html>

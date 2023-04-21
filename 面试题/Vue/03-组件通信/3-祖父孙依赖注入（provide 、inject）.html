@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        provide发射数据 / inject接收数据，和data是同级的。
+        并且provide的书写形式和data一样。
+            inject: ['数据'] 接收
+        
+     -->
+    这种方式就是Vue中的依赖注入，该方法用于父子组件之间的通信。当然这里所说的父子不一定是真正的父子，也可以是祖孙组件，在层数很深的情况下，可以使用这种方法来进行传值。就不用一层一层的传递了。
+    provide / inject是Vue提供的两个钩子，和data、methods是同级的。并且provide的书写形式和data一样。
+        provide 钩子用来发送数据或方法
+        inject钩子用来接收数据或方法
+
+    在父组件中：
+    provide() { 
+        return {     
+            num: this.num  
+        };
+    }
+    在子组件中：
+    inject: ['num']
+
+    还可以这样写，这样写就可以访问父组件中的所有属性：
+    provide() {
+        return {
+            app: this
+        };
+    }
+    data() {
+        return {
+            num: 1
+        };
+    }
+    
+    inject: ['app']
+    console.log(this.app.num)
+
+    注意： 依赖注入所提供的属性是非响应式的。
+
+</body>
+</html>

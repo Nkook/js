@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <!-- 
+    $parent 属性可以访问当前组件的父组件实例。this.$parent是个对象
+    $children 属性可以访问当前组件的所有子组件实例。this.$children是个数组
+   -->
+    使用$parent可以让组件访问父组件的实例（访问的是上一级父组件的属性和方法）
+    使用$children可以让组件访问子组件的实例，但是，$children并不能保证顺序，并且访问的数据也不是响应式的。
+
+    在子组件中：
+    <template>
+        <div>
+          <span>{{message}}</span>
+          <p>获取父组件的值为:  {{parentVal}}</p>
+        </div>
+    </template>
+      
+    <script>
+      export default {
+        data() {
+          return {
+            message: 'Vue'
+          }
+        },
+        computed:{
+          parentVal(){
+            return this.$parent.msg;
+          }
+        }
+      }
+    </script>
+
+    <!-- 在父组件中：
+    <template>
+        <div class="hello_world">
+            <div>{{msg}}</div>
+            <child></child>
+            <button @click="change">点击改变子组件值</button>
+        </div>
+    </template>
+
+    <script>
+        import child from './child.vue'
+        export default {
+            components: { child },
+            data() {
+                return {
+                msg: 'Welcome'
+                }
+            },
+            methods: {
+                change() {
+                // 获取到子组件
+                this.$children[0].message = 'JavaScript'
+                }
+            }
+        }
+    </script> -->
+
+    在上面的代码中，子组件获取到了父组件的parentVal值，父组件改变了子组件中message的值。
+    需要注意：
+        通过$parent访问到的是上一级父组件的实例，可以使用$root来访问根组件的实例
+        在组件中使用$children拿到的是所有的子组件的实例，它是一个数组，并且是无序的
+        在根组件#app上拿$parent得到的是new Vue()的实例，在这实例上再拿$parent得到的是undefined，而在最底层的子组件拿$children是个空数组
+        $children 的值是数组，而$parent是个对象
+</body>
+</html>

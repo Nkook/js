@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    .wrapper {
+        display: flex;
+    }
+
+    /* 
+    侧边栏的最小宽度为150px，如果视口宽度大于500px（500*30%=150），则最小宽度为30vw。
+    */
+    aside {
+        flex-basis: max(30vw, 150px);
+    }
+
+    main {
+        flex-grow: 1;
+    }
+</style>
+<body>
+    <!-- 
+        max() 函数方法接受一个或多个用逗号分隔的表达式作为他的参数，数值最大的表达式的值将会作为指定的属性的值。
+     -->
+</body>
+</html>

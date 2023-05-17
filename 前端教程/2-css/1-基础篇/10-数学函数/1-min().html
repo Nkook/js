@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* min() */
+    /* 1. 基本使用：给元素设置最大值边界
+            浏览器必须选择最小的值（50%，500px）。选择该选项取决于视口宽度。
+            如果50%的计算值大于500px，那么它将被忽略，而使用500px。
+            否则，如果50%的计算值小于500px，则50%将用作宽度值。
+    */
+    .element {
+        width: min(50%, 500px);
+    }
+
+    /* 2. 容器宽度：
+        有一个容器的宽度是其父级宽度的80%，并且宽度不应超过780px，那么该如何写：
+    */
+    .container {
+        max-width: 780px;
+        width: 80%;
+    }
+    .container {
+        max-width: min(80%, 780px);
+    }
+
+    /* 3. 平滑渐变
+        
+     */
+    @media (max-width: 700px) {
+        .element {
+            background: linear-gradient(135deg, #2c3e50, #2c3e50 25%, #3498db);
+        }
+    }
+    .element {
+        background: linear-gradient(135deg, #2c3e50, #2c3e50 min(20vw, 60%), #3498db);
+    }
+
+</style>
+<body>
+    <!-- 
+        min() 函数方法接受一个或多个用逗号分隔的表达式作为他的参数，数值最小的表达式的值将会作为指定的属性的值。
+
+     -->
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 两个指针的初始位置相近，移动方向相同。通常一个指针用于外层遍历，另一个用于内层遍历。
+        
+        // 两个数的和等于目标值
+        /**
+         *  输入： nums = [2,7,11,15], target = 9
+            输出： [0,1]
+            解释： 因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+        */
+       let nums = [2,7,11,15]
+       let target = 9
+       var twoSum = function(nums, target) {
+            for (let i = 0; i<nums.length; i++) {
+                for(let j = i+1; j<nums.length; j++) {
+                    if (nums[i] + nums[j] === target) {
+                        return [i, j]
+                    }
+                }
+            }
+       }
+       console.log('twoSum(nums, target)', twoSum(nums, target))
+       console.log('[3,2,3],target=6', twoSum([3,2,3], 6))
+
+       /**
+        * 时间复杂度: 因为对数组遍历了两次，所以为O(n²)
+        * 空间复杂度：O(1) 没有使用额外的变量。
+        * 
+       */
+    </script>
+</body>
+</html>

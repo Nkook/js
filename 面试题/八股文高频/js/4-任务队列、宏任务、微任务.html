@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         /*
@@ -19,22 +21,50 @@
             微任务的执行顺序优先于下一个宏任务，即微任务队列中的任务必须在下一个宏任务之前执行完毕。
         
         */
-        console.log('start');
+        // console.log('start');
 
-        setTimeout(function() {
-            console.log('setTimeout');
-        }, 0);
+        // setTimeout(function () {
+        //     console.log('setTimeout');
+        // }, 0);
 
-        Promise.resolve().then(function() {
-            console.log('Promise');
-        });
+        // Promise.resolve().then(function () {
+        //     console.log('Promise');
+        // });
 
-        console.log('end');
+        // console.log('end');
 
         // start
         // end
         // Promise
         // setTimeout
+
+
+        function test() {
+            console.log(1)
+            setTimeout(() => {
+                console.log(2)
+                Promise.resolve().then(() => {
+                    console.log(3)
+                })
+            }, 0)
+            new Promise((resolve, reject) => {
+                console.log(4)
+                resolve()
+            }).then(() => {
+                console.log(5)
+            })
+            setTimeout(() => {
+                console.log(6)
+                Promise.resolve().then(() => {
+                    console.log(7)
+                })
+            }, 0)
+            Promise.resolve().then(() => { console.log(8) })
+            console.log(9)
+        }
+        test()
+        // 1 4 9 5 8 2 3 6 7
     </script>
 </body>
+
 </html>

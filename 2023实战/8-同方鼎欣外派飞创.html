@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        1. js写一个算法找到数组中两个元素相加等于指定数的所有组合
+        2. 浏览器页面渲染的过程
+        3. vue组件传值的方式
+     -->
+    <script>
+        function findSumPairs(arr, target) {
+            let result = [];
+
+            // 遍历数组
+            for (let i = 0; i < arr.length; i++) {
+                // 遍历当前元素之后的元素
+                for (let j = i + 1; j < arr.length; j++) {
+                    // 如果两个元素相加等于指定数，则将它们加入结果数组
+                    if (arr[i] + arr[j] === target) {
+                        result.push([arr[i], arr[j]]);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        // 示例用法
+        const arr = [1, 2, 3, 4, 5];
+        const target = 6;
+
+        const result = findSumPairs(arr, target);
+        console.log(result); // 输出 [[1, 5], [2, 4]]
+
+    </script>
+    <!-- 
+        二面
+        1. 外层的div设置了min-height，内层的div设置什么可以撑满父元素
+            flex 1
+        2. 封装一个组件都需要考虑哪些因素？如果子组件通过if判断显示隐藏，可能不好维护怎么做？
+            通过minx 混入将这些条件生成一个map映射
+        3. vue操作数组后可以使页面回显的方法
+            $set
+            $nexttik
+            $update
+        4. webpack的sourceMap知道吗？
+
+        5. webpack的shap...知道吗 Tree Shaking？
+            如：math.js中写入多个方法，只用到其中一个，就可以按需引入，这样打包的时候不会打包整个文件了。
+
+        6. vue中的样式穿透 通过/deep/原理是啥？
+
+        7. 
+     -->
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 引用类型： 用typeof检测都是 object
+    let arr = [1, 2, 3]      // arr instanceof Array   true    arr instanceof Object   true
+    let reg = /123/						// reg instanceof RegExp  true
+    let date = new Date()			// date instanceof Date   true
+    // Array RegExp Date ... extends Object 所有的引用对象都继承自Object。 
+
+    /**
+     * 1. 左侧是对象，右侧是类型 arr instanceof Array
+     * 2. 判断左侧为空 或 非对象 返回false
+     * 3. Object.getPrototypeOf()方法 返回指定对象的原型
+     * 4. 如果原型对象为空 返回false
+     * 5. 如果原型对象是构造函数的原型对象 返回true 如 Object.getPrototypeOf(arr) === Array.prototype
+     * 6. 递归判断 循环往下寻找，直到找到相同的原型对象
+     * 
+     **/
+    function myInstanceof(leftObj, rightConstructor) {
+        if (leftObj == null || typeof leftObj != "object") {
+            return false
+        }
+        let proto = Object.getPrototypeOf(leftObj)
+        if (proto === null) {
+            return false
+        }
+        if (proto === rightConstructor.prototype) {
+            return true
+        }
+        return myInstanceof(proto, rightConstructor)
+    }
+
+    console.log('1', myInstanceof(arr, Array)) // true
+    console.log('2', myInstanceof(reg, RegExp))
+    console.log('3', myInstanceof(date, Date))
+
+    function Person(name) {
+        this.name = name;
+    }
+
+    var person1 = new Person("张三");
+
+    console.log(myInstanceof(person1, Person)); // true
+    console.log(myInstanceof(person1, Object)); // true
+    console.log(myInstanceof(person1, Array)); // false
+
+</script>
+</html>

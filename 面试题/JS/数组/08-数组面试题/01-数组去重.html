@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. new Set()
+        var arr = [1,9,8,8,7,2,5,3,3,3,2,3,1,4,5,444,55,22];
+        function noRepeat (arr) {
+            let newArr = [...new Set(arr)]
+            return newArr
+        }
+        var arr1 = noRepeat(arr)
+        
+        console.log('arr1', arr1)
+        console.log('arr', arr)
+
+        // 2. filter()
+        let arr2 = arr.filter((item, index) => arr.indexOf(item) === index)
+        console.log('arr2', arr2)
+    </script>
+</body>
+</html>

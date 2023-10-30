@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <img style="width: 800px;height: 300px;" src="./images/继承.png" alt="">
   <script>
     // 参考文章：https://blog.csdn.net/jatej/article/details/120317973
-    
+
     // JS 实现继承的几种方式
     // 一、 原型链继承
-    // function Parent1() {
-    //   this.name = 'parent1';
-    //   this.play = [1, 2, 3]
-    // }
-    // function Child1() {
-    //   this.type = 'child2';
-    // }
-    // Child1.prototype = new Parent1();
-    // console.log(new Child1());
-    
+    function Parent1() {
+      this.name = 'parent1';
+      this.play = [1, 2, 3]
+    }
+    function Child1() {
+      this.type = 'child2';
+    }
+    Child1.prototype = new Parent1();
+    console.log(new Child1());
+
     // 原型链继承的缺点
     // 因为两个实例使用的是同一个原型对象。它们的内存空间是共享的，
     // 当一个发生变化的时候，另外一个也随之进行了变化，这就是使用原型链继承方式的一个缺点。
@@ -33,23 +35,23 @@
 
     // 二、 构造函数继承（借助 call）
     // 只能继承父类构造函数的属性和方法，无法继承父类prototype原型对象上的方法。（只能继承父类的实例属性和方法，不能继承原型属性或者方法。）
-    
+
     // 可以看到最后打印的 child 在控制台显示，除了 Child1 的属性 type 之外，也继承了 Parent1 的属性 name。
     // 这样写的时候子类虽然能够拿到父类的属性值，解决了第一种继承方式的弊端，
     // 但问题是，父类原型对象中一旦存在父类之前自己定义的方法，那么子类将无法继承这些方法。这种情况的控制台执行结果如下图所示。
     // function Parent1(){
     //   this.name = 'parent1';
     // }
-  
+
     // Parent1.prototype.getName = function () {
     //   return this.name;
     // }
-  
+
     // function Child1(){
     //   Parent1.call(this);
     //   this.type = 'child1'
     // }
-  
+
     // let child = new Child1();
     // console.log(child);  // 没问题 Child1里两个属性 name: "parent1" type: "child1" [[Prototype]]: Object
 
@@ -61,11 +63,11 @@
     // 子级构造函数Child3里通过call改变了Parent3里this指向（指向new Child3()的实例对象），并继承了它的属性和方法
     // Child3.prototype等于new Parent3实例对象，这样将Parent3的属性和其原型上的属性都挂载到子级的原型对象上
     // 那么new Child3()的实例对象就可以使用Parent3构造函数里及其原型对象上的属性和方法
-    function Parent3 () {
+    function Parent3() {
       this.name = 'parent3';
       this.play = [1, 2, 3];
     }
-  
+
     Parent3.prototype.getName = function () {
       return this.name;
     }
@@ -74,7 +76,7 @@
       Parent3.call(this);
       this.type = 'child3';
     }
-  
+
     // 第一次调用 Parent3()
     Child3.prototype = new Parent3();
     // 手动挂上构造器，指向自己的构造函数 可有可无？
@@ -94,90 +96,90 @@
     // 通过 Object.create 这个方法可以实现普通对象的继承，不仅仅能继承属性，同样也可以继承 getName 的方法
     // 缺点也很明显，多个实例的引用类型属性指向相同的内存，存在篡改的可能，接下来我们看一下在这个继承基础上进行优化之后的另一种继承方式——寄生式继承。
     let parent4 = {
-    name: "parent4",
-    friends: ["p1", "p2", "p3"],
-    getName: function() {
-      return this.name;
-    }
-  };
- 
-  let person4 = Object.create(parent4);
-  person4.name = "tom";
-  person4.friends.push("jerry");
-  let person5 = Object.create(parent4);
-  person5.friends.push("lucy");
- 
-  console.log(person4.name); // tom
-  console.log(person4.name === person4.getName()); // true
-  console.log(person5.name); // parent4
-  console.log(person4.friends); // ['p1', 'p2', 'p3', 'jerry', 'lucy']
-  console.log(person5.friends); // ['p1', 'p2', 'p3', 'jerry', 'lucy']
-
-  // 五、寄生式继承
-  // 使用原型式继承可以获得一份目标对象的浅拷贝，然后利用这个浅拷贝的能力再进行增强，添加一些方法，这样的继承方式就叫作寄生式继承。
-  // 虽然其优缺点和原型式继承一样，但是对于普通对象的继承方式来说，寄生式继承相比于原型式继承，还是在父类基础上添加了更多的方法。
-
-  //  person5 是通过寄生式继承生成的实例，它不仅仅有 getName 的方法，而且可以看到它最后也拥有了 getFriends 的方法
-  let parent5 = {
-    name: "parent5",
-    friends: ["p1", "p2", "p3"],
-    getName: function() {
-      return this.name;
-    }
-  };
- 
-  function clone(original) {
-    let clone = Object.create(original);
-    clone.getFriends = function() {
-      return this.friends
+      name: "parent4",
+      friends: ["p1", "p2", "p3"],
+      getName: function () {
+        return this.name;
+      }
     };
-    return clone;
-  }
- 
-  let person6 = clone(parent5);
-  console.log(person6.getName()); // parent5
-  console.log(person6.getFriends()); //  ['p1', 'p2', 'p3']
 
-  // 六、寄生组合式继承
-  // 结合第四种中提及的继承方式，解决普通对象的继承问题的 Object.create 方法，
-  // 我们在前面这几种继承方式的优缺点基础上进行改造，得出了寄生组合式的继承方式，
-  // 这也是所有继承方式里面相对最优的继承方式，代码如下。
+    let person4 = Object.create(parent4);
+    person4.name = "tom";
+    person4.friends.push("jerry");
+    let person5 = Object.create(parent4);
+    person5.friends.push("lucy");
 
-  // 这种寄生组合式继承方式，基本可以解决前几种继承方式的缺点，较好地实现了继承想要的结果，同时也减少了构造次数，减少了性能的开销，
-  function clone (parent, child) {
-    // 这里改用 Object.create 就可以减少组合继承中多进行一次构造的过程
-    child.prototype = Object.create(parent.prototype);
-    child.prototype.constructor = child;
-  }
- 
-  function Parent6() {
-    this.name = 'parent6';
-    this.play = [1, 2, 3];
-  }
-   Parent6.prototype.getName = function () {
-    return this.name;
-  }
-  function Child6() {
-    Parent6.call(this);
-    this.friends = 'child5';
-  }
- 
-  clone(Parent6, Child6);
- 
-  Child6.prototype.getFriends = function () {
-    return this.friends;
-  }
- 
-  let person7 = new Child6();
-  console.log(person7); // Child6 {name: 'parent6', play: Array(3), friends: 'child5'}
-  // [[Prototype]]: Parent6
-  // constructor: ƒ Child6()
-  // getFriends: ƒ ()
-  console.log(person7.getName()); // parent6
-  console.log(person7.getFriends()); // child5
+    console.log(person4.name); // tom
+    console.log(person4.name === person4.getName()); // true
+    console.log(person5.name); // parent4
+    console.log(person4.friends); // ['p1', 'p2', 'p3', 'jerry', 'lucy']
+    console.log(person5.friends); // ['p1', 'p2', 'p3', 'jerry', 'lucy']
 
-  // 七、ES6 的 extends 关键字实现逻辑
-  // 通过编译解码可以发现，extends内步也是采用的寄生组合继承方式。
+    // 五、寄生式继承
+    // 使用原型式继承可以获得一份目标对象的浅拷贝，然后利用这个浅拷贝的能力再进行增强，添加一些方法，这样的继承方式就叫作寄生式继承。
+    // 虽然其优缺点和原型式继承一样，但是对于普通对象的继承方式来说，寄生式继承相比于原型式继承，还是在父类基础上添加了更多的方法。
+
+    //  person5 是通过寄生式继承生成的实例，它不仅仅有 getName 的方法，而且可以看到它最后也拥有了 getFriends 的方法
+    let parent5 = {
+      name: "parent5",
+      friends: ["p1", "p2", "p3"],
+      getName: function () {
+        return this.name;
+      }
+    };
+
+    function clone(original) {
+      let clone = Object.create(original);
+      clone.getFriends = function () {
+        return this.friends
+      };
+      return clone;
+    }
+
+    let person6 = clone(parent5);
+    console.log(person6.getName()); // parent5
+    console.log(person6.getFriends()); //  ['p1', 'p2', 'p3']
+
+    // 六、寄生组合式继承
+    // 结合第四种中提及的继承方式，解决普通对象的继承问题的 Object.create 方法，
+    // 我们在前面这几种继承方式的优缺点基础上进行改造，得出了寄生组合式的继承方式，
+    // 这也是所有继承方式里面相对最优的继承方式，代码如下。
+
+    // 这种寄生组合式继承方式，基本可以解决前几种继承方式的缺点，较好地实现了继承想要的结果，同时也减少了构造次数，减少了性能的开销，
+    function clone(parent, child) {
+      // 这里改用 Object.create 就可以减少组合继承中多进行一次构造的过程
+      child.prototype = Object.create(parent.prototype);
+      child.prototype.constructor = child;
+    }
+
+    function Parent6() {
+      this.name = 'parent6';
+      this.play = [1, 2, 3];
+    }
+    Parent6.prototype.getName = function () {
+      return this.name;
+    }
+    function Child6() {
+      Parent6.call(this);
+      this.friends = 'child5';
+    }
+
+    clone(Parent6, Child6);
+
+    Child6.prototype.getFriends = function () {
+      return this.friends;
+    }
+
+    let person7 = new Child6();
+    console.log(person7); // Child6 {name: 'parent6', play: Array(3), friends: 'child5'}
+    // [[Prototype]]: Parent6
+    // constructor: ƒ Child6()
+    // getFriends: ƒ ()
+    console.log(person7.getName()); // parent6
+    console.log(person7.getFriends()); // child5
+
+    // 七、ES6 的 extends 关键字实现逻辑
+    // 通过编译解码可以发现，extends内步也是采用的寄生组合继承方式。
     class Person {
       constructor(name) {
         this.name = name
@@ -189,7 +191,7 @@
         console.log('Person:', this.name)
       }
     }
-    
+
     class Gamer extends Person {
       constructor(name, age) {
         // 子类中存在构造函数，则需要在使用“this”之前首先调用 super()。
@@ -197,10 +199,11 @@
         this.age = age
       }
     }
-    
+
     const asuna = new Gamer('Asuna', 20)
     asuna.getName() // 成功访问到父类的方法
 
   </script>
 </body>
+
 </html>

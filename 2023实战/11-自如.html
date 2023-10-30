@@ -1,0 +1,60 @@
+1. $nextTick的原理
+2. vue.use做了什么事
+3. element-ui中的$message在页面弹出一个提醒，这个怎么封装实现？
+说了组件的封装后，那怎么通过一个函数调用就能显示在页面上呢
+vue的h函数了解吗？怎么在页面函数调用就展示?通过document.body插入一个元素？
+https://blog.csdn.net/m0_45219210/article/details/124079327
+4. 做过哪些性能优化
+5. 懒加载怎么实现的？
+6. 手写防抖节流？它们的区别？
+7. webpack和vite的区别？
+没用过vite说了roolup
+7. 最后a是几？ 其实页面的渲染也是异步的，$nextTick也是异步的，但会进行一个去重只看最后一次
+data(){
+return {
+a: 1
+}
+}
+
+methods: {
+clickHandler() {
+this.$nextTick(() => {
+this.a = 2
+})
+
+this.a = 3
+}
+} // a是3
+
+data(){
+return {
+a: 1
+}
+}
+
+methods: {
+clickHandler() {
+this.a = 3
+this.$nextTick(() => {
+this.a = 2
+})
+}
+} // a是2
+
+
+二面：
+1. 微信小程序跳转h5需要做哪些事情
+环境区分
+参数携带
+登陆状态
+h5回小程序接收参数
+
+2. webpack有哪些优化
+splitcode具体怎么配置
+
+3. 微信小程序蓝牙打印具体怎么实现的
+
+
+三面：
+手写一个vue页面
+有个输入框一个按钮，输入一串数字后，点击按钮数字从大到小排序，使用冒泡

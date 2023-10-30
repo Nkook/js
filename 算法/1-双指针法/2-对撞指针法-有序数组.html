@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 存在两个指针一个在头部，一个在尾部，他们的移动方向是面对面的，即一个前移、一个后移。
+
+        // 给定一个有序的输入数组，寻找数组中两个数的和等于目标值，返回他们的下标。
+        /**
+         * 输入数组有序。
+         * 首先申明两个指针，头指针和尾指针。
+         * 然后头指针和尾指针相加和目标值对比。
+         * 如果和小于目标值，则需要头指针后移；
+         * 如果大于目标值，那么需要尾指针前移；
+         * 等于的话，返回下标即可。
+         * 当首指针大于尾指针时说明不存在这样的两个元素，返回false即可。
+        */
+       // [1, 2, 3, 4, 5] 8
+       var twoSum = function(nums, target) {
+            let i = 0,  j = nums.length - 1
+            while(i < j) {
+                const sum = nums[i] + nums[j]
+                if (sum < target) i++
+                else if (sum > target) j--
+                else return [i, j]
+            }
+            return []
+       }
+       console.log(twoSum([1, 2, 3, 4, 5], 8))
+
+        // 时间复杂度：只对输入数据进行了一次遍历，因此是O(n)
+
+        // 空间复杂度：没有使用额外变量，因此是O(1)
+    </script>
+</body>
+</html>

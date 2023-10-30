@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 应用
+        // Object.create(proto, [propertiesObject])
+        // proto是新对象的原型，propertiesObject是可选参数，表示要添加到新对象中的属性和值。
+        const personProto = {
+            sayHello() {
+                console.log(`Hello, my name is ${this.name}`);
+            }
+        };
+
+        const person1 = Object.create(personProto);
+        person1.name = 'John';
+        person1.age = 20;
+
+        person1.sayHello();
+        // 输出 "Hello, my name is John"
+        // 在上面的例子中，我们通过将personProto传递给Object.create方法来创建一个新对象。
+        // 然后，我们将名称和年龄属性添加到新对象中，并在调用对象的sayHello方法时使用这些属性。
+
+        // Object.create方法允许您指定新对象的原型链。
+        // 例如，如果我们想在新对象的原型中添加其他属性和方法，可以先创建一个继承自personProto的新对象，并将其指定为新对象的原型：
+        const studentProto = Object.create(personProto, {
+            study: {
+                value() {
+                console.log(`${this.name} is studying`);
+                }
+            }
+        });
+
+        const student1 = Object.create(studentProto);
+        student1.name = 'Lucy';
+        student1.major = 'Computer Science';
+
+        student1.sayHello();
+        student1.study();
+        // 输出 "Hello, my name is Lucy" 和 "Lucy is studying"
+        // 我们创建了一个新对象studentProto，并将其原型链设置为personProto。
+        // 然后，我们将study方法作为studentProto的属性添加，并使用Object.create方法创建一个新对象student1，其原型为studentProto。
+        // 最后，我们添加名称和专业属性，并在调用student1的方法时分别使用这些属性。
+
+
+
+    </script>
+</body>
+</html>
